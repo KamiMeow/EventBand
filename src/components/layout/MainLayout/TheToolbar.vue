@@ -24,6 +24,9 @@
 const toolbarItems = [
   { title: 'Da',  link: '/'     },
   { title: 'Net', link: '/net'  },
+  { title: 'Profile', link: '/profile'  },
+  { title: 'SignIn', link: '/signIn'  },
+  { title: 'SignUp', link: '/signUp'  },
 ];
 
 export default {
