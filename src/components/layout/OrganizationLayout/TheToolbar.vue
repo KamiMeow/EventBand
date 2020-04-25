@@ -1,7 +1,7 @@
 <template>
   <v-app-bar color="primary" clipped-left dark app>
     <div>
-      <v-img src="/favicon.ico" max-width="230" class="ml-1" contain />
+      <v-img src="/logo.png" contain />
     </div>
     <v-spacer />
 
