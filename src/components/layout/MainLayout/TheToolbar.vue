@@ -1,5 +1,10 @@
 <template>
-  <v-app-bar color="primary" clipped-left dark app>
+  <v-app-bar 
+    color="primary" 
+    height="80"
+    clipped-left 
+    dark 
+    app>
     <div>
       <v-img src="/logo.png" contain />
     </div>
@@ -10,7 +15,7 @@
         v-for="item in toolbarItems"
         :key="item.link"
         :to="item.link"
-        class="toolbar--items headline text-none"
+        class="toolbar--items title text-none"
         color="secondary"
         text
       >
@@ -22,11 +27,13 @@
 
 <script>
 const toolbarItems = [
-  { title: 'Da',  link: '/'     },
-  { title: 'Net', link: '/net'  },
+  { title: 'MainPage',  link: '/'},
   { title: 'Profile', link: '/profile'  },
   { title: 'SignIn', link: '/signIn'  },
   { title: 'SignUp', link: '/signUp'  },
+  { title: 'Event feed', link: '/events/feed'  },
+  { title: 'Event list', link: '/events/list'  },
+  { title: 'Event page', link: '/events/5'  },
 ];
 
 export default {

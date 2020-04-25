@@ -2,7 +2,7 @@
   <v-content>
     <the-toolbar />
     
-    <v-container fluid class="px-0 mt-4">
+    <v-container fluid class="pa-0">
       <v-layout fill-height justify-center>
         <v-slide-y-transition mode="out-in">
           <router-view />

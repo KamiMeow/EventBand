@@ -1,5 +1,10 @@
 <template>
-  <v-app-bar color="primary" clipped-left dark app>
+  <v-app-bar 
+    color="primary" 
+    clipped-left 
+    dark 
+    app
+    >
     <div>
       <v-img src="/logo.png" contain />
     </div>
