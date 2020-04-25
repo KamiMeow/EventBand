@@ -6,16 +6,34 @@
     <v-spacer />
 
     <v-toolbar-items>
+      <v-btn
+        v-for="item in toolbarItems"
+        :key="item.link"
+        :to="item.link"
+        class="toolbar--items"
+        color="secondary"
+        text
+      >
+        {{ item.title }}
+      </v-btn>
     </v-toolbar-items>
   </v-app-bar>
 </template>
 
 <script>
-/**
- * Компонент верхнего меню
- */
+const toolbarItems = [
+  { title: 'da',  link: '/'     },
+  { title: 'net', link: '/net'  },
+];
 
 export default {
   name: "TheToolbar",
+  
+  data: () => ({
+    toolbarItems,
+  }),
 };
 </script>
+
+<style lang="scss" scoped>
+</style>
