@@ -10,7 +10,7 @@
         v-for="item in toolbarItems"
         :key="item.link"
         :to="item.link"
-        class="toolbar--items"
+        class="toolbar--items title--font headline text-none"
         color="secondary"
         text
       >
@@ -22,8 +22,8 @@
 
 <script>
 const toolbarItems = [
-  { title: 'da',  link: '/'     },
-  { title: 'net', link: '/net'  },
+  { title: 'Da',  link: '/'     },
+  { title: 'Net', link: '/net'  },
 ];
 
 export default {
