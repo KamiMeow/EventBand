@@ -30,6 +30,10 @@ export default {
 </script>
 
 <style>
+.title--font {
+  font-family: 'Baloo Bhaina 2'
+}
+
 .cursor--pointer {
   cursor: pointer;
 }
