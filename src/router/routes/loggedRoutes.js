@@ -6,5 +6,4 @@ export default [
         path: "/profile",
         component: Profile,
     },
-   
 ];
