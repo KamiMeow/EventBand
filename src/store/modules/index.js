@@ -3,7 +3,7 @@
  */
 
 import * as notification from './notification';
-import * as examples from './examples';
+import * as examples from './example';
 
 export default {
   notification,
