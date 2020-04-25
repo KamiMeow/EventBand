@@ -3,9 +3,9 @@
  */
 
 import * as notification from './notification';
-import * as example from './example';
+import * as examples from './example';
 
 export default {
   notification,
-  example,
+  examples,
 };
