@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <notification />
-
+    
     <organization-layout v-if="isOrganizationLayout" />
     <main-layout v-else />
   </v-app>
