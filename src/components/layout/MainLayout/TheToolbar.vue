@@ -10,7 +10,7 @@
         v-for="item in toolbarItems"
         :key="item.link"
         :to="item.link"
-        class="toolbar--items title--font headline text-none"
+        class="toolbar--items headline text-none"
         color="secondary"
         text
       >
