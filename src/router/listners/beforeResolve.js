@@ -3,5 +3,7 @@
  * @param {VueX.Store} store Хранилище приложения
  */
 export default function (store) {
-  return (to, _, next) => {};
+  return (to, _, next) => {
+    next();
+  };
 };
