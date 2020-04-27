@@ -29,8 +29,8 @@
 const toolbarItems = [
   { title: 'MainPage',  link: '/'},
   { title: 'Profile', link: '/profile'  },
-  { title: 'SignIn', link: '/signIn'  },
-  { title: 'SignUp', link: '/signUp'  },
+  { title: 'SignIn', link: '/sign-in'  },
+  { title: 'SignUp', link: '/sign-up'  },
   { title: 'Event feed', link: '/events/feed'  },
   { title: 'Event list', link: '/events/list'  },
   { title: 'Event page', link: '/events/5'  },
