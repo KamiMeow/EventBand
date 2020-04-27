@@ -1,10 +1,10 @@
 <template>
   <v-container class="d-flex justify-center" fluid>
     <v-layout
-			class="elevation-5 d-flex mt-10 flex-column"
+			class="custom-elevation d-flex mt-10 flex-column"
 			style="max-width: 75vw;"
 		>
-      <v-layout style="height: 10px;">
+      <v-layout>
         <v-col class="pr-0 ma-0" cols="1">
           <v-img
 						class="pa-0 ma-0"
