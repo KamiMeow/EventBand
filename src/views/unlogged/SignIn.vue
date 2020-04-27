@@ -10,8 +10,8 @@
 			<h2 align="center"> Sign In </h2>
 			<v-text-field
 				v-model="email"
-				class="width-l"
 				color="purple darken-1"
+				class="width-l"
 				label="E-mail"
 				clearable
 				outlined
@@ -20,9 +20,9 @@
 			></v-text-field>
 			<v-text-field
 				v-model="password"
-				class="width-l"
 				color="purple darken-1"
 				label="Password"
+				class="width-l"
 				type="password"
 				clearable
 				outlined
@@ -32,7 +32,7 @@
 			<v-row class="null-indents d-flex justify-start">
 				<v-col cols="4" class="null-indents"> 
 					<v-btn
-						to="/resetPassword"
+						to="/reset-password"
 						class="text-none subtitle-1 purple--text pa-0"
 						elevation="0"
 						rounded
@@ -43,7 +43,7 @@
 				</v-col>
 				<v-col cols="6" class="null-indents"> 
 					<v-btn
-						to="/signUp"
+						to="/sign-up"
 						class="text-none subtitle-1 purple--text pa-0"
 						elevation="0"
 						rounded
