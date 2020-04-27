@@ -41,6 +41,7 @@ export default {
 .v-expansion-panel-content,
 .v-expansion-panel::before,
 .v-expansion-panels--flat>.v-expansion-panel,
+.custom-elevation,
 .v-data-table {
   border-radius: 6px !important;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1) !important;
