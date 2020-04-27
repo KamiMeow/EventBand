@@ -16,5 +16,6 @@ export default [
     {
         path: "/resetPassword",
         component: ResetPassword, 
-    },
+		},
+		
 ];

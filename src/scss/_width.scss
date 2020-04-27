@@ -1,0 +1,27 @@
+@import 'variables.scss';
+
+.width-xs {
+	width: $xs-width;
+	max-width: $xs-width;
+}
+.width-s {
+	width: $s-width;
+	max-width: $s-width;
+}
+.width-m {
+	width: $m-width;
+	max-width: $m-width;
+}
+.width-l {
+	width: $l-width;
+	max-width: $l-width;
+}
+.width-xl {
+	width: $xl-width;
+	max-width: $xl-width;
+}
+
+.null-indents {
+	margin: 0;
+	padding: 0;
+}
