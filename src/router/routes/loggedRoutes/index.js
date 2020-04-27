@@ -1,5 +1,5 @@
 
-import Profile from '@/views/logged/Profile';
+import Profile from '@/views/logged/Profile/Profile';
 import EventList from '@/views/unlogged/EventList';
 import EventFeed from '@/views/logged/EventFeed';
 import EventPage from '@/views/logged/EventPage';

@@ -40,7 +40,7 @@ export default {
 	},
 	methods: {
 		sendEmailToRecoverPassword() {
-			this.$router.push('/signIn');
+			this.$router.push('/sign-in');
 		}
 	}
 }

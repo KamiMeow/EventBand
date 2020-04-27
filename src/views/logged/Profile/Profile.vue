@@ -4,7 +4,7 @@
 			class="custom-elevation d-flex mt-10 flex-column"
 			style="max-width: 75vw;"
 		>
-      <v-layout style="height: 180px;">
+      <v-layout>
         <v-col class="pr-0 ma-0" cols="1">
           <v-img
 						class="pa-0 ma-0"
@@ -49,9 +49,36 @@
         </v-col>
       </v-layout>
 
-      <v-layout>
+      <v-layout
+
+			>
         <v-col cols="12">
-          <div class="headline">My subscriptions</div>
+          <div class="headline">My organizations</div>
+					<v-divider></v-divider>
+					<v-carousel
+						cycle
+						height="200"
+						hide-delimiter-background
+						show-arrows-on-hover
+					>
+						<v-carousel-item
+							v-for="(slide, i) in slides"
+							:key="i"
+						>
+							<v-sheet
+								:color="colors[i]"
+								height="100%"
+							>
+								<v-row
+									class="fill-height"
+									align="center"
+									justify="center"
+								>
+									<div class="display-3">{{ slide }} Slide</div>
+								</v-row>
+							</v-sheet>
+						</v-carousel-item>
+					</v-carousel>
         </v-col>
       </v-layout>
     </v-layout>
@@ -59,11 +86,28 @@
 </template>
 
 <script>
+import OrganizationItem from './OrganizationItem';
+
 export default {
   data() {
     return {
       nickname: "Ryab4ik",
-      email: "example@gmail.com"
+			email: "example@gmail.com",
+			
+			colors: [
+          'indigo',
+          'warning',
+          'pink darken-2',
+          'red lighten-1',
+          'deep-purple accent-4',
+        ],
+        slides: [
+          'First',
+          'Second',
+          'Third',
+          'Fourth',
+          'Fifth',
+        ],
     };
   },
   methods: {
