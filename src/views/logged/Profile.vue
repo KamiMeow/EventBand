@@ -4,7 +4,7 @@
 			class="elevation-5 d-flex mt-10 flex-column"
 			style="max-width: 75vw;"
 		>
-      <v-layout style="height: 10px;">
+      <v-layout style="height: 180px;">
         <v-col class="pr-0 ma-0" cols="1">
           <v-img
 						class="pa-0 ma-0"
