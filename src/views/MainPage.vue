@@ -54,11 +54,9 @@ const offers = [
 
 export default {
 	name: 'MainPage',
-	data() {
-		return {
-			offers,
-		}
-	},
+	data: () => ({
+		offers,
+	}),
 }
 </script>
 
