@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <v-content class="pb-0">
     <the-toolbar />
     
     <v-container fluid class="pa-0">

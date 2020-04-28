@@ -2,9 +2,9 @@
   <v-app-bar 
     color="primary" 
     height="80"
-    clipped-left 
-    dark 
-    app>
+    dark
+    app
+  >
     <div>
       <v-img src="/logo.png" contain />
     </div>

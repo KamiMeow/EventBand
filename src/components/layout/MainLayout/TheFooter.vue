@@ -1,52 +1,48 @@
 <template>
   <v-footer
-		class="py-10"
+    class="grey--text subtitle-2 px-2"
     color="primary"
-    dark
+    absolute
     app
   >
-		<v-col
-			cols="3">
-			<span 
-				class="px-3 body-2" aria-label="Написать в поддержку" data-direction="top">
+		<v-col cols="3">
+			<span class="px-3">
 				&copy; {{ new Date().getFullYear() }} — all rigths reserved
 			</span>
 		</v-col>
+
 		<v-col
+			class="d-flex flex-row justify-center align-center py-0"
 			cols="6"
-			class="d-flex flex-row justify-center align-center">
-			<v-img
-				v-for="icn in icons"
-				:key="icn"
-				:src="pathToIcons + icn + format"
-				class="ma-1"
-				max-width="32"
-				max-height="32"
-			></v-img>
+		>
+			<v-icon
+				v-for="icon in icons"
+				:key="icon"
+				class="grey--text mx-2"
+			>
+				{{ icon }}
+			</v-icon>
 		</v-col>
-		<v-col
-			cols="3"
-			align="right">
-			Privacy | Conditions	
+
+		<v-col shrink align="right">
+			Privacy
 		</v-col>
   </v-footer>
 </template>
 
 <script>
-/**
- * Компонент футера
- */
-
+const icons = [
+	'mdi-instagram',
+	'mdi-facebook',
+	'mdi-twitter',
+	'mdi-email',
+];
 
 export default {
 	name: 'TheFooter',
-	data() {
-		return {
-			pathToIcons: "/socmedia-icons/socmedia-",
-			format: ".png",
-			icons: ['1', '2', '3', '4'],
-		}
-	},
+	data: () => ({
+		icons,
+	}),
 };
 </script>
 
