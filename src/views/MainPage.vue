@@ -1,17 +1,13 @@
 <template>
   <v-img
     src="/blur-bg-main.png"
-    style="height: 90%"
+		class="pb-8"
   >
-		<v-container
-			class="d-flex justify-space-around align-center"
-			style="height: 90%"
-			fluid
-		>
+		<v-layout justify-center align-center fill-height>
 			<v-card
 				v-for="offer in offers"
 				:key="offer.icon"
-				class="py-5 px-1 semi-opacity"
+				class="py-5 px-1 semi-opacity mx-12"
 				width="350"
 				outlined
 				tile
@@ -19,15 +15,16 @@
 				<div class="d-flex flex-column align-center white--text">
 					<v-img
 						:src="'/'+ offer.icon +'-icon.'+ offer.format"
-					></v-img>
-					<v-card-title class="headline"> {{ offer.title }} </v-card-title>
-					<v-card-text align="center" class="title">
+						class="my-2"
+					/>
+
+					<v-card-title class="display-1 mt-2"> {{ offer.title }} </v-card-title>
+					<v-card-text align="center" class="body-1 mt-3 mb-6">
 						{{ offer.text }}
 					</v-card-text>
 				</div>
-			</v-card>			
-		</v-container>
-		
+			</v-card>
+		</v-layout>
   </v-img>
 </template>
 
