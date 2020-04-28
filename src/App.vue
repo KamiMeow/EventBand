@@ -35,12 +35,6 @@ export default {
 .custom-elevation,
 .v-stepper__header,
 .v-btn-toggle--selected,
-.v-expansion-panel,
-.v-expansion-panels,
-.v-expansion-panel-header,
-.v-expansion-panel-content,
-.v-expansion-panel::before,
-.v-expansion-panels--flat>.v-expansion-panel,
 .custom-elevation,
 .v-data-table {
   border-radius: 6px !important;
@@ -58,4 +52,11 @@ export default {
 .no-select {
   user-select: none;
 }
+
+/* .v-expansion-panel,
+.v-expansion-panels,
+.v-expansion-panel-header,
+.v-expansion-panel-content,
+.v-expansion-panel::before,
+.v-expansion-panels--flat>.v-expansion-panel, */
 </style>
