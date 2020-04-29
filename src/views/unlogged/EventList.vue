@@ -7,6 +7,8 @@
 		<v-col
 			color="secondary"
 			cols="9">
+			ТУТ ДОЛЖНА БЫТЬ КАРТА
+			НО ЕЕ ЧЕТ ПОКА НЕТ
 		</v-col>
 		<v-divider vertical ></v-divider>
 		<v-col
@@ -16,6 +18,7 @@
 				multiple
 				accordion
 			>
+				Filters
       <v-expansion-panel
 				elevation="0">
         <v-expansion-panel-header> Themes </v-expansion-panel-header>
@@ -75,20 +78,20 @@
 					<v-row>
 						<v-slider
 							v-model="maxPeopleLimit"
-							class="align-center"
 							:max="maxPeople"
 							:min="minPeople"
+							class="align-center"
 							hide-details
 						>
 							<template v-slot:append>
 								<v-text-field
 									v-model="maxPeopleLimit"
-									class="mt-0 pt-0"
-									hide-details
-									single-line
-									type="number"
 									:max="maxPeople"
 									style="width: 60px"
+									class="mt-0 pt-0"
+									type="number"
+									hide-details
+									single-line
 								></v-text-field>
 							</template>
 						</v-slider>
@@ -111,20 +114,20 @@
 						>
 							<v-range-slider
 								v-model="range"
-								class="align-center"
 								:max="120"
 								:min="1"
+								class="align-center"
 								hide-details
 							>
 								<template v-slot:prepend>
 									<v-text-field
 										:value="range[0]"
-										class="mt-0 pt-0"
 										:min="minPrice"
+										class="mt-0 pt-0"
+										style="width: 60px"
+										type="number"
 										hide-details
 										single-line
-										type="number"
-										style="width: 60px"
 										@change="$set(range, 0, $event)"
 									></v-text-field>
 								</template>
@@ -132,15 +135,88 @@
 									<v-text-field
 										:value="range[1]"
 										:max="maxPrice"
-										class="mt-0 pt-0"
-										hide-details
-										single-line
-										type="number"
 										style="width: 60px"
+										class="mt-0 pt-0"
+										type="number"
+										single-line
+										hide-details
 										@change="$set(range, 1, $event)"
 									></v-text-field>
 								</template>
 							</v-range-slider>
+						</v-col>
+					</v-row>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+			<v-expansion-panel
+				elevation="0">
+        <v-expansion-panel-header> Date </v-expansion-panel-header>
+        <v-expansion-panel-content>
+					<v-row>
+						<v-col
+							cols="12"
+						>
+							<v-switch 
+								v-model="isPeriod"
+								:label="isPeriod ? 'One-day' : 'Period'"
+							/>
+						</v-col>
+						<v-col
+							cols="6"
+						>
+							<calendar-input/>
+						</v-col>
+						<v-col
+							cols="6"
+						>
+							<time-input/>
+						</v-col>
+						<template
+							v-if="isPeriod"
+						>
+							<v-col
+								cols="6"
+							>
+								<calendar-input/>
+							</v-col>
+							<v-col
+								cols="6"
+							>
+								<time-input/>
+							</v-col>
+						</template>
+					</v-row>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+			<v-expansion-panel
+				elevation="0">
+        <v-expansion-panel-header> Rating </v-expansion-panel-header>
+        <v-expansion-panel-content>
+					<v-row>
+						<v-col
+							cols="12"
+						>
+							<v-slider
+								v-model="minRate"
+								label="Min rate"
+								class="align-center"
+								thumb-label
+								max="10"
+								min="1"
+								hide-details
+							>
+								<template v-slot:append>
+									<v-text-field
+										v-model="minRate"
+										style="width: 60px"
+										class="mt-0 pt-0"
+										type="number"
+										max="10"
+										hide-details
+										single-line
+									></v-text-field>
+								</template>
+							</v-slider>
 						</v-col>
 					</v-row>
         </v-expansion-panel-content>
@@ -152,6 +228,9 @@
 </template>
 
 <script>
+
+import CalendarInput from '@/components/helper/DateTimePicker/CalendarInput';
+import TimeInput from '@/components/helper/DateTimePicker/TimeInput';
 
 const items = [
 	{
@@ -181,8 +260,19 @@ const items = [
 ];
 
 export default {
+	name: 'EventList',
+
+	components: {
+		CalendarInput,
+		TimeInput,
+	},
+	
 	data() {
 		return {
+
+			date: new Date().toISOString().substr(0, 10),
+      menu: false,
+
 			selected: [],
 			items,
 			
@@ -195,6 +285,9 @@ export default {
 			range: [1, 20],
 
 			isFree: true,
+			isPeriod: false,
+
+			minRate: 3,
 		}
 	},
 

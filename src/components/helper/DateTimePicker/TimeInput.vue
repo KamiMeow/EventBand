@@ -12,7 +12,7 @@
       <v-text-field
         v-model="time"
         append-icon="mdi-clock-outline"
-        label="Выбор времени"
+        label="Pick time"
         readonly
         v-on="on"
       />

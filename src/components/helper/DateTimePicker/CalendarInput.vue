@@ -10,7 +10,7 @@
       <v-text-field
         v-model="currentDate"
         append-icon="mdi-calendar-month"
-        label="Выбор даты"
+        label="Pick date"
         readonly
         v-on="on"
       />
