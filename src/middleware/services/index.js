@@ -3,7 +3,9 @@
  */
 
 import ExampleService from './ExampleService';
+import UserService from './UserService';
 
 export default {
   ExampleService,
+  UserService,
 };

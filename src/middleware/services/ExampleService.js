@@ -1,6 +1,7 @@
 /**
  * Пример сервиса
  */
+const url = ""
 
 export default {
   loadExamples() {
