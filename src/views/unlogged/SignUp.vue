@@ -15,7 +15,7 @@
 					outlined
 					counter
 					dense
-				></v-text-field>
+				/>
 				<v-text-field
 					v-model="surname"
 					placeholder="Brown"

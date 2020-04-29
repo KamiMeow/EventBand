@@ -14,13 +14,135 @@
 			cols="3">
 			<v-expansion-panels
 				multiple
-				inset
-				>
+				accordion
+			>
       <v-expansion-panel
 				elevation="0">
         <v-expansion-panel-header> Themes </v-expansion-panel-header>
         <v-expansion-panel-content>
-          
+					<v-row
+						align="center"
+						justify="start"
+					>	
+						<v-col
+							v-for="(tag, i) in selectedTags"
+							:key="tag.text"
+							class="shrink"
+						>
+							<v-chip
+								color="primary"
+								close
+								@click:close="selectedTags.splice(i, 1)"
+							>
+								<v-icon
+									left
+									v-text="tag.icon"
+								></v-icon>
+								{{ tag.text }}
+							</v-chip>
+						</v-col>
+					</v-row>
+					<v-row
+						align="center"
+						justify="start"
+					>
+						<template
+							v-for="tag in tags"
+						>
+							<v-col
+								v-if="!selected.includes(tag)"
+								:key="tag.text"
+								class="shrink"
+							>
+								<v-chip
+									@click="selected.push(tag)"
+								>
+									<v-icon
+										left
+										v-text="tag.icon"
+									></v-icon>
+									{{ tag.text }}
+								</v-chip>
+							</v-col>
+						</template>
+					</v-row>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+			<v-expansion-panel
+				elevation="0">
+        <v-expansion-panel-header> Event people limit </v-expansion-panel-header>
+        <v-expansion-panel-content>
+					<v-row>
+						<v-slider
+							v-model="maxPeopleLimit"
+							class="align-center"
+							:max="maxPeople"
+							:min="minPeople"
+							hide-details
+						>
+							<template v-slot:append>
+								<v-text-field
+									v-model="maxPeopleLimit"
+									class="mt-0 pt-0"
+									hide-details
+									single-line
+									type="number"
+									:max="maxPeople"
+									style="width: 60px"
+								></v-text-field>
+							</template>
+						</v-slider>
+					</v-row>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+			<v-expansion-panel
+				elevation="0">
+        <v-expansion-panel-header> Price </v-expansion-panel-header>
+        <v-expansion-panel-content>
+					<v-row>
+						<v-col cols="12">
+							<v-switch 
+								v-model="isFree"
+								:label="isFree ? 'Free' : 'Paid'"
+							/>
+						</v-col>
+						<v-col
+							v-if="!isFree"
+						>
+							<v-range-slider
+								v-model="range"
+								class="align-center"
+								:max="120"
+								:min="1"
+								hide-details
+							>
+								<template v-slot:prepend>
+									<v-text-field
+										:value="range[0]"
+										class="mt-0 pt-0"
+										:min="minPrice"
+										hide-details
+										single-line
+										type="number"
+										style="width: 60px"
+										@change="$set(range, 0, $event)"
+									></v-text-field>
+								</template>
+								<template v-slot:append>
+									<v-text-field
+										:value="range[1]"
+										:max="maxPrice"
+										class="mt-0 pt-0"
+										hide-details
+										single-line
+										type="number"
+										style="width: 60px"
+										@change="$set(range, 1, $event)"
+									></v-text-field>
+								</template>
+							</v-range-slider>
+						</v-col>
+					</v-row>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -31,7 +153,7 @@
 
 <script>
 
-const tags = [
+const items = [
 	{
 		text: '3D-modeling',
 		icon: 'mdi-desktop-mac-dashboard',
@@ -61,8 +183,27 @@ const tags = [
 export default {
 	data() {
 		return {
-			tags,
+			selected: [],
+			items,
+			
+			minPeople: 1,
+			maxPeople: 350,
+			maxPeopleLimit: 60,
 
+			minPrice: 1,
+			maxPrice: 120,
+			range: [1, 20],
+
+			isFree: true,
+		}
+	},
+
+	computed: {
+		tags() {
+			return this.items;
+		},
+		selectedTags() {
+			return this.selected;
 		}
 	},
 }

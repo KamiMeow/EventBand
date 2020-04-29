@@ -17,7 +17,7 @@
 				outlined
 				counter
 				dense
-			></v-text-field>
+			/>
 			<v-text-field
 				v-model="password"
 				color="purple darken-1"
@@ -28,7 +28,7 @@
 				outlined
 				counter
 				dense
-			></v-text-field>
+			/>
 			<v-row class="null-indents d-flex justify-start">
 				<v-col cols="4" class="null-indents"> 
 					<v-btn
@@ -72,9 +72,11 @@ export default {
 		}
 	},
 	methods: {
-		signIn() {
-			console.log('data sent! Email: ' + this.email + ' Password: ' +this.password);
-			
+		async signIn() {
+			let resp = await this.$store.dispatch('auth/signIn', { 
+				password: this.password,
+				email: this.email, 
+			});
 		}
 	}
 }
