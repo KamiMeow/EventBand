@@ -4,13 +4,20 @@
 			style="height: 70vh;"
 		>
 			<h2 class="mb-5" > Create new account </h2>
-			<v-form class="width-l d-flex flex-column">
+			<v-form 
+				v-model="valid"
+				class="width-l d-flex flex-column"
+				ref="form"
+				@submit.prevent="signUpNewuserAccount"
+			>
 				<v-text-field
 					v-model="email"
-					label="Email"
+					:rules="[rules.required, rules.email]"
 					placeholder="example@mail.com"
 					color="primary"
 					maxlength="25"
+					label="Email"
+					validate-on-blur
 					clearable
 					outlined
 					counter
@@ -18,10 +25,12 @@
 				/>
 				<v-text-field
 					v-model="surname"
+					:rules="[rules.required, rules.min('surname')]"
 					placeholder="Brown"
 					label="Surname"
 					color="primary"
 					maxlength="20"
+					validate-on-blur
 					clearable
 					outlined
 					counter
@@ -29,10 +38,12 @@
 				></v-text-field>
 				<v-text-field
 					v-model="name"
+					:rules="[rules.required, rules.min('name')]"
 					placeholder="John"
 					color="primary"
 					maxlength="20"
 					label="Name"
+					validate-on-blur
 					clearable
 					outlined
 					counter
@@ -40,10 +51,12 @@
 				></v-text-field>
 				<v-text-field
 					v-model="nickname"
+					:rules="[rules.required, rules.min('nickname')]"
 					placeholder="GrassBoy"
 					color="primary"
 					maxlength="20"
 					label="Nickname"
+					validate-on-blur
 					clearable
 					outlined
 					counter
@@ -51,18 +64,20 @@
 				></v-text-field>
 				<v-text-field
 					v-model="password"
+					:rules="[rules.required, rules.min('password')]"
 					placeholder="Some strong pass"
 					label="Password"
 					type="password"
 					color="primary"
 					maxlength="18"
+					validate-on-blur
 					clearable
 					outlined
 					counter
 					dense
 				></v-text-field>
 				<v-btn
-					@click="signUpNewuserAccount"
+					type="submit"
 					class="white--text align-self-center"
 					color="primary"
 				>
@@ -74,19 +89,32 @@
 
 <script>
 export default {
-	data() {
-		return {
-			email: '',
-			surname: '',
-			name: '',
-			nickname: '',
-			password: '',
-		}
-	},
+	data: () => ({
+		email: '',
+		surname: '',
+		name: '',
+		nickname: '',
+		password: '',
+		valid: false,
+	}),
 	methods: {
 		signUpNewuserAccount() {
 
+			if ( !this.$refs.form.validate() ) return;
+
+			console.log(this.email);
+			console.log(this.surname);
+			console.log(this.name);
+			console.log(this.nickname);
+			console.log(this.password);
+			
 		}
+	},
+
+	computed: {
+		rules() {
+			return this.$store.getters['getRules'];
+		},
 	},
 }
 </script>

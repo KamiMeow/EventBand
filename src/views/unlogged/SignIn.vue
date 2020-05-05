@@ -5,14 +5,19 @@
 		fluid
 	>
 		<v-form
+			v-model="valid"
 			class="width-l"
+			ref="form"
+			@submit.prevent="signIn"
 		>
 			<h2 align="center"> Sign In </h2>
 			<v-text-field
 				v-model="email"
+				:rules="[rules.email, rules.required]"
 				color="purple darken-1"
 				class="width-l"
 				label="E-mail"
+				validate-on-blur
 				clearable
 				outlined
 				counter
@@ -20,10 +25,12 @@
 			/>
 			<v-text-field
 				v-model="password"
+				:rules="[rules.required, rules.min('password')]"
 				color="purple darken-1"
 				label="Password"
 				class="width-l"
 				type="password"
+				validate-on-blur
 				clearable
 				outlined
 				counter
@@ -55,7 +62,7 @@
 				<v-col cols="12" class="null-indents mt-2" >
 					<v-btn
 						color="primary"
-						@click="signIn"
+						type="submit"
 					> SIGN IN </v-btn>
 				</v-col>
 			</v-row>
@@ -64,19 +71,34 @@
 </template>
 
 <script>
+
 export default {
 	data() {
 		return {
 			email: '',
 			password: '',
+			valid: false,
 		}
 	},
 	methods: {
 		async signIn() {
+			if ( !this.$refs.form.validate() ) return;
+
+			console.log(this.email);
+			console.log(this.password);
+
 			let resp = await this.$store.dispatch('auth/signIn', { 
 				password: this.password,
 				email: this.email, 
 			});
+
+		}
+	},
+
+
+	computed: {
+		rules () {
+			return this.$store.getters['getRules'];
 		}
 	}
 }
