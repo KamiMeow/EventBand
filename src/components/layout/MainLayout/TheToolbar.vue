@@ -1,7 +1,7 @@
 <template>
   <v-app-bar 
     color="primary" 
-    height="80"
+		class="vh-toolbar"
     dark
     app
   >
@@ -46,4 +46,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+	.vh--toolbar {
+		height: 10vh;
+	}
 </style>

@@ -1,9 +1,7 @@
 <template>
   <v-footer
-    class="grey--text subtitle-2 px-2"
+    class="grey--text subtitle-2 px-2 vh--footer"
     color="primary"
-    absolute
-    app
   >
 		<v-col cols="3">
 			<span class="px-3">
@@ -47,4 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+	.vh--footer { 
+		height: 10vh;
+	}
 </style>

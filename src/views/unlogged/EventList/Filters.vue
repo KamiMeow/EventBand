@@ -1,8 +1,10 @@
 <template>
-	<v-col
+	<v-layout
 		class="d-flex flex-column justify-start align-center"
-		cols="3">
+		:class="maxFilterHeight"
+		style="overflow-y: auto">
 		<v-expansion-panels
+			:value="expandedPanels"
 			multiple
 			accordion
 		>
@@ -146,7 +148,7 @@
 					>
 						<v-switch 
 							v-model="isPeriod"
-							:label="isPeriod ? 'One-day' : 'Period'"
+							:label="isPeriod ? 'Period' : 'One-day'"
 						/>
 					</v-col>
 					<v-col
@@ -210,7 +212,7 @@
 			</v-expansion-panel-content>
 		</v-expansion-panel>
 	</v-expansion-panels>
-	</v-col>
+	</v-layout>
 </template>
 
 <script>
@@ -272,6 +274,8 @@ export default {
 			isPeriod: false,
 
 			minRate: 3,
+
+			expandedPanels: [0, 1, 2, 3, 4],
 	}),
 
 	computed: {
@@ -280,7 +284,37 @@ export default {
 		},
 		selectedTags() {
 			return this.selected;
+		},
+		maxFilterHeight() {
+			switch (this.$vuetify.breakpoint.name) {
+				case 'xs': 
+				case 'sm': 
+				case 'md': 
+					return 'vh-xs';
+				case 'xl': 
+				case 'lg': 
+					return 'vh-lg';
+				default: 
+					return 'vh-lg';
+			}
 		}
 	},
 }
 </script>
+
+<style lang="scss" scoped>
+	.vh-lg { 
+		height: 80vh;
+		max-height: 80vh;
+	}
+
+	.vh-xs { 
+		height: 60vh;
+		max-height: 60vh;
+	}
+
+	::-webkit-scrollbar { /* chrome based */
+    width: 0px;  /* ширина scrollbar'a */
+    background: transparent;  /* опционально */
+	}
+</style>

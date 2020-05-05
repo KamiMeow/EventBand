@@ -24,7 +24,7 @@ export default {
     isOrganizationLayout() {
       return false;
     },
-  },
+	},
 };
 </script>
 
