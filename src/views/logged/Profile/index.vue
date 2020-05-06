@@ -1,8 +1,8 @@
 <template>
   <v-container class="d-flex justify-center" fluid>
     <v-layout
-			class="custom-elevation d-flex mt-10 flex-column"
-			style="max-width: 75vw;"
+			class="custom-elevation d-flex flex-column"
+			style="max-width: 75vw; height: 80vh;"
 		>
       <v-layout>
         <v-col class="pr-0 ma-0" cols="1">
@@ -35,12 +35,8 @@
         </v-col>
         <v-divider vertical />
 
-        <v-col cols="2">
-          <v-btn
-						color="primary"
-						class="mt-2"
-						@click="editProfile"
-					>Edit profile</v-btn>
+        <v-col cols="2" >
+          <edit-profile-form/>
           <v-btn
 						color="primary"
 						class="mt-2"
@@ -87,12 +83,18 @@
 
 <script>
 import OrganizationItem from './OrganizationItem';
+import EditProfileForm from './EditProfileForm';
 
 export default {
+	name: 'Profile',
+
+	components: {
+		OrganizationItem,
+		EditProfileForm,
+	},
+	
   data() {
     return {
-      nickname: "Ryab4ik",
-			email: "example@gmail.com",
 			
 			colors: [
           'indigo',
@@ -109,7 +111,22 @@ export default {
           'Fifth',
         ],
     };
-  },
+	},
+	
+
+
+	computed: {
+		userInfo() {
+			return this.$store.getters['auth/getActualUser'];
+		},
+		nickname() {
+			return this.$store.getters['auth/getActualUser'].nickname;
+		},
+		email() {
+			return this.$store.getters['auth/getActualUser'].email;
+		},
+	},
+
   methods: {
     editProfile() {},
     changePassword() {}

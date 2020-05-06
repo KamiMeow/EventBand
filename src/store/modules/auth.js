@@ -1,22 +1,35 @@
 import services from '@/middleware'; 
 const { UserService } = services;
  
+const initialUser = () => ({
+	email: 'example@gmail.com',
+	nickname: 'example-nickname',
+	surname: 'Brown',
+	name: 'John',
+	password: 'password123',
+});
+
 export const initialState = () => ({
 	isLogged: false,
-	email: '',
-	nickname: '',
-	surname: '',
-	name: '',
-	password: '',
+	actualUser: initialUser(),
+	editableUser: initialUser(),
 });
 
 export const mutations = {
 	SIGN_IN: (state, user) => {
 		state.isLogged = true;
-		state.email = user.email;
-		state.nickname = user.nickname;
-		state.surname = user.surname;
-		state.name = user.name;
+		state.actualUser.email = state.editableUser.email = user.email;
+		state.actualUser.nickname = state.editableUser.nickname = user.nickname;
+		state.actualUser.surname = state.editableUser.surname = user.surname;
+		state.actualUser.name = state.editableUser.name = user.name;
+	},
+
+	UNSET_EDITABLE_USER: (state) => {
+		state.editableUser = { ...state.actualUser };
+	},
+
+	SET_ACTUAL_USER: (state, user) => {
+		state.actualUser = { ...user };
 	},
 }
 
@@ -25,16 +38,20 @@ export const actions = {
 		const { user } = (await UserService.signIn( email, password )).data;
 		commit('SIGN_IN', user);
 	},
+
+	unsetEditableUser:  ({ commit }) => {
+		commit('UNSET_EDITABLE_USER');
+	},
+
+	setActualUser({ commit }, user) {
+		commit('SET_ACTUAL_USER', user);
+	}
 };
 
 export const getters = {
 
-	getUser: state => ({ 
-		email: state.email,
-		nickname: state.nickname,
-		surname: state.surname,  
-		name: state.name,  
-	}),
+	getActualUser: state => state.actualUser,
+	getEditableUser: state => state.editableUser,
 	
 	getIsLogged: state => state.isLogged,
 
