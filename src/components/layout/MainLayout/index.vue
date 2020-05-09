@@ -2,15 +2,15 @@
   <v-content class="pb-0">
     <the-toolbar />
     
-    <v-container fluid class="pa-0">
-      <v-layout fill-height justify-center>
+    <v-container fluid class="pa-0 mb-12 pb-12">
+      <v-layout fill-height justify-center class="mb-6">
         <v-slide-y-transition mode="out-in">
           <router-view />
         </v-slide-y-transition>
       </v-layout>
     </v-container>
 
-    <the-footer />
+    <the-footer/>
   </v-content>
 </template>
 

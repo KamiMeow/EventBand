@@ -31,17 +31,19 @@ class WebClient {
    */
   setInterceptors() {
     this.axios.interceptors.response.use(res => {
-      /// Постобработка усппешных запросов
+			/// Постобработка усппешных запросов
+			return res;
     }, error => {
       /// Постобработка не усппешных запросов
 
-      if ([401, 403].includes(error.data.status)) {
-        this.store.dispatch('unsetUserData');
-        setTimeout(() => {
-          this.router.replace({ name: "login" });
-        }, 0);
-      }
-      return Promise.reject(error);
+      // if ([401, 403].includes(error.data.status)) {
+      //   this.store.dispatch('unsetUserData');
+      //   setTimeout(() => {
+      //     this.router.replace({ name: "login" });
+      //   }, 0);
+			// }
+			
+      return error.response;
     });
   }
 

@@ -35,11 +35,13 @@ export const mutations = {
 
 export const actions = {
 	async signIn({ commit }, { email, password } ) {
-		const { user } = (await UserService.signIn( email, password )).data;
-		commit('SIGN_IN', user);
+		const { user, message = null } = (await UserService.signIn( email, password )).data;		
+		return message ? { message } : commit('SIGN_IN', user); 
 	},
 
-	async signUp({ commit }, { email, nickname, surname, name, password } ) {
+	async signUp({ commit }, userInfo ) {
+		const { user, message = null} = (await UserService.signUp( userInfo )).data;
+		return message ? { message } : commit('SIGN_IN', user);
 	},
 
 	

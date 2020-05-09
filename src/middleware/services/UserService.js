@@ -5,7 +5,7 @@ export default {
 		return this.apiClient.post('login', { email, password });
 	},
 
-	signUp ( email, nickname,  ) {
-		return this.apiClient.post('register', {});
+	signUp ( user ) {
+		return this.apiClient.post('register', { ...user });
 	},
 }

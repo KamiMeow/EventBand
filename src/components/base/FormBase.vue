@@ -10,13 +10,6 @@
                 :class="{ 'pa-4' : title }"
               >{{ title }}</span>
             </slot>
-
-            <v-spacer />
-            <slot name="afterTitle">
-              <span class="caption secondary--text cursor--pointer change-form-button" @click="$emit('after-title-action')">
-                {{ afterTitle }}
-              </span>
-            </slot>
           </v-layout>
 
           <v-flex xs12>
@@ -43,6 +36,11 @@
       <v-card-actions>
         <slot name="actions"></slot>
       </v-card-actions>
+			<slot name="afterTitle">
+			<span class="caption secondary--text cursor--pointer change-form-button" @click="$emit('after-title-action')">
+				{{ afterTitle }}
+			</span>
+			</slot>
     </v-card>
   </form-validate>
 </template>
@@ -73,7 +71,7 @@ export default {
   methods: {
     hadleFailValidation(e) {
       this.$emit('fail-validation', e);
-      return this.error = 'Проверьте заполненность и корректность данных полей';
+      return this.error = 'Check whether these fields are filled in and correct';
     },
     handleSubmit(e) {
       this.$emit('submit', e);

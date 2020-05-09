@@ -1,7 +1,6 @@
 <template>
 	<v-card
 		class="pa-2 my-2 d-inline-block"
-		style="max-width: 65vw; min-width: 65vw"
 		color="secondary"
 		elevation="0"
 		tile
@@ -25,30 +24,36 @@
 				</v-flex>
 				<v-flex 
 					xl2 lg2 
-					style="max-height: 130px; overflow-y: auto;"
 				>
-					<v-layout
-						class="d-flex flex-column"
-						style="">
-						<v-chip
-							v-for="tag in tags"
-							:key="tag.text"
-							color="primary"
-							class="my-1"
-							small
+					<v-layout wrap >
+						<v-flex xs12 class="white--text mt-n4">
+							Tags	
+						</v-flex>
+						<v-flex 
+							style="overflow-y: auto; max-height: 130px;"
+							shrink
 						>
-							<v-icon
-								left
-								v-text="tag.icon"
-							></v-icon>
-							{{ tag.text }}
-						</v-chip>
+							<v-chip
+								v-for="tag in tags"
+								:key="tag.text"
+								color="primary"
+								class="my-1 mr-1"
+								small
+							>
+								<v-icon
+									v-text="tag.icon"
+									small
+									left
+								></v-icon>
+								{{ tag.text }}
+							</v-chip>
+						</v-flex>
 					</v-layout>
 				</v-flex>
-				<v-flex xl2 lg2 class="px-2 pt-1 white--text">
+				<v-flex xl2 lg2 class="pl-4 px-2 pt-1 white--text">
 					<p> Price:  {{ price }} $ </p>
 					<p> Participants: {{ currentParticipantsAmount }} / {{ maxParticipantsAmount }} </p>
-					<p> Date: <v-btn class="white--text" text v-text="date" /> Time: <v-btn class="white--text" text v-text="time" /> </p>
+					<div> Date: <v-btn class="white--text" text v-text="date" /> </div> <div> Time: <v-btn class="white--text" text v-text="time" /> </div> 
 				</v-flex>
 				<v-flex xl3 lg3>
 					<v-card-actions>
@@ -155,8 +160,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-	::-webkit-scrollbar { 
-    width: 0px;  
-    background: transparent;
-	}
+	// ::-webkit-scrollbar { 
+  //   width: 0px;  
+  //   background: transparent;
+	// }
 </style>
