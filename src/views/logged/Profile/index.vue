@@ -1,10 +1,12 @@
 <template>
-  <v-container class="d-flex justify-center" fluid>
+  <v-container class="d-flex flex-column justify-center align-center" fluid>
     <v-layout
-			class="custom-elevation d-flex flex-column"
-			style="max-width: 75vw; height: 80vh;"
+			class="custom-elevation d-flex flex-column align-content-center"
+			style="max-width: 75vw;"
 		>
-      <v-layout>
+      <v-layout
+				style="max-height: 20vh; height: 20vh;"
+			>
         <v-col class="pr-0 ma-0" cols="1">
           <v-img
 						class="pa-0 ma-0"
@@ -37,84 +39,49 @@
 
         <v-col cols="2" >
           <edit-profile-form/>
-          <v-btn
-						color="primary"
-						class="mt-2"
-						@click="changePassword"
-					>Change password</v-btn>
+          <change-password-form/>
         </v-col>
       </v-layout>
 
-      <v-layout
-
-			>
-        <v-col cols="12">
-          <div class="headline">My organizations</div>
+      <v-layout 
+				class="d-flex flex-column justify-start px-4">
+          <div class="headline">My own organizations</div>
 					<v-divider></v-divider>
-					<v-carousel
-						cycle
-						height="200"
-						hide-delimiter-background
-						show-arrows-on-hover
-					>
-						<v-carousel-item
-							v-for="(slide, i) in slides"
-							:key="i"
-						>
-							<v-sheet
-								:color="colors[i]"
-								height="100%"
-							>
-								<v-row
-									class="fill-height"
-									align="center"
-									justify="center"
-								>
-									<div class="display-3">{{ slide }} Slide</div>
-								</v-row>
-							</v-sheet>
-						</v-carousel-item>
-					</v-carousel>
-        </v-col>
+					<v-layout
+						class="my-2"
+						style="overflow-x: auto; width: 100%; height: fit-content">
+						<horizontal-carousel class="px-8"> 
+							<organization-item
+								v-for="i in 20"
+								:key="i"
+							></organization-item>
+						</horizontal-carousel>
+					</v-layout>
       </v-layout>
+			<subscribes class="px-4" />
     </v-layout>
   </v-container>
 </template>
 
 <script>
+import HorizontalCarousel from '@/components/helper/HorizontalCarousel';
 import OrganizationItem from './OrganizationItem';
 import EditProfileForm from './EditProfileForm';
+import ChangePasswordForm from './ChangePasswordForm';
+import Subscribes from './Subscribes';
 
 export default {
 	name: 'Profile',
 
 	components: {
+		ChangePasswordForm,
+		HorizontalCarousel,
 		OrganizationItem,
 		EditProfileForm,
+		Subscribes,
 	},
 	
-  data() {
-    return {
-			
-			colors: [
-          'indigo',
-          'warning',
-          'pink darken-2',
-          'red lighten-1',
-          'deep-purple accent-4',
-        ],
-        slides: [
-          'First',
-          'Second',
-          'Third',
-          'Fourth',
-          'Fifth',
-        ],
-    };
-	},
-	
-
-
+  
 	computed: {
 		userInfo() {
 			return this.$store.getters['auth/getActualUser'];
@@ -133,3 +100,10 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+	::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+	}
+</style>

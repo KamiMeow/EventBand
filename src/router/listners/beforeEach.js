@@ -4,6 +4,7 @@
  */
 export default function (store) {
   return (to, _, next) => {
+		let isAuth = store.getters['auth/getIsLogged'];	
     next();
   };
 };

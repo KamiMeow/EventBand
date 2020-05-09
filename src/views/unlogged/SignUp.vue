@@ -98,7 +98,7 @@ export default {
 		valid: false,
 	}),
 	methods: {
-		signUpNewuserAccount() {
+		async signUpNewuserAccount() {
 
 			if ( !this.$refs.form.validate() ) return;
 
@@ -107,6 +107,15 @@ export default {
 			console.log(this.name);
 			console.log(this.nickname);
 			console.log(this.password);
+
+			let resp = await this.$store.dispatch('auth/signUp', {
+				email: this.email,
+				surname: this.surname,
+				name: this.name,
+				nickname: this.nickname,
+				password: this.password,
+			});
+			
 			
 		}
 	},

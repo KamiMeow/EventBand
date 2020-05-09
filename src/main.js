@@ -13,12 +13,7 @@ const router = routerInit(store);
 WebClient.$router = router;
 WebClient.$store = store;
 
-const settings = {
-  apiKey: '8f4217b3-fd58-486f-aff3-301ef4343996',
-  lang: 'en_EN',
-  coordorder: 'latlong',
-  version: '2.1'
-}
+
 
 new Vue({
   router,

@@ -16,7 +16,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: "/",
-    component: MainPage,
+		component: MainPage,
+		
   },
   ...unloggedRoutes,
   ...loggedRoutes,

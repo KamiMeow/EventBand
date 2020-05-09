@@ -39,6 +39,11 @@ export const actions = {
 		commit('SIGN_IN', user);
 	},
 
+	async signUp({ commit }, { email, nickname, surname, name, password } ) {
+	},
+
+	
+
 	unsetEditableUser:  ({ commit }) => {
 		commit('UNSET_EDITABLE_USER');
 	},
