@@ -8,12 +8,12 @@
 			@submit="signIn"
 			ref="signInForm"
 		>
-			<template v-slot:title> 
+			<template #title> 
 				<v-row>
 					<v-col cols="12" align="center"> {{ formTitle }} </v-col>
 				</v-row>
 			</template>
-			<template v-slot:afterTitle>
+			<template #afterTitle>
 				<v-row class="d-flex justify-center">
 					<v-col cols="6" align="center" class="null-indents"> 
 						<v-btn
@@ -40,22 +40,13 @@
 					</v-col>
 				</v-row>
 			</template> 
-			<template v-slot:actions>
-				<v-row class="null-indents">
-					<v-col cols="12" align="center" class="null-indents" >
-						<v-btn
-							color="primary"
-							type="submit"
-						> SIGN IN </v-btn>
-					</v-col>
-				</v-row>
-			</template>
 			<v-text-field
 				v-model="email"
 				:rules="[rules.email, rules.required]"
 				color="purple darken-1"
 				class="width-l"
 				label="E-mail"
+				tabindex="1"
 				validate-on-blur
 				clearable
 				outlined
@@ -69,13 +60,24 @@
 				label="Password"
 				class="width-l"
 				type="password"
+				tabindex="2"
 				validate-on-blur
 				clearable
 				outlined
 				counter
 				dense
 			/>
-			
+			<template #actions>
+				<v-row class="null-indents">
+					<v-col cols="12" align="center" class="null-indents" >
+						<v-btn
+							tabindex="3"
+							color="primary"
+							type="submit"
+						> SIGN IN </v-btn>
+					</v-col>
+				</v-row>
+			</template>
 		</form-base>
 	</v-container>
 </template>
@@ -108,7 +110,7 @@ export default {
 				email: this.email, 
 			}) || {};
 
-			return resp.message ? this.$refs.signInForm.setError(resp.message) : this.$router.replace('/');
+			return resp.message ? this.$refs.signInForm.setAlert(resp.message, 'error') : this.$router.replace('/');
 		},
 	},
 
