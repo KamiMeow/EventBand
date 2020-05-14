@@ -3,12 +3,16 @@
     src="/blur-bg-main.png"
 		class="pb-8"
   >
-		<v-layout justify-center align-center fill-height>
+		<v-layout 
+			justify-center 
+			align-center 
+			fill-height
+		>
 			<v-card
 				v-for="offer in offers"
 				:key="offer.icon"
 				class="py-5 px-1 semi-opacity mx-12"
-				width="350"
+				max-width="350"
 				outlined
 				tile
 			>
