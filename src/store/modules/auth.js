@@ -1,65 +1,48 @@
 import services from '@/middleware'; 
 const { UserService } = services;
- 
-const initialUser = () => ({
-	email: 'example@gmail.com',
-	nickname: 'example-nickname',
-	surname: 'Brown',
-	name: 'John',
-	password: 'password123',
-});
 
 export const initialState = () => ({
 	isLogged: false,
-	actualUser: initialUser(),
-	editableUser: initialUser(),
+	token: '', 
+	uuid: '', 
 });
 
 export const mutations = {
-	SIGN_IN: (state, user) => {
-		state.isLogged = true;
-		state.actualUser.email = state.editableUser.email = user.email;
-		state.actualUser.nickname = state.editableUser.nickname = user.nickname;
-		state.actualUser.surname = state.editableUser.surname = user.surname;
-		state.actualUser.name = state.editableUser.name = user.name;
+
+	SET_AUTH_INFO: (state, { uuid, token }) => {
+		state.token = token;
+		state.uuid = uuid;
 	},
 
-	UNSET_EDITABLE_USER: (state) => {
-		state.editableUser = { ...state.actualUser };
-	},
-
-	SET_ACTUAL_USER: (state, user) => {
-		state.actualUser = { ...user };
-	},
 }
 
 export const actions = {
 	async signIn({ commit }, { email, password } ) {
-		const { user, message = null } = (await UserService.signIn( email, password )).data;		
-		return message ? { message } : commit('SIGN_IN', user); 
+		const response = await UserService.signIn( email, password );		
+		return response.message ? { message: response.message } : commit('profile/SIGN_IN', response.user, { root: true }); 
 	},
 
 	async signUp({ commit }, userInfo ) {
-		const { user, message = null} = (await UserService.signUp( userInfo )).data;
-		return message ? { message } : commit('SIGN_IN', user);
+		const { user = null, message = null } = (await UserService.signUp( userInfo )).data;
+		if (user) {
+			commit('SET_AUTH_INFO', { 
+				uuid: user.uuid, 
+				token: user.token,
+			});
+			commit('profile/SIGN_IN', user, { root: true });
+			return {};
+		} else {
+			return { message };
+		}
 	},
 
 	
-
-	unsetEditableUser:  ({ commit }) => {
-		commit('UNSET_EDITABLE_USER');
-	},
-
-	setActualUser({ commit }, user) {
-		commit('SET_ACTUAL_USER', user);
-	}
 };
 
 export const getters = {
 
-	getActualUser: state => state.actualUser,
-	getEditableUser: state => state.editableUser,
-	
 	getIsLogged: state => state.isLogged,
+	getUUID: state => state.uuid,
+	getToken: state => state.token,
 
 };

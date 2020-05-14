@@ -7,6 +7,9 @@ import Vuex from 'vuex';
 import modules from './modules';
 import initialModules from './initialModules';
 
+import services from '@/middleware'; 
+const { GeneralService } = services; 
+
 Vue.use(Vuex);
 
 /**
@@ -56,14 +59,22 @@ const initialState = () => ({
   },
 });
 
+
 const vuex = new Vuex.Store({
   state: initialState,
   mutations: {
     // Общие мутации
   },
   actions: {
-    // Общие экшены
-  },
+		async requestPassword( _, { email }) {
+			let message = (await GeneralService.requestPassword( email )).data;
+			return message;
+		},
+	
+		changePassword({ getters } , { password }) {
+			
+		}
+	},
   getters: {
 		getRules: state => state.rules,
 		
