@@ -58,13 +58,19 @@
 				<v-flex xl3 lg3>
 					<v-card-actions>
 						<v-layout  class="d-flex flex-column justify-start py-3">
-							<v-btn 
-								color="primary"
-								class="mb-1"
-								depressed
-								x-large
-							> subscribe 
-							</v-btn>
+							<template v-if="isLogged" >
+								<v-btn 
+									color="primary"
+									class="mb-1"
+									depressed
+									x-large
+									@click="subsribeOnEvent"
+								> subscribe 
+								</v-btn>
+							</template>
+							<template v-else>
+								<quick-subscribe-form/>
+							</template>
 							<v-btn 
 								color="secondary"
 								class="my-1"
@@ -88,6 +94,7 @@
 <script>
 import CalendarInput from '@/components/helper/DateTimePicker/CalendarInput';
 import TimeInput from '@/components/helper/DateTimePicker/TimeInput';
+import QuickSubscribeForm from './QuickSubscribeForm';
 
 const items = [
 	{
@@ -122,6 +129,7 @@ export default {
 	components: {
 		CalendarInput,
 		TimeInput,
+		QuickSubscribeForm,
 	},
 	
 	data: () => ({
@@ -154,7 +162,10 @@ export default {
 		},
 		eventTime() {
 			return this.time;
-		}
+		},
+		isLogged() {
+			return this.$store.getters['getIsLogged'];
+		},
 	},
 }
 </script>
