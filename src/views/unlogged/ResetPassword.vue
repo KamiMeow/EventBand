@@ -3,54 +3,82 @@
 		class="d-flex flex-column justify-center align-center"
 		style="height: 80vh;"
 	>
-		<v-form 
-			v-model="valid"
-			class="width-l"
-			ref="form"
+		<form-base
+			ref="resetPasswordForm"
 			@submit.prevent="sendEmailToRecoverPassword"
 		>
-			<v-alert
-				class="width-l"
-				type="info"
-			>
-				<div>
-					Enter the email address that your account is linked to.
-					If an account with the specified email address exists, you will be sent an email for further password recovery.
-				</div>
-			</v-alert>
-			<v-text-field
-				v-model="emailForResetPassword"
-				:rules="[rules.required, rules.email]"
-				label="Your E-mail"
-				outlined
-				dense
-			></v-text-field>
-			<v-col cols="12" class="d-flex justify-center mt-0 pa-0" >
-				<v-btn 
-					class="white--text"
-					color="primary"
-					type="submit"
-					dense
-				> Recover </v-btn>
-			</v-col>
-		</v-form>
+				<template #title> 
+					<span class="display-1"> Reset password </span>
+				</template>
+				<template #default>
+					<v-layout justify-center>
+						<v-text-field
+							v-model="emailForResetPassword"
+							:rules="[rules.required, rules.email]"
+							label="Your E-mail"
+							class="width-l"
+							outlined
+							dense
+						/>
+					</v-layout>  
+				</template>
+				<template #actions>
+					<v-layout justify-center>
+						<v-btn 
+							:loading="loading"
+							class="white--text"
+							color="primary"
+							type="submit"
+							dense
+						> Recover </v-btn>
+					</v-layout> 
+				</template>
+		</form-base>
 	</v-container>
 </template>
 
 <script>
-export default {
+import FormBase from '@/components/base/FormBase';
 
+export default {
+	name: 'ResetPassword',
+
+	components: {
+		FormBase,
+	},
+
+	
+	mounted() {
+		this.$refs.resetPasswordForm.setAlert(this.infoTip , 'info');
+	},
+	
 	data: () => ({
 		emailForResetPassword: '',
-		valid: false,
+		infoTip: `Enter the email address 
+							that your account is linked to.`,
+		loading: false,
+		
 	}),
 	
 	methods: {
-		sendEmailToRecoverPassword() {
-			if ( !this.$refs.form.validate() ) return;
+		async sendEmailToRecoverPassword() {
+			
+			this.loading = true;
 
-			this.$router.push('/sign-in');
-		}
+			let message = await this.$store.dispatch('requestPassword', { 
+				email: this.emailForResetPassword, 
+			});
+
+			console.log(message);
+			
+
+			return this.handleMessageType(message);
+		},
+
+		handleMessageType(responseMessageObj) {
+			this.$refs.resetPasswordForm.setAlert(responseMessageObj.message, responseMessageObj.type);
+			this.loading = false;
+		},
 	},
 
 	computed: {
