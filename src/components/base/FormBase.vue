@@ -1,9 +1,12 @@
 <template>
   <form-validate @submit="handleSubmit" @fail-validation="hadleFailValidation">
-    <v-card elevation="0">
+    <v-card 
+			elevation="0"
+			max-width="500px"
+			>
       <v-card-title class="pa-0">
         <v-layout column>
-          <v-layout align-center>
+          <v-layout justify-center>
             <slot name="title">
               <span
                 class="font-weight-regular"
@@ -12,19 +15,22 @@
             </slot>
           </v-layout>
 
-          <v-flex xs12>
-            <v-slide-y-transition>
-              <v-alert
-                v-if="error"
-                style="width:100%"
-                class="mb-0 mt-3"
-                border="top"
-                color="error"
-                dark
-              >{{ error }}</v-alert>
-            </v-slide-y-transition>
-          </v-flex>
-
+					<v-flex xs12>
+						<v-slide-y-transition>
+							<v-alert
+								v-if="message"
+								style="width:100%"
+								class="mb-0 mt-3"
+								border="top"
+								:type="typeAlert"
+								:color="typeAlert"
+								dark
+							> 
+								{{ message }} 
+							</v-alert>
+						</v-slide-y-transition>
+					</v-flex>
+					
           <v-divider />
         </v-layout>
       </v-card-title>
@@ -33,8 +39,8 @@
         <slot></slot>
       </v-card-text>
 
-      <v-card-actions>
-        <slot name="actions"></slot>
+      <v-card-actions >
+				<slot name="actions"></slot>
       </v-card-actions>
 			<slot name="afterTitle">
 			<span class="caption secondary--text cursor--pointer change-form-button" @click="$emit('after-title-action')">
@@ -65,22 +71,27 @@ export default {
   },
 
   data: () => ({
-    error: '',
+		message: '',
+		typeAlert: 'info',
   }),
 
   methods: {
     hadleFailValidation(e) {
-      this.$emit('fail-validation', e);
-      return this.error = 'Check whether these fields are filled in and correct';
+			this.typeAlert = 'error'
+      this.message = 'Check whether these fields are filled in and correct';
+			return this.$emit('fail-validation', e);
     },
     handleSubmit(e) {
-      this.$emit('submit', e);
-      return this.error = '';
+			this.typeAlert = 'info';
+			this.message = '';
+			return this.$emit('submit', e);
     },
 
-    setError(error) {
-      return this.error = error;
+    setAlert(message, type = 'error') {			
+			this.typeAlert = type;
+			this.message = message;
+			return; 
     },
-  },
+	},
 };
 </script>
