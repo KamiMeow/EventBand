@@ -1,24 +1,28 @@
 <template>
 	<swiper-slide class="mx-4">
-		<v-card 
-			class="max-company-size d-flex flex-column align-center pt-4" 
-			color="secondary"
-		> 
-				<v-img 
-						contain
-						height="64"
-						src="/men.png" />
-			<v-card-subtitle class="align-self-center white--text"> 
-				<v-btn
-					class="white--text"
-					x-small
-					text
-					to="/"
-				>
-					{{ OrganizationName }} 
-				</v-btn>
-			</v-card-subtitle>
-		</v-card>
+		<v-responsive
+			:aspect-ratio="16/9"
+		>
+			<v-card 
+				class="max-company-size d-flex flex-column align-center pt-4" 
+				color="secondary"
+			> 
+					<v-img 
+							contain
+							height="64"
+							:src="noLogo" />
+				<v-card-subtitle class="align-self-center white--text"> 
+					<v-btn
+						class="white--text"
+						x-small
+						text
+						to="/"
+					>
+						{{ organization.name }} 
+					</v-btn>
+				</v-card-subtitle>
+			</v-card>
+		</v-responsive>
 	</swiper-slide>
 </template>
 
@@ -28,14 +32,25 @@ import { SwiperSlide } from 'vue-awesome-swiper';
 export default {
 	name: 'OrganizationItem',
 	props: {
-		OrganizationName: {
-			type: String,
-			default: 'Company name',
+		organization: {
+			type: Object,
+			default: {
+				logo: 'no-logo',
+				reputation: 0,
+				uuid: 'none',
+				name: 'no-name',
+			},
 		},
 	},
 
 	components: {
 		SwiperSlide,
+	},
+
+	computed: {
+		noLogo() {
+			return '/logo-organization.png';
+		}
 	}
 }
 </script>

@@ -1,54 +1,59 @@
 <template>
+<v-layout>
 	<v-row justify="start" class="ml-3">
+
     <v-dialog v-model="dialog" persistent max-width="30vw">
-      <template v-slot:activator="{ on }">
-        <v-btn color="primary" class="mt-2 align-self-start" dark v-on="on">Change password</v-btn>
+      <template #activator="{ on }">
+        <v-btn color="primary" class="mt-2 align-self-start" dark v-on="on">Reset password</v-btn>
       </template>
       <v-card>
         <v-card-title>
-          <span class="headline">Change password</span>
+					<v-layout justify-center>
+          	<span class="headline">Do you want to change your password?</span>
+					</v-layout>
         </v-card-title>
         <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field 
-									v-model="oldPassword"
-									label="Old password*"
-									required/>
-              </v-col>
-              <v-col cols="12" sm="6" md="4">
-                <v-text-field 
-									v-model="newPassword"
-									label="New password*"
-									required/>
-              </v-col>
-            </v-row>
-          </v-container>
-          <small>*indicates required field</small>
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="error" @click="dialog = false">Close</v-btn>
-          <v-btn color="success" @click="changePassword">Change</v-btn>
+          <v-layout 
+						fill-width
+						justify-space-around=""
+					>
+						<v-btn color="error" @click="dialog = false">Close</v-btn>
+						<v-btn color="success" @click="resetPassword">Agree</v-btn>
+					</v-layout>
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+		<v-dialog v-model="successDialog" max-width="600px">
+			<v-alert
+				type="success"
+				align="center"
+			>
+				Check your E-mail
+			</v-alert> 
+		</v-dialog>
   </v-row>
+</v-layout>
 </template>
 
 <script>
 export default {
 	data: () => ({
 		dialog: false,
-		oldPassword: '',
-		newPassword: '',
+		successDialog: false,
 	}),
 
 	methods: {
-		changePassword() {
+		resetPassword() {
 			this.dialog = false;
+			this.successDialog = true;
+			setTimeout( () => { this.successDialog = false }, 2000);
+			this.$store.dispatch('requestPassword', { 
+				email: this.$store.getters['profile/getActualUser'].email,
+			});
 		}
-	}
+	},
 }
 </script>

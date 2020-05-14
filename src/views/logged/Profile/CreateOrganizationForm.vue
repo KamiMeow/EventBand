@@ -1,0 +1,158 @@
+<template>
+	<v-dialog 
+		
+		v-model="dialog"
+		width="700px"
+		persistent
+	>
+		<template #activator="{ on }">
+			<v-btn
+				v-on="on"
+				color="primary"
+				class="ml-3 mt-2" 
+			> 
+				{{ btnText }} 
+			</v-btn>	
+		</template>
+
+		<template #default>
+			<v-card>
+
+				<v-layout justify-center>
+					<form-base
+						ref="createOrgForm"
+						@submit="createNewOrganization"
+					>	
+						<template #title>
+							<span> Create your own Organization </span>
+						</template>
+						<template #default>
+							<v-layout column align-center>
+								<v-text-field
+									v-model="name"
+									label="Organization name"
+									class="width-l"
+									outlined
+									dense
+								/>
+								<v-textarea
+									v-model="description"
+									label="Description"
+									class="width-l"
+									outlined
+								/>
+								<vue-dropzone 
+									ref="myVueDropzone" 
+									id="dropzone" 
+									:options="dropzoneOptions"
+									@vdropzone-success="fileAdded"
+								/>
+							</v-layout>
+						</template>
+						<template #actions>
+							<v-layout justify-space-around> 
+								<v-btn 
+									color="error" 
+									@click="dialog = false"
+								> 
+									Close
+								</v-btn>
+								<v-btn 
+									color="success"
+									type="submit"
+								> 
+									Create 
+								</v-btn>
+							</v-layout>
+						</template>
+					</form-base>
+				</v-layout>
+			</v-card>
+		</template>
+		<v-dialog z-index="10" v-model="resultDialog" width="600px" max-width="600px">
+			<v-alert
+				type="error"
+				align="center"
+			>
+				{{ dialogMessage }}
+
+			</v-alert> 
+		</v-dialog>
+	</v-dialog>
+</template>
+
+<script>
+import FormBase from '@/components/base/FormBase';
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+
+
+export default {
+	name: 'CreateOrganizationForm',
+	components: {
+		FormBase,
+		vueDropzone: vue2Dropzone,
+	},
+
+	props: {
+		btnText: {
+			type: String,	
+		},
+
+	},
+
+	data: () => ({
+		dialog: false,
+		resultDialog: false,
+
+		dropzoneOptions: {
+			url: 'https://httpbin.org/post',
+			addRemoveLinks: true,
+			thumbnailWidth: 150,
+			maxFilesize: 0.5,
+			maxFiles: 1,
+			headers: { "My-Awesome-Header": "header value" }
+		},
+
+		name: '',
+		description: '',
+		logo: {},
+
+		dialogMessage: '',
+	}),
+
+	methods: {
+		async createNewOrganization() {
+			let message = await this.$store.dispatch('organization/createNewOrganization', {
+				name: this.name,
+				description: this.description,
+				logo: 'no-logo&no-homo',
+			});
+
+			
+
+			if (message) {
+				
+				console.log(message);
+				this.$refs.createOrgForm.setAlert(message.message, 'error');
+				this.resultDialog = true;
+				console.log(this.resultDialog);
+				
+				this.dialogMessage = message;
+			}
+
+		},
+
+		fileAdded(file, resp) {
+			// this.$refs.myVueDropzone.removeAllFiles();
+			console.log(this.$refs.myVueDropzone.getAcceptedFiles());
+			console.log(this.$refs.myVueDropzone.getRejectedFiles());
+			
+			// this.$refs.myVueDropzone.manuallyAddFile(file, file.dataURL);
+			// console.log(file);
+		}
+	},
+}
+</script>
+
+<style src="@/scss/_width.scss" lang="scss"></style>
