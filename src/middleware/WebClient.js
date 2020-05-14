@@ -18,7 +18,7 @@ class WebClient {
     this.axios = axios.create({
       baseURL,
       headers: {
-        'Content-Type': 'application/json',
+				'Content-Type': 'application/json',
       },
       withCredentials: false,
     });
@@ -52,12 +52,14 @@ class WebClient {
    * @param {String} token Токен авторизации
    */
   login(token) {
-    this.axios.defaults.headers.common['authorization'] = 'Bearer ' + token;
+		this.axios.defaults.baseURL = this.baseURL + 'api/';
+		this.axios.defaults.headers.common['authorization'] = 'Bearer ' + token;
   }
   /**
    * Метод очистки заголовка авторизации при выходе пользователя из приложения
    */
   logout() {
+		this.axios.defaults.baseURL = this.baseURL;
     delete this.axios.defaults.headers.common['authorization'];
   }
 

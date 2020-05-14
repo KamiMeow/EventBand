@@ -1,8 +1,13 @@
 const url = "users";
 
 export default {
-	signIn( email, password ) {
-		return this.apiClient.post('login', { email, password });
+	async signIn( email, password ) {
+		let response = (await this.apiClient.post('login', { email, password })).data;
+				
+		if (response.user) {
+			this.apiClient.login(response.user.token);
+		}
+		return response;
 	},
 
 	signUp ( user ) {
