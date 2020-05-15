@@ -123,9 +123,8 @@ export default {
 			return this.$store.getters['profile/getActualUser'].avatar;
 		},
 		organizations() {
-			console.log(this.$store.getters['profile/getUserOrganizations']);
-			
-			return this.$store.getters['profile/getUserOrganizations'];
+			// console.log(this.$store.getters['profile/getUserOrganizations']);	
+			return this.$store.getters['profile/getUserOrganizations'] || [];
 		},
 	},
 

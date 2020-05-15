@@ -7,6 +7,7 @@
       centered
       dark
     >
+			
       <v-tabs-slider></v-tabs-slider>
 
       <v-tab
@@ -26,7 +27,7 @@
 					class="pa-5"
 					fluid
 				>
-					{{i.title}}
+					<subscribe-item/>
 				</v-container>
       </v-tab-item>
     </v-tabs>
@@ -34,6 +35,7 @@
 </template>
 
 <script>
+import SubscribeItem from './SubscribeItem';
 
 const tabs = [
 	{
@@ -48,6 +50,11 @@ const tabs = [
 
 export default {
 	name: 'Subscribes',
+
+	components: {
+		SubscribeItem,
+	},
+
 	data: () => ({
 		tabs,
 	}),
