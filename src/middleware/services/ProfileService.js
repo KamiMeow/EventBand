@@ -14,5 +14,17 @@ export default {
 	 */
 	updateProfileInfo( profileInfo ) {
 		return this.apiClient.put('profile', { ...profileInfo });
-	}
+	},
+
+	unsubscribeFromEvent( uuid ) {
+		return this.apiClient.get(`event/unsubscribe/${uuid}`);
+	},
+
+	requestRecomendedContent() {
+		return this.apiClient.get('event/event-recommended');
+	},
+
+	requestOrganizationsNews() {
+		return this.apiClient.get('event/event-feed');
+	},
 }
