@@ -5,7 +5,7 @@
 			class="white--text"
 			flat 
 		>
-			<v-toolbar-title> Feed & News </v-toolbar-title>
+			<v-toolbar-title> Recommended content & Organizations news </v-toolbar-title>
 		</v-toolbar>
 		<v-tabs centered>
 			<v-tab> Events </v-tab>
@@ -37,6 +37,11 @@ export default {
 		OrganizationsNews,
 		Organizations,
 		Events,
+	},
+
+	created() {
+		this.$store.dispatch('profile/requestRecomendedContent');
+		this.$store.dispatch('profile/requestOrganizationsNews');
 	},
 }
 </script>

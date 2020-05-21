@@ -51,24 +51,29 @@
 							/>
 						</v-layout>
 						<v-layout column>
-							<span class="headline align-self-center" > Tickets </span>
-							<v-radio-group v-model="radio">
-								<v-tooltip 
-									v-for="ticket in tickets"
-									:key="ticket.uuid"
-									left
-								>
-									<template #activator="{ on }">
-										<v-radio 
-											color="black"
-											:label="ticket.name"
-											:value="ticket.uuid"
-											v-on="on"
-										/>
-									</template>
-									<span> {{ ticket.description }} </span>
-								</v-tooltip>
-							</v-radio-group>
+							<template v-if="!tickets.length">
+								<span class="title align-self-center"> No tickets this event</span>
+							</template>
+							<template v-else>
+								<span class="headline align-self-center" > Tickets </span>
+								<v-radio-group v-model="radio">
+									<v-tooltip 
+										v-for="ticket in tickets"
+										:key="ticket.uuid"
+										left
+									>
+										<template #activator="{ on }">
+											<v-radio 
+												color="black"
+												:label="ticket.name"
+												:value="ticket.uuid"
+												v-on="on"
+											/>
+										</template>
+										<span> {{ ticket.description }} </span>
+									</v-tooltip>
+								</v-radio-group>
+							</template>
 						</v-layout>
 						<template #actions>
 							<v-layout 
@@ -119,7 +124,8 @@ export default {
 		email: '',
 		surname: '',
 		name: '',
-		radio: vm.tickets[0].uuid,
+		radio: '',
+		// radio: vm.tickets[0].uuid,
 
 		cbMessage: 'nothing happend',
 	}),

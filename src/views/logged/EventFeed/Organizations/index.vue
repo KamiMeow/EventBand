@@ -1,19 +1,34 @@
 <template>
 	<v-layout
 		class="pa-4"
+		align-center
+		justify-start
+		column
 	>
-		Organizations
+		<organization-item
+			v-for="o in organizations"
+			:key="o.uuid"
+			:organization="o"
+		>
+			{{ o.name }}
+		</organization-item>
 	</v-layout>
 </template>
 
 <script>
+import OrganizationItem from '@/components/helper/OrganizationItem'
+
 export default {
 	name: 'Organizations',
 
-	async created() {
-		await this.$store.dispatch('profile/requestOrganizationsNews');
-		console.log(this.$store.getters['profile/getOrganizationsNews']);
-		
-	} 
+	components: {
+		OrganizationItem,
+	},
+
+	computed: {
+		organizations() {
+			return this.$store.getters['profile/getRecomendedOrganizations'];
+		}
+	},
 }
 </script>
