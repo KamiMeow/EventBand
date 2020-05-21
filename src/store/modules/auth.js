@@ -23,28 +23,36 @@ export const mutations = {
 };
 
 export const actions = {
-	logout: ({ commit }) => commit('LOGOUT'),
+	loginFromState: ({ commit }, data) => commit('SET_AUTH_INFO', data),
+	logout: ({ dispatch }) => dispatch('unsetUserData', null, { root: true }),
 
 	async signIn({ commit, dispatch }, { email, password } ) {
 		const { user, message } = await UserService.signIn( email, password );
-		commit('SET_AUTH_INFO', {
+		const infoUser = {
 			token: user.token,
 			uuid: user.uuid,
-		});
+		};
+
+		commit('SET_AUTH_INFO', infoUser);
+		dispatch('saveToLocaleStorage', infoUser, { root: true });
 
 		return message
 			? { message }
 			: dispatch('profile/getProfile', null, { root: true });
 	},
 
-	async signUp({ commit }, userInfo ) {
+	async signUp({ dispatch, commit }, userInfo ) {
 		const { user = null, message = null } = (await UserService.signUp( userInfo )).data;
 		if (user) {
-			commit('SET_AUTH_INFO', { 
-				uuid: user.uuid, 
+			const infoUser = {
 				token: user.token,
-			});
+				uuid: user.uuid,
+			};
 			commit('profile/SIGN_IN', user, { root: true });
+			dispatch('saveToLocaleStorage', infoUser, { root: true });
+	
+			commit('SET_AUTH_INFO', infoUser);
+
 			return {};
 		} else {
 			return { message };
