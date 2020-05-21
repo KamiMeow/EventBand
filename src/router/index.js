@@ -28,6 +28,10 @@ const routes = [
   ...loggedRoutes,
 
   {
+    path: '/ping',
+    name: 'ping',
+  },
+  {
     path: "/*",
     redirect: '/sign-in',
 	},
