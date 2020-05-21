@@ -30,14 +30,17 @@
 
 <script>
 export default {
-  name: 'CalendarInput',
+	name: 'CalendarInput',
+	
   props: {
     showCurrent: String,
     value: String,
-  },
+	},
+	
   data: vm => ({
     menu: false,
-  }),
+	}),
+	
   computed: {
     date: {
       get() {
@@ -48,7 +51,7 @@ export default {
       },
     },
 
-    currentDate() {
+    currentDate() {			
       if (!this.date) return;
       const [year, month, day] = this.date.split('-');
       return [day, month, year].join('.');
