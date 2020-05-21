@@ -8,10 +8,10 @@ import EventPage from '@/views/logged/EventPage';
 export default [
     {
         path: "/profile",
-				component: Profile,
-				meta: {
-					onlyForUser: true,
-				},
+        component: Profile,
+        meta: {
+            onlyForUser: true,
+        },
     },
     {
         path: "/events/feed",

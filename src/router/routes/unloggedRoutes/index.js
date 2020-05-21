@@ -7,6 +7,7 @@ import ResetPassword from '@/views/unlogged/ResetPassword';
 export default [
     {
         path: "/sign-in",
+        name: "sign-in",
         component: SignIn,
     },
     {
@@ -16,6 +17,6 @@ export default [
     {
         path: "/reset-password",
         component: ResetPassword, 
-		},
+    },
 		
 ];
