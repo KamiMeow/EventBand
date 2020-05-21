@@ -7,11 +7,10 @@
 		<template #activator="{ on }">
 			<v-btn
 				v-on="on"
-				@click="dialog = true"
-				color="red"
-				icon
-			> 
-				<v-icon> mdi-close-circle </v-icon>
+				@action="dialog = true"
+				color="error"
+			>
+				unsubscribe
 			</v-btn>
 		</template>
 
@@ -37,7 +36,7 @@
 						</v-btn>
 						<v-btn
 							color="error"
-							@click="removeEventFromSubscribes"
+							@click="removeItemFromSubscribes"
 						>
 							unsubscribe
 						</v-btn>
@@ -50,14 +49,15 @@
 
 
 <script>
+import tooltip from '@/components/helper/TooltipButton.vue';
+
 export default {
 	name: 'rejectEventDialog',
 
-	props: {
-		"event-uuid": {
-			type: String,
-			default: null,
-		}
+	props: [ "subUuid", "subType" ],
+
+	components: {
+		tooltip,
 	},
 
 	data: () => ({
@@ -65,10 +65,22 @@ export default {
 	}),
 
 	methods: {
-		removeEventFromSubscribes() {
-			console.log("event: removed!");
-			this.dialog = false;
+		removeItemFromSubscribes() {
+			console.log(this.subType, this.subUuid);
+			this.$store.dispatch(`profile/removeUserSubscribe${this.subType}`, this.subUuid);
+			return this.dialog = false;
 		},
+
+		/** Frozen */
+		/*defineAction() {
+
+			switch (this["sub-type"]) {
+				case "Event": {
+					this.$store.dispatch("removeUserSubscribeEvent", this["sub-uuid"]);
+					break;
+				}
+			}
+		}*/
 	},
 }
 </script>

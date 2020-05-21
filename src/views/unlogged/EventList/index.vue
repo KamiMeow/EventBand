@@ -3,10 +3,7 @@
 		class="d-flex flex-column"
 		fluid
 	>
-		<v-layout
-			style="height: 90vh; max-height: 90vh;"
-			wrap
-		>
+		<v-layout wrap>
 			<v-flex 
 				color="secondary"
 				lg9 md8 sm12 xs12
@@ -24,10 +21,14 @@
 		>
 			<v-flex
 				xs12 sm10 md9
-				v-for="i in 5"
-				:key="i"
+				v-for="i in events"
+				:key="i.uuid"
 			>
-				<event-item/>
+				<event-item 
+					:event="i"
+					:tickets="i.tickets"
+					:tags="i.tags"
+				/>
 			</v-flex>
 		</v-layout>
 	</v-container>
@@ -37,7 +38,7 @@
 
 import yaMap from './Ya-map';
 import Filters from './Filters';
-import EventItem from './EventItem';
+import EventItem from '@/components/helper/EventItem';
 
 export default {
 	name: 'EventList',
@@ -46,6 +47,12 @@ export default {
 		yaMap,
 		Filters,
 		EventItem,
+	},
+
+	computed: {
+		events() {
+			return this.$store.getters['nonauth/getEvents'];
+		},
 	},
 }
 </script>

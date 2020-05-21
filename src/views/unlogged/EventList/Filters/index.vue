@@ -2,10 +2,9 @@
 	<v-layout
 		class="d-flex flex-column justify-start align-center"
 		:class="maxFilterHeight"
-		style="overflow-y: auto">
-		<v-form
-			@input="changeWholeForm"
-		>
+		style="overflow-y: auto;"
+	>
+		<v-form>
 		<v-expansion-panels
 			:value="expandedPanels"
 			multiple
@@ -23,7 +22,7 @@
 						>	
 							<v-col
 								v-for="(tag, i) in selectedTags"
-								:key="tag.text"
+								:key="i"
 								class="shrink"
 							>
 								<v-chip
@@ -31,11 +30,7 @@
 									close
 									@click:close="selectedTags.splice(i, 1)"
 								>
-									<v-icon
-										left
-										v-text="tag.icon"
-									></v-icon>
-									{{ tag.text }}
+									{{ tag.name }}
 								</v-chip>
 							</v-col>
 						</v-row>
@@ -48,17 +43,13 @@
 							>
 								<v-col
 									v-if="!selected.includes(tag)"
-									:key="tag.text"
+									:key="tag.uuid"
 									class="shrink"
 								>
 									<v-chip
 										@click="selected.push(tag)"
 									>
-										<v-icon
-											left
-											v-text="tag.icon"
-										></v-icon>
-										{{ tag.text }}
+										{{ tag.name }}
 									</v-chip>
 								</v-col>
 							</template>
@@ -74,6 +65,7 @@
 								v-model="maxPeopleLimit"
 								:max="maxPeople"
 								:min="minPeople"
+								thumb-label="always"
 								class="align-center"
 								hide-details
 							>
@@ -108,8 +100,9 @@
 							>
 								<v-range-slider
 									v-model="range"
-									:max="120"
-									:min="1"
+									:max="2500"
+									:min="0"
+									thumb-label="always"
 									class="align-center"
 									hide-details
 								>
@@ -117,8 +110,8 @@
 										<v-text-field
 											:value="range[0]"
 											:min="minPrice"
-											class="mt-0 pt-0"
 											style="width: 60px"
+											class="mt-0 pt-0"
 											type="number"
 											hide-details
 											single-line
@@ -132,8 +125,8 @@
 											style="width: 60px"
 											class="mt-0 pt-0"
 											type="number"
-											single-line
 											hide-details
+											single-line
 											@change="$set(range, 1, $event)"
 										></v-text-field>
 									</template>
@@ -158,12 +151,13 @@
 							<v-col
 								cols="6"
 							>
-								<calendar-input/>
+								<calendar-input 
+									v-model="dateFrom"/>
 							</v-col>
 							<v-col
 								cols="6"
 							>
-								<time-input/>
+								<time-input v-model="timeFrom"/>
 							</v-col>
 							<template
 								v-if="isPeriod"
@@ -171,12 +165,13 @@
 								<v-col
 									cols="6"
 								>
-									<calendar-input/>
+									<calendar-input 
+										v-model="dateTo"/>
 								</v-col>
 								<v-col
 									cols="6"
 								>
-									<time-input/>
+									<time-input v-model="timeTo" />
 								</v-col>
 							</template>
 						</v-row>
@@ -194,7 +189,7 @@
 									v-model="minRate"
 									label="Min rate"
 									class="align-center"
-									thumb-label
+									thumb-label="always"
 									max="10"
 									min="1"
 									hide-details
@@ -225,33 +220,6 @@
 import CalendarInput from '@/components/helper/DateTimePicker/CalendarInput';
 import TimeInput from '@/components/helper/DateTimePicker/TimeInput';
 
-const items = [
-	{
-		text: '3D-modeling',
-		icon: 'mdi-desktop-mac-dashboard',
-	},
-	{
-		text: 'Science',
-		icon: 'mdi-atom',
-	},
-	{
-		text: 'Music',
-		icon: 'mdi-guitar-acoustic',
-	},
-	{
-		text: 'Sport',
-		icon: 'mdi-volleyball',
-	},
-	{
-		text: 'Art',
-		icon: 'mdi-brush',
-	},
-	{
-		text: 'Religion',
-		icon: 'mdi-christianity',
-	},
-];
-
 export default {
 	name: 'Filters',
 
@@ -259,21 +227,38 @@ export default {
 		CalendarInput,
 		TimeInput,
 	},
+
+	async created() {
+		await this.$store.dispatch('nonauth/requestAllTags');
+		this.items = this.$store.getters['nonauth/getAllTags'];
+	},
+
+	beforeDestroy() {
+		clearTimeout(this.timer);
+	},
 	
 	data: () => ({
-		date: new Date().toISOString().substr(0, 10),
+
+			timer: {},
+			date: new Date().toISOString().substr(0, 10),
       menu: false,
 
 			selected: [],
-			items,
+			items: [],
 			
 			minPeople: 1,
-			maxPeople: 350,
+			maxPeople: 2500,
 			maxPeopleLimit: 60,
 
-			minPrice: 1,
-			maxPrice: 120,
-			range: [1, 20],
+			minPrice: 0,
+			maxPrice: 0,
+			range: [0, 0],
+
+			dateFrom: '2020-05-10',
+			dateTo: new Date().toISOString().substr(0, 10),
+			timeTo: '',
+			timeFrom: '',
+
 
 			isFree: true,
 			isPeriod: false,
@@ -286,8 +271,26 @@ export default {
 	methods: {
 		changeWholeForm(e) {
 			console.log(1);
+		},
+
+		requestEvents() {
+			clearTimeout(this.timer);
+			// console.log([...this.selected].map( v => v.id));
 			
-		}
+			this.timer = setTimeout( () => {
+				console.log(this.maxPrice);
+				
+				this.$store.dispatch('nonauth/requestEvents', {
+					dateFrom: this.dateFrom,
+					dateTo: this.dateTo,
+					priceFrom: this.range[0],
+					priceTo: this.range[1],
+					people: this.maxPeopleLimit,
+					tags: [...this.selected].map( v => v.id) || [],
+					reputation: this.minRate,
+				});
+			}, 1000);
+		},
 	},
 
 	computed: {
@@ -309,7 +312,58 @@ export default {
 				default: 
 					return 'vh-lg';
 			}
-		}
+		},
+
+	},
+
+	watch: {
+
+		selected(val) {
+			this.requestEvents();
+		},
+
+		isFree(val) {
+			if (val) {
+				this.range = [0, 0];
+			}
+			this.requestEvents();
+		},
+		
+		isPeriod(val) {
+			this.dateTo = this.dateFrom;
+			this.requestEvents();
+		},
+
+		minRate(val) {
+			this.requestEvents();
+		},
+
+		range(val) {
+			this.requestEvents();
+		},
+		
+		maxPeopleLimit(val) {
+
+			this.requestEvents();
+		},
+
+		dateFrom(val) {
+			this.requestEvents();
+		},
+		
+		dateTo(val) {
+			this.requestEvents();
+		},
+
+
+		// minPrice(val) {
+		// 	console.log('MIN ', val);
+		// 	this.range[0]
+		// },
+
+		// maxPrice(val) {
+		// 	console.log('MAX ', val);
+		// },
 	},
 }
 </script>

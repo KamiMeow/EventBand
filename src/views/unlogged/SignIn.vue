@@ -47,7 +47,6 @@
 				class="width-l"
 				label="E-mail"
 				tabindex="1"
-				validate-on-blur
 				clearable
 				outlined
 				counter
@@ -61,7 +60,6 @@
 				class="width-l"
 				type="password"
 				tabindex="2"
-				validate-on-blur
 				clearable
 				outlined
 				counter

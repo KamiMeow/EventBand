@@ -1,6 +1,5 @@
 <template>
 	<v-dialog 
-		
 		v-model="dialog"
 		width="700px"
 		persistent
@@ -9,9 +8,8 @@
 			<v-btn
 				v-on="on"
 				color="primary"
-				class="ml-3 mt-2" 
 			> 
-				{{ btnText }} 
+				Create organization
 			</v-btn>	
 		</template>
 
@@ -92,13 +90,6 @@ export default {
 	components: {
 		FormBase,
 		vueDropzone: vue2Dropzone,
-	},
-
-	props: {
-		btnText: {
-			type: String,	
-		},
-
 	},
 
 	data: () => ({

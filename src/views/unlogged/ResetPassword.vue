@@ -65,7 +65,7 @@ export default {
 			
 			this.loading = true;
 
-			let message = await this.$store.dispatch('requestPassword', { 
+			let message = await this.$store.dispatch('non-auth/requestPassword', { 
 				email: this.emailForResetPassword, 
 			});
 
