@@ -6,9 +6,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import modules from './modules';
 import initialModules from './initialModules';
-
-import services from '@/middleware'; 
-const { GeneralService } = services; 
+import RStore from '../helper/RStore';
+import WebClient from '../middleware/WebClient';
 
 Vue.use(Vuex);
 
@@ -63,10 +62,20 @@ const initialState = () => ({
 const vuex = new Vuex.Store({
   state: initialState,
   mutations: {
-    // Общие мутации
+    UNSET_DATA: state => state = initialState(),
   },
   actions: {
-		// Общие действия
+    saveToLocaleStorage(_, data) {
+      RStore.initState(data);
+    },
+    unsetUserData({ commit, dispatch }) {
+      Object.keys(modules).forEach(module => {
+        commit(`${module}/UNSET_DATA`);
+      });
+      commit('UNSET_DATA');
+      dispatch('saveToLocaleStorage');
+      WebClient.logout();
+    },
 	},
   getters: {
 		getRules: state => state.rules,
