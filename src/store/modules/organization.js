@@ -2,13 +2,8 @@ import services from '@/middleware';
 const { OrganizationService } = services;
 
 
-export const initialState = () => {
-	
-};
+export const initialState = () => ({});
 
-export const mutations = {
-
-};
 
 export const actions = {
 	async createNewOrganization({ commit }, orgInfo) {
