@@ -10,16 +10,31 @@ export const initialState = () => ({
 export const mutations = {
 
 	SET_AUTH_INFO: (state, { uuid, token }) => {
+		state.isLogged = true;
 		state.token = token;
 		state.uuid = uuid;
 	},
+	LOGOUT: state => {
+		state.isLogged = false;
+		state.token = '';
+		state.uuid = '';
+	}
 
-}
+};
 
 export const actions = {
+	logout: ({ commit }) => commit('LOGOUT'),
+
 	async signIn({ commit, dispatch }, { email, password } ) {
-		const response = await UserService.signIn( email, password );		
-		return response.message ? { message: response.message } : dispatch('profile/getProfile', null, { root: true }); 
+		const { user, message } = await UserService.signIn( email, password );
+		commit('SET_AUTH_INFO', {
+			token: user.token,
+			uuid: user.uuid,
+		});
+
+		return message
+			? { message }
+			: dispatch('profile/getProfile', null, { root: true });
 	},
 
 	async signUp({ commit }, userInfo ) {
