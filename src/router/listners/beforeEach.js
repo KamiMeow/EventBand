@@ -4,11 +4,6 @@ const NOT_LOGIN_META = 'notLogin';
 const NEED_LOGIN_META = 'needLogin';
 const FOR_ALL_META = 'all';
 
-const lastRoute = {};
-function isEmpty(object) {
-  return !Object.keys(object).length;
-};
-
 export default function (store) {
   return (to, _, next) => {
     const isSigned = store.getters['auth/getIsSigned'];
@@ -20,7 +15,6 @@ export default function (store) {
       webClient.login(token);
     }
 
-    console.log(to.meta, isSigned, access);
     if (!access || access === FOR_ALL_META) next();
     if (isSigned) {
       if (access === NEED_LOGIN_META) next();
