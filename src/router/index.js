@@ -12,7 +12,7 @@ import loggedRoutes from "./routes/loggedRoutes";
 import MainPage from '@/views/MainPage';
 import CreateNewPasswordForm from '@/views/CreateNewPasswordForm';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -22,9 +22,19 @@ const routes = [
 	{
 		path: "/create-new-password/:token",
 		component: CreateNewPasswordForm,
-	},
+  },
+
   ...unloggedRoutes,
   ...loggedRoutes,
+
+  {
+    path: "/ping",
+    name: 'ping',
+	},
+  {
+    path: "/*",
+    redirect: '/sign-in',
+	},
 ];
 
 const router = new VueRouter({
