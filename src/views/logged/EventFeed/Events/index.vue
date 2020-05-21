@@ -8,7 +8,7 @@
 			v-for="event in events"
 			:key="event.uuid"
 			:event="event"
-			:tickets="[]"
+			:tickets="event.tickets"
 			:tags="event.tags"
 		/>
 	</v-layout>
@@ -23,10 +23,6 @@ export default {
 	
 	components: {
 		EventItem,
-	},
-
-	created() {
-		this.$store.dispatch('profile/requestRecomendedContent');
 	},
 
 	computed: {

@@ -75,10 +75,7 @@ export default {
 	props: {
 		event: Object,
 		tags: Array,
-		tickets: {
-			type: Array,
-			default: [],
-		},
+		tickets: Array,
 	},
 	
 	data: () => ({
@@ -96,7 +93,7 @@ export default {
 			return this.path; 
 		},
 		isLogged() {
-			return this.$store.getters['getIsLogged'];
+			return this.$store.getters['auth/getIsLogged'];
 		},
 	},
 }
