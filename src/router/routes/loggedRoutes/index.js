@@ -10,19 +10,28 @@ export default [
         path: "/profile",
         component: Profile,
         meta: {
-            onlyForUser: true,
+            access: 'needLogin',
         },
     },
     {
         path: "/events/feed",
         component: EventFeed,
+        meta: {
+            access: 'needLogin',
+        },
     },
     {
         path: "/events/list",
         component: EventList,
+        meta: {
+            access: 'notLogin',
+        },
     },
     {
         path: "/events/:uuid",
         component: EventPage,
+        meta: {
+            access: 'all',
+        },
     },
 ];
