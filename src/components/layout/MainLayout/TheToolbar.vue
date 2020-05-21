@@ -11,15 +11,27 @@
     <v-spacer />
 
     <v-toolbar-items>
+      <template v-for="item in toolbarItems">
+        <v-btn
+          v-if="item.needLogin === 'all' || item.needLogin === isLogged"
+          :key="item.link"
+          :to="item.link"
+          class="toolbar--items title text-none"
+          color="secondary"
+          text
+        >
+          {{ item.title }}
+        </v-btn>
+      </template>
+
       <v-btn
-        v-for="item in toolbarItems"
-        :key="item.link"
-        :to="item.link"
+        v-if="isLogged"
         class="toolbar--items title text-none"
         color="secondary"
         text
+        @click="logout"
       >
-        {{ item.title }}
+        Logout
       </v-btn>
     </v-toolbar-items>
   </v-app-bar>
@@ -27,13 +39,13 @@
 
 <script>
 const toolbarItems = [
-  { title: 'MainPage',  link: '/'},
-  { title: 'Profile', link: '/profile'  },
-  { title: 'SignIn', link: '/sign-in'  },
-  { title: 'SignUp', link: '/sign-up'  },
-  { title: 'Event feed', link: '/events/feed'  },
-  { title: 'Event list', link: '/events/list'  },
-  { title: 'Event page', link: '/events/5'  },
+  { title: 'MainPage',    link: '/',            needLogin: 'all'  },
+  { title: 'Profile',     link: '/profile',     needLogin: true   },
+  { title: 'SignIn',      link: '/sign-in',     needLogin: false  },
+  { title: 'SignUp',      link: '/sign-up',     needLogin: false  },
+  { title: 'Event feed',  link: '/events/feed', needLogin: true   },
+  { title: 'Event list',  link: '/events/list', needLogin: false  },
+  { title: 'Event page',  link: '/events/5',    needLogin: true   },
 ];
 
 export default {
@@ -42,6 +54,19 @@ export default {
   data: () => ({
     toolbarItems,
   }),
+
+  computed: {
+    isLogged() {
+      return this.$store.getters['auth/getIsLogged'];
+    },
+  },
+
+  methods: {
+    logout() {
+      this.$store.dispatch('auth/logout');
+      this.$router.replace({ name: 'sign-in' });
+    },
+  },
 };
 </script>
 
