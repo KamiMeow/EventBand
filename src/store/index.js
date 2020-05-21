@@ -66,14 +66,7 @@ const vuex = new Vuex.Store({
     // Общие мутации
   },
   actions: {
-		async requestPassword( _, { email }) {
-			let message = (await GeneralService.requestPassword( email )).data;
-			return message;
-		},
-	
-		changePassword({ getters } , { password }) {
-			
-		}
+		// Общие действия
 	},
   getters: {
 		getRules: state => state.rules,

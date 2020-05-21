@@ -17,9 +17,9 @@ export const mutations = {
 }
 
 export const actions = {
-	async signIn({ commit }, { email, password } ) {
+	async signIn({ commit, dispatch }, { email, password } ) {
 		const response = await UserService.signIn( email, password );		
-		return response.message ? { message: response.message } : commit('profile/SIGN_IN', response.user, { root: true }); 
+		return response.message ? { message: response.message } : dispatch('profile/getProfile', null, { root: true }); 
 	},
 
 	async signUp({ commit }, userInfo ) {
