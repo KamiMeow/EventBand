@@ -13,7 +13,10 @@ const router = routerInit(store);
 WebClient.$router = router;
 WebClient.$store = store;
 
-
+RStore.subscribe('afterUpdate', state => {
+  store.dispatch(state ? 'auth/loginFromState' : 'unsetUserData', state);
+  router.replace('/ping');
+});
 
 new Vue({
   router,
