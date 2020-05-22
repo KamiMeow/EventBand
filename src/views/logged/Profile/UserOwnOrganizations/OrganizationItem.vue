@@ -20,6 +20,9 @@
 							to="/"
 						>
 							{{ organization.name }} 
+							<v-icon right>
+								mdi-arrow-right-bold-circle
+							</v-icon>
 						</v-btn>
 					</v-card-subtitle>
 				</v-layout>

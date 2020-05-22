@@ -15,6 +15,10 @@ export default {
 		return this.apiClient.post(`subscribe`, { ...formData });
 	},
 
+	requestEventInfo( uuid ) {
+		return this.apiClient.get(`event/${uuid}`);
+	},
+
 	changePassword( password ) {
 
 	},

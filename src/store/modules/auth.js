@@ -28,6 +28,11 @@ export const actions = {
 
 	async signIn({ commit, dispatch }, { email, password } ) {
 		const { user, message } = await UserService.signIn( email, password );
+		if (!user) {
+			return message
+				? { message }
+				: { message: 'Something went wrong' };
+		}
 		const infoUser = {
 			token: user.token,
 			uuid: user.uuid,
@@ -35,10 +40,7 @@ export const actions = {
 
 		commit('SET_AUTH_INFO', infoUser);
 		dispatch('saveToLocaleStorage', infoUser, { root: true });
-
-		return message
-			? { message }
-			: dispatch('profile/getProfile', null, { root: true });
+			
 	},
 
 	async signUp({ dispatch, commit }, userInfo ) {

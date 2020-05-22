@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style>
-.v-card,
+
 .v-stepper,
 .custom-elevation,
 .v-stepper__header,

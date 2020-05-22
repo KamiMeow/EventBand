@@ -9,8 +9,8 @@
 			v-for="o in organizations"
 			:key="o.uuid"
 			:organization="o"
+			:maxWidth="750"
 		>
-			{{ o.name }}
 		</organization-item>
 	</v-layout>
 </template>

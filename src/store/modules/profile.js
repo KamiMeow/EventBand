@@ -133,12 +133,12 @@ export const actions = {
 	},
 
 	async removeUserSubscribeOrganization({ commit, dispatch }, uuid) {
-		console.log('from action', uuid, 'organization');
+		// console.log('from action', uuid, 'organization');
 		
-		const { messag = null } = (await ProfileService.unsubscribeFromOrganization(uuid)).data;
+		const res = await ProfileService.unsubscribeFromOrganization(uuid);
 		let result = await dispatch('getProfile');
 		console.log('result', result);
-		return result;
+		return res;
 	},
 
 	async requestOrganizationsNews({ commit }) {
@@ -156,6 +156,12 @@ export const actions = {
 			 events,
 		 });
 	},
+	
+	// TODO Решить что делать, обновлять рекоменды или нет
+	async subscribeOnOrganization({ dispatch }, uuid) {
+		let response = await ProfileService.subscribeOnOrganization(uuid);
+		return response;
+	}
 
 }; 
 
