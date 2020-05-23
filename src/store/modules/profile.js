@@ -70,24 +70,6 @@ export const mutations = {
 		state.recomendedEvents = events;
 		state.recomendedOrganizations = organizations;
 	},
-
-	/* Frozen */
-	/*REMOVE_SUB_EVENT_ITEM: (state, { array, uuid }) => {
-		let rIndex = undefined;
-
-		array.forEach( function (item, index) {
-			if (item.uuid) {
-				if (item.uuid === uuid) {
-					rIndex = index;
-					return;
-				}
-			}
-		});
-		
-		if (rIndex) {
-			array.slice(rIndex, 1);
-		}
-	},*/
 };
 
 export const actions = {
@@ -158,10 +140,15 @@ export const actions = {
 	},
 	
 	// TODO Решить что делать, обновлять рекоменды или нет
-	async subscribeOnOrganization({ dispatch }, uuid) {
+	async subscribeOnOrganization(_, uuid) {
 		let response = await ProfileService.subscribeOnOrganization(uuid);
 		return response;
-	}
+	},
+
+	async subscribeOnEvent(_, uuid) {
+		let response = await ProfileService.subscribeOnEvent(uuid);
+		return response;
+	},
 
 }; 
 

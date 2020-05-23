@@ -101,6 +101,16 @@ export const initialState = () => ({
 					}
 			]
 	},
+	currentOrganization: {
+		"id": 1,
+		"uuid": "989713f3-2f0b-4a14-b863-d98b5c00f94e",
+		"name": "Fregalo",
+		"reputation": 9,
+		"description": "\n          Normal fregal Sergeevich. Sounds honorable, looks stylish. Here, only fucked up in the head anime. Who are willing to sell their mother for ramen and a point for the opportunity to see waifa.\n          If you're not like that, just walk through and leave us alone. We don't touch you, don't touch us. Trust me, you'll be better off. We're fucked up tight, we can fuck you in all the holes if you just mention anime in our presence.\n        ",
+		"logo": "fregalo.jpg",
+		"createdAt": "2020-05-21T22:08:16.398Z",
+		"updatedAt": "2020-05-21T22:08:16.398Z"
+	},
 });
 
 
@@ -114,6 +124,18 @@ export const mutations = {
 
 	SET_CURRENT_EVENT: (state, event) => {
 		state.currentEvent = event;
+	},
+
+	SET_CURRENT_ORGANIZATION: (state, organization) => {
+		state.currentOrganization = organization;
+	},
+
+	RESET_CURRENT_EVENT: (state) => {
+		state.currentEvent = {};
+	},
+
+	RESET_CURRENT_ORGANIZATION: (state) => {
+		state.currentEvent = {};
 	},
 };
 
@@ -148,6 +170,19 @@ export const actions = {
 		return event ? commit('SET_CURRENT_EVENT', event) : message;
 	},
 
+	async requestOrganizationInfo({ commit }, uuid) {
+		let { organization = null, message = null } = (await GeneralService.requestOrganizationInfo(uuid)).data;
+		return event ? commit('SET_CURRENT_ORGANIZATIOB', organization) : message;
+	},
+
+	resetCurrentEvent({ commit }) {
+		commit('RESET_CURRENT_EVENT');
+	},
+
+	resetCurrentOrganization({ commit }) {
+		commit('RESET_CURRENT_ORGANIZATION');
+	},
+
 	changePassword({ getters } , { password }) {
 		
 	},
@@ -157,4 +192,5 @@ export const getters = {
 	getAllTags: state => state.tags,
 	getEvents: state => state.events,
 	getCurrentEvent: state => state.currentEvent,
+	getCurrentOrganization: state => state.currentOrganization,
 };
