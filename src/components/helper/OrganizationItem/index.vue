@@ -1,7 +1,7 @@
 <template>
 	<v-card 
 		:max-width="maxWidth"
-		min-width="500"
+		:min-width="'auto'"
 		:tile="tile"
 		:outlined="outlined"
 		:flat="flat"
@@ -13,14 +13,16 @@
 			<v-card-title class="pa-0">
 				<v-layout align-center>
 					<slot name="prependTitleContent"></slot>
-					<span class="grey--text text--lighten-3"> {{ organization.name + ' ' }} </span>
+					<span class="grey--text text--lighten-3"> 
+						{{ organization.name }} 
+					</span>
 					<slot name="appendTitleContent"></slot>
 				</v-layout>
 			</v-card-title>
 		</v-toolbar>
 		<v-card-subtitle>
 			<span class="black--text">
-				{{ organization.description }}
+				{{ eclipsisDescription }}
 			</span>
 		</v-card-subtitle>
 		<v-card-actions>
@@ -39,7 +41,7 @@
 					<v-btn 
 						color="success"
 						small
-						to="/"
+						:to="`/organization/${organization.uuid}`"
 					>
 						View
 					</v-btn>
@@ -92,6 +94,10 @@ export default {
 			type: Number || String,
 			default: undefined,
 		},
+		"minWidth": {
+			type: String || Number,
+			default: '500px',
+		},
 	},
 
 	data: () => ({
@@ -110,12 +116,23 @@ export default {
 			this.snackbarType = response.type;
 			this.snackbarMessage = response.message;
 		},
+		
+		stalin( str, lenin) {
+			if (str.length <= lenin) return str; 
+			
+			const jew = str.substr(0, lenin);
+			return jew + '...';
+		}
 	},
 
 	computed: {
 
 		type() {
 			return this.snackbarType;
+		},
+
+		eclipsisDescription() {
+			return this.stalin(this.organization.description, 100);
 		},
 	},
 }
