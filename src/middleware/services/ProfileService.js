@@ -42,4 +42,15 @@ export default {
 			type: 'success',
 		});
 	},
+
+	async subscribeOnEvent(uuid) {
+		let res = await this.apiClient.get(`event/subscribe/${uuid}`);
+		return (res.status >= 400) ? ({
+			message: res.data.message,
+			type: 'error',
+		}) : ({
+			message: res.data.message,
+			type: 'success',
+		});
+	}
 }

@@ -15,8 +15,13 @@ export default {
 		return this.apiClient.post(`subscribe`, { ...formData });
 	},
 
-	requestEventInfo( uuid ) {
+	async requestEventInfo( uuid ) {
+		console.log(await this.apiClient.get(`event/${uuid}`));
 		return this.apiClient.get(`event/${uuid}`);
+	},
+
+	requestOrganizationInfo( uuid ) {
+		return this.apiClient.get(`organization/${uuid}`);
 	},
 
 	changePassword( password ) {
