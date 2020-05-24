@@ -45,7 +45,7 @@ const toolbarItems = [
   { title: 'SignUp',      link: '/sign-up',     needLogin: false  },
   { title: 'Event feed',  link: '/events/feed', needLogin: true   },
   { title: 'Event list',  link: '/events/list', needLogin: false  },
-  { title: 'Event page',  link: '/event/300921b1-4ae3-442d-8396-642cde5e565b',    needLogin: 'all'   },
+  { title: 'Event page',  link: '/event/e9c976b2-a77c-442a-8ffd-ff2a3ff4ee6a',    needLogin: 'all'   },
 ];
 
 export default {

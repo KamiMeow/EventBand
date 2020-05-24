@@ -1,7 +1,9 @@
 <template>
-    <v-container
-			class="d-flex flex-column justify-center align-center"
-			style="height: 70vh;"
+    <v-layout
+			column
+			justify-center
+			align-center
+			fill-height
 		>
 			<form-base
 				ref="signUpForm"
@@ -116,7 +118,7 @@
 					</v-row>
 				</template>
 			</form-base>
-		</v-container>
+		</v-layout>
 </template>
 
 <script>

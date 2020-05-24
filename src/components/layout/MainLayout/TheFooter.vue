@@ -2,7 +2,6 @@
   <v-footer
     class="grey--text subtitle-2 px-2 vh--footer"
     color="primary"
-		absolute
 		app
   >
 		<v-col cols="3">

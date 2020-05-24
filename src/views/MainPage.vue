@@ -4,30 +4,38 @@
 		class="pb-8"
   >
 		<v-layout 
+			wrap
 			justify-center 
 			align-center 
 			fill-height
 		>
-			<v-card
+			<v-flex xs12 sm12 md3 lg4
+				class="my-2"
 				v-for="offer in offers"
 				:key="offer.icon"
-				class="py-5 px-1 semi-opacity mx-12"
-				max-width="350"
-				outlined
-				tile
 			>
-				<div class="d-flex flex-column align-center white--text">
-					<v-img
-						:src="'/'+ offer.icon +'-icon.'+ offer.format"
-						class="my-2"
-					/>
+				<v-layout justify-center>
+					<v-card
+						
+						class="py-5 px-1 semi-opacity"
+						max-width="350"
+						outlined
+						tile
+					>
+						<div class="d-flex flex-column align-center white--text">
+							<v-img
+								:src="'/'+ offer.icon +'-icon.'+ offer.format"
+								class="my-2"
+							/>
 
-					<v-card-title class="display-1 mt-2"> {{ offer.title }} </v-card-title>
-					<v-card-text align="center" class="body-1 mt-3 mb-6">
-						{{ offer.text }}
-					</v-card-text>
-				</div>
-			</v-card>
+							<v-card-title class="display-1 mt-2"> {{ offer.title }} </v-card-title>
+							<v-card-text align="center" class="body-1 mt-3 mb-6">
+								{{ offer.text }}
+							</v-card-text>
+						</div>
+					</v-card>
+				</v-layout>
+			</v-flex>
 		</v-layout>
   </v-img>
 </template>
