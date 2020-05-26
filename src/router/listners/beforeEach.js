@@ -14,9 +14,12 @@ export default function (store) {
   return (to, _, next) => {
     const isLogged = store.getters['auth/getIsLogged'];
     const token = store.getters['auth/getToken'];
-
-    if (token) {
-      webClient.login(token);
+		const organizationToken = store.getters['auth/getOrganizationToken'];
+		
+		// console.log(organizationToken);
+		
+    if (organizationToken || token) {
+      webClient.login(organizationToken || token);
     }
 
     const isPing = !!(to.path === '/ping' && lastRoute);

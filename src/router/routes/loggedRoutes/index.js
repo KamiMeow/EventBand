@@ -1,30 +1,43 @@
-
-import Profile from '@/views/logged/Profile';
-import EventList from '@/views/unlogged/EventList';
-import EventFeed from '@/views/logged/EventFeed';
-
-
-
 export default [
     {
 			path: "/profile",
-			component: Profile,
+			component: () => import('@/views/logged/Profile'),
 			meta: {
 				access: 'needLogin',
 			},
     },
     {
 			path: "/events/feed",
-			component: EventFeed,
+			component: () => import('@/views/logged/EventFeed'),
 			meta: {
 				access: 'needLogin',
 			},
     },
     {
 			path: "/events/list",
-			component: EventList,
+			component: () => import('@/views/unlogged/EventList'),
 			meta: {
-				access: 'notLogin',
+				access: 'all',
 			},
-    },
+		},
+		{
+			path: "/my-organization",
+			component: () => import('@/views/logged/Organization'),
+		},
+		{
+			path: `/my-organization/event/edit/:uuid`,
+			component: () => import('@/views/logged/EditEventForm'),
+		},
+		{
+			path: `/my-organization/event/create`,
+			component: () => import('@/views/logged/Organization/CreateEventForm'),
+		},
+		{
+			path: '/my-organization/news/create',
+			component: () => import('@/views/logged/Organization/CreateNewsForm'),
+		},
+		{
+			path: '/my-organization/edit',
+			component: () => import('@/views/logged/Organization/EditOrganizationForm'),
+		},
 ];
