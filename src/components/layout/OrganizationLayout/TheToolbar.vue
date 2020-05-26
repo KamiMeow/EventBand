@@ -1,6 +1,6 @@
 <template>
   <v-app-bar 
-    color="primary" 
+    color="secondary" 
     clipped-left 
     dark 
     app
@@ -11,6 +11,7 @@
     <v-spacer />
 
     <v-toolbar-items>
+			
     </v-toolbar-items>
   </v-app-bar>
 </template>

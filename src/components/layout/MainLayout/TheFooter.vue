@@ -1,6 +1,6 @@
 <template>
   <v-footer
-    class="grey--text subtitle-2 px-2 vh--footer"
+    class="grey--text subtitle-2 px-2 mt-12"
     color="primary"
 		app
   >

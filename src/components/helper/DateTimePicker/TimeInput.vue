@@ -23,8 +23,8 @@
       v-model="time"
       full-width
       format="24hr"
-      use-seconds
-      @click:second="$refs.menu.save(time)"
+      :use-seconds="useSeconds"
+			@click:minute="$refs.menu.save(time)"
     />
   </v-menu>
 </template>
@@ -34,7 +34,11 @@ export default {
   name: 'TimeInput',
 
   props: {
-    value: String,
+		value: String,
+		useSeconds: {
+			type: Boolean,
+			default: false,
+		}
   },
 
   data: () => ({

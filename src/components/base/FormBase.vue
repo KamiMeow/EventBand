@@ -1,8 +1,9 @@
 <template>
-  <form-validate @submit="handleSubmit" @fail-validation="hadleFailValidation">
+  <form-validate ref="form" @submit="handleSubmit" @fail-validation="hadleFailValidation">
     <v-card 
 			elevation="0"
-			max-width="500px"
+			:max-width="maxWidth"
+			:min-width="minWidth"
 			>
       <v-card-title class="pa-0">
         <v-layout column>
@@ -67,7 +68,16 @@ export default {
 
   props: {
     afterTitle: String,
-    title: String,
+		title: String,
+		maxWidth: {
+			type: String || Number,
+			default: '500px',
+		},
+
+		minWidth: {
+			type: String || Number,
+			default: 'auto',
+		},
   },
 
   data: () => ({
@@ -91,7 +101,16 @@ export default {
 			this.typeAlert = type;
 			this.message = message;
 			return; 
-    },
+		},
+
+		resetValidation() {
+			this.$refs.form.resetValidation();
+			this.message = '';
+		},
+		resetForm() {
+			this.$refs.form.resetForm();
+			this.message = '';
+		},
 	},
 };
 </script>

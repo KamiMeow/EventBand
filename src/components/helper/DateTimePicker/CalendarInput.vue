@@ -20,6 +20,7 @@
       v-model="date"
       :show-current="showCurrent"
       :min="showCurrent"
+			:max="maxDate"
       scrollable
       no-title
       @click:date="$refs.menu.save(date)"
@@ -33,7 +34,11 @@ export default {
 	name: 'CalendarInput',
 	
   props: {
-    showCurrent: String,
+		showCurrent: String,
+		maxDate: {
+			type: String,
+			default: '',
+		},
     value: String,
 	},
 	

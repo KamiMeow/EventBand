@@ -2,8 +2,8 @@
   <v-content class="pb-0">
     <the-toolbar />
     
-    <v-container fill-height fluid class="pa-0 pb-12">
-      <v-layout justify-center class="mb-6">
+    <v-container fill-height fluid class="pa-0">
+      <v-layout justify-center class=" pb-10">
         <v-slide-y-transition mode="out-in">
 					<router-view/>
         </v-slide-y-transition>

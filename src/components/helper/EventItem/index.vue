@@ -4,10 +4,11 @@
 		elevation="0"
 		outlined
 	>
+
 		<v-layout>
 			<v-flex xs1>
-				<v-avatar size="128px" >
-					<v-img :src="imagePath" />
+				<v-avatar size="128px">
+					<v-img :src="`https://event-band-api.ru:5000/static/organizations/${logo || event.organization.logo}`" />
 				</v-avatar>
 			</v-flex>
 
@@ -28,7 +29,7 @@
 						class="ma-1"
 						small
 					> 
-						{{ tag.name }} 
+						{{ tag.name || tag }} 
 					</v-chip>
 				</v-layout>
 			</v-flex>
@@ -39,7 +40,7 @@
 						<span class="orange--text text--darken-4"> ({{ event.count }}) </span>
 					</div>
 					<div> Min ticket price 
-						<span class="green--text text--darken-2"> ({{ event.price }}) </span>  
+						<span class="green--text text--darken-2"> ({{ minimumPrice }}) </span>  
 					</div>
 					<div> Starting
 						<span class="pink--text text--darken-4"> {{ dateFrom }} </span>
@@ -50,8 +51,26 @@
 				</v-layout>
 			</v-flex>
 			<v-flex xs3>
-				<v-layout fill-height column align-content-center>
-					<quick-subscribe-form :tickets="tickets"/>
+				<v-layout fill-height column justify-space-around>
+					<quick-subscribe-form 
+						v-if="canSubscribe"
+						:tickets="tickets"/>
+					<v-btn
+						v-if="canView"
+						:to="`/event/${event.uuid}`"
+						class="align-self-center"
+						color="accent"
+					>
+						View
+					</v-btn>
+					<v-btn
+						v-if="canEdit"
+						:to="`/my-organization/event/edit/${event.uuid}`"
+						class="align-self-center"
+						color="secondary"
+					>
+						Edit event
+					</v-btn>
 				</v-layout>
 			</v-flex>
 		</v-layout>
@@ -67,19 +86,31 @@ export default {
 	name: 'EventItem',
 
 	components: {
+		QuickSubscribeForm,
 		CalendarInput,
 		TimeInput,
-		QuickSubscribeForm,
 	},
 
 	props: {
+		tickets: Array,
 		event: Object,
 		tags: Array,
-		tickets: Array,
+		logo: {
+			type: String,
+			default: undefined,
+		},
+
+		canSubscribe: true,
+		canView: true,
+		canEdit: false,
+	},
+
+	created() {
+		console.log(this.event);		
 	},
 	
 	data: () => ({
-		path: '/logo-organization.png',
+		path: 'logo-organization.png',
 	}),
 
 	computed: {
@@ -94,6 +125,14 @@ export default {
 		},
 		isLogged() {
 			return this.$store.getters['auth/getIsLogged'];
+		},
+
+		minimumPrice() {
+			if (this.event.price === undefined) {
+				return this.event.minPrice;
+			} else {
+				return this.event.price;
+			}
 		},
 	},
 }

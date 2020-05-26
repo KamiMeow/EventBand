@@ -4,6 +4,8 @@
     :lazy-validation="lazyValidation"
     ref="form"
     @submit.prevent="handleSubmit"
+		@reset-validation="resetValidation"
+		@reset-form="resetForm"
   >
     <slot></slot>
   </v-form>
@@ -40,7 +42,13 @@ export default {
         return this.$emit('submit', e);
       }
       return this.$emit('fail-validation', e);
-    },
+		},
+		resetValidation() {
+			this.form.resetValidation();
+		},
+		resetForm() {
+			this.form.reset();
+		},
   },
 };
 </script>
