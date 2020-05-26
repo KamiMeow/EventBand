@@ -14,7 +14,7 @@ yarn serve
 ```
 yarn build
 ```
-### Last release is up to the next link
+### The latest release is available at the following link
 <a href="https://event-band-api.ru/"> EventBand </a>
 
 ### Customize configuration
