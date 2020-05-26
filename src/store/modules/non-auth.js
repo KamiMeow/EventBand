@@ -173,8 +173,8 @@ export const actions = {
 	},
 
 	async requestOrganizationInfo({ commit }, uuid) {
-		let { organization = null, message = null } = (await GeneralService.requestOrganizationInfo(uuid)).data;
-		return organization ? commit('SET_CURRENT_ORGANIZATION', organization) : message;
+		let resp = (await GeneralService.requestOrganizationInfo(uuid)).data;
+		return resp.organization ? commit('SET_CURRENT_ORGANIZATION', resp) : resp.message;
 	},
 
 	resetCurrentEvent({ commit }) {

@@ -98,7 +98,6 @@ export const actions = {
 	async getProfile({ commit }) {
 		let resp = (await ProfileService.getProfileInfo()).data;
 		console.log(resp);
-	
 		commit('SIGN_IN', resp.user);
 		commit('SET_ORGANIZATIONS_LIST', resp.organizations);
 		commit('SET_SUB_ORGANIZATIONS_LIST', resp.subscriptions.organizations);

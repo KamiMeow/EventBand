@@ -8,6 +8,7 @@ import * as auth from './auth';
 import * as profile from './profile';
 import * as organization from './organization';
 import * as nonauth from './non-auth.js'
+import * as event from './event';
 
 export default {
 	notification,
@@ -15,5 +16,6 @@ export default {
 	examples,
 	profile,
 	nonauth,
+	event,
 	auth,
 };

@@ -8,6 +8,7 @@ import modules from './modules';
 import initialModules from './initialModules';
 import RStore from '../helper/RStore';
 import WebClient from '../middleware/WebClient';
+import GeneralService from '../middleware/services/GeneralService';
 
 Vue.use(Vuex);
 
@@ -50,7 +51,11 @@ const initialState = () => ({
 					return v => (v + '').length >= 3 || message;
 				case 'name': 
 					return v => (v + '').length >= 3 || message;
-					
+				case 'event-name':
+					return v => (v + '').length >= 5 || message;
+				case 'event-description': 
+					return v => (v + '').length >= 10 || message;
+
         default:
           return true;
       };
@@ -75,7 +80,12 @@ const vuex = new Vuex.Store({
       commit('UNSET_DATA');
       dispatch('saveToLocaleStorage');
       WebClient.logout();
-    },
+		},
+		
+		async changePassword(_, { password, token }) {
+			let message = await GeneralService.changePassword({ password, token });
+			return message ? message : undefined;
+		},
 	},
   getters: {
 		getRules: state => state.rules,
