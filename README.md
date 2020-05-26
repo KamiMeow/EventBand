@@ -14,7 +14,8 @@ yarn serve
 ```
 yarn build
 ```
-
+### Last release is up to the next link
+<a href="https://event-band-api.ru/"> EventBand </a>
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
