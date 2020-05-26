@@ -24,9 +24,17 @@ export default {
 		return this.apiClient.get(`organization/${uuid}`);
 	},
 
-	changePassword( password ) {
-
-	},
+	async changePassword( info ) {
+		let response = await this.apiClient.post('change-password', { ...info });
+		console.log(response);
+		
+		if (response.status == 400) {
+			return {
+				message: response.data.message,
+			};
+		}
+		return { nomessage: ''} ;
+	},	
 
 	
 }
