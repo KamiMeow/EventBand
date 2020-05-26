@@ -43,6 +43,7 @@ export default {
 		OrganizationItem,
 	},
 
+
 	computed: {
 		organizations() {
 			return this.$store.getters['profile/getUserOrganizations'];

@@ -9,12 +9,13 @@
 			:key="i"
 			:news="v"
 			:organization="v.Organization"
+			:showOrganizationName="true"
 		/>
 	</v-layout>
 </template>
 
 <script>
-import NewsItem from './NewsItem'
+import NewsItem from '@/components/helper/NewsItem';
 
 export default {
 	name: 'OrganizationsNews',

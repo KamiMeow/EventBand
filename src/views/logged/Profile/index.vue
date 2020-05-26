@@ -3,7 +3,19 @@
 		class="mt-5"
 		justify-center
 	>
-		<v-flex xs9>
+		
+		 <v-progress-circular
+		 	v-if="profileIsLoading"
+      :size="70"
+      :width="7"
+      color="accent"
+			class="align-self-center"
+      indeterminate
+    ></v-progress-circular>
+		<v-flex 
+			v-else
+			xs9
+		>
 			<v-card class="pa-4">
 				<v-layout column>
 					<user-info/>
@@ -21,7 +33,6 @@ import UserInfo from './UserInfo';
 import UserOwnOrganizations from './UserOwnOrganizations';
 import UserSubscriptions from './Subscribes';
 
-
 export default {
 	name: 'Profile',
 
@@ -31,8 +42,27 @@ export default {
 		UserSubscriptions,
 	},
 	
+	data: () => ({
+		profileIsLoading: true,
+	}),
+
 	created() {
-		this.$store.dispatch('profile/getProfile');
+		this.getProfile();
+	},
+
+	methods: {
+		async getProfile() {
+			if (this.isLoggedAsOrganization) return;
+			this.profileIsLoading = true;
+			await this.$store.dispatch('profile/getProfile');
+			this.profileIsLoading = false;
+		},
+	},
+
+	computed: {
+		isLoggedAsOrganization() {
+			return this.$store.getters['auth/getIsLoggedAsOrganization'];
+		}
 	},
 
 };

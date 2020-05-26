@@ -18,7 +18,7 @@
 
 				<v-layout justify-center>
 					<form-base
-						ref="createOrgForm"
+						ref="form"
 						@submit="createNewOrganization"
 					>	
 						<template #title>
@@ -28,6 +28,7 @@
 							<v-layout column align-center>
 								<v-text-field
 									v-model="name"
+									:rules="[rules.required]"
 									label="Organization name"
 									class="width-l"
 									outlined
@@ -35,6 +36,7 @@
 								/>
 								<v-textarea
 									v-model="description"
+									:rules="[rules.required]"
 									label="Description"
 									class="width-l"
 									outlined
@@ -51,7 +53,7 @@
 							<v-layout justify-space-around> 
 								<v-btn 
 									color="error" 
-									@click="dialog = false"
+									@click="closeForm"
 								> 
 									Close
 								</v-btn>
@@ -101,8 +103,8 @@ export default {
 			addRemoveLinks: true,
 			thumbnailWidth: 150,
 			maxFilesize: 0.5,
-			maxFiles: 1,
-			headers: { "My-Awesome-Header": "header value" }
+			// maxFiles: 1,
+			// headers: { "My-Awesome-Header": "header value" }
 		},
 
 		name: '',
@@ -112,35 +114,53 @@ export default {
 		dialogMessage: '',
 	}),
 
+	computed: {
+		rules() {
+			return this.$store.getters['getRules'];
+		},
+	},
+
 	methods: {
+
+		closeForm() {
+			this.$refs.form.resetForm();
+			this.$refs.form.resetValidation();
+			this.$refs.myVueDropzone.removeAllFiles();
+			this.dialog = false;
+		},
+		
 		async createNewOrganization() {
+			
+			let filesCount = this.$refs.myVueDropzone.getAcceptedFiles().length;
+			if (filesCount > 1 || filesCount == 0) {
+				return this.$refs.form.setAlert('Make sure you uploaded the only one file', 'warning');
+			}
+
 			let message = await this.$store.dispatch('organization/createNewOrganization', {
 				name: this.name,
 				description: this.description,
-				logo: 'no-logo&no-homo',
+				logo: this.$refs.myVueDropzone.getAcceptedFiles()[0],
 			});
-
-			
 
 			if (message) {
 				
 				console.log(message);
-				this.$refs.createOrgForm.setAlert(message.message, 'error');
+				this.$refs.form.setAlert(message.message, 'error');
 				this.resultDialog = true;
 				console.log(this.resultDialog);
 				
 				this.dialogMessage = message;
+			} else {
+				this.$refs.form.resetForm();
+				this.$refs.form.resetValidation();
+				this.$refs.myVueDropzone.removeAllFiles();
+				this.dialog = false;
 			}
 
 		},
 
 		fileAdded(file, resp) {
-			// this.$refs.myVueDropzone.removeAllFiles();
 			console.log(this.$refs.myVueDropzone.getAcceptedFiles());
-			console.log(this.$refs.myVueDropzone.getRejectedFiles());
-			
-			// this.$refs.myVueDropzone.manuallyAddFile(file, file.dataURL);
-			// console.log(file);
 		}
 	},
 }

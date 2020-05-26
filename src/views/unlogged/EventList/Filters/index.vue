@@ -1,4 +1,4 @@
-<template>
+	<template>
 	<v-layout
 		class="d-flex flex-column justify-start align-center"
 		:class="maxFilterHeight"

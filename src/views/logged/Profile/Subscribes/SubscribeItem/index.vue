@@ -6,11 +6,17 @@
 			fill-width
 			wrap
 		>
-			<v-flex xs1 md1>
-				<v-img
-					:src="stableSubInfo.path"
-					max-width="128px"
-				/>
+			<v-flex xs1 md1
+				class="pl-3"
+			>
+				<v-avatar
+					size="64px"
+				>
+					<v-img
+						:aspect-ratio="3/4"
+						:src="`https://event-band-api.ru:5000/static/organizations/${stableSubInfo.logo || stableSubInfo.organization.logo}`"
+					/>
+				</v-avatar>
 			</v-flex>
 			<v-flex xs6>
 				<v-layout fill-width> 
@@ -101,6 +107,10 @@ export default {
 			default: 'Event' || 'Organization',
 		}
 	},
+
+	created() {
+
+	}	,
 
 	components: {
 		rejectEventDialog,

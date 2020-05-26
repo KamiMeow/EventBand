@@ -3,117 +3,115 @@
 		class="pt-12"
 		justify-center
 		fill-height
+		wrap
+		
 	>
 		<v-flex xs9
 			class="mt-12"
 		>
-			<v-card class="custom-elevation">
-				<v-layout column>
-					<v-card-title>
-						<v-layout 
-							class="mx-2"
-							wrap
-						>
-							<v-flex xs12 sm12 md2 lg2
-								class="d-xs-flex d-md-none"
-							>
-								<v-layout :class="justify">
-									<v-avatar :size="avatarSize">
-										<v-img src="/Avatar.png"/>
-									</v-avatar>
-								</v-layout>
-							</v-flex>
-							<v-flex grow>
-								<v-layout column>
-									<span class="display-1 font-weight-medium"> {{organization.name}} </span>
-									<span> Followers ( {{organization.subscribers}} ) </span>
-									<span> Reputation ( {{organization.reputation}} ) </span>
-									<v-rating
-										:value="rating"
-										:length="length"
-										:size="ratingSize"
-										background-color="accent lighten-3"
-										color="accent lighten-1"
-										half-increments
-										readonly
-										dense
-									/>
-								</v-layout>
-							</v-flex>
-							<v-flex xs12 sm12 md2 lg2
-								class="d-none d-md-flex d-lg-flex"
-							>
-								<v-layout :class="justify">
-									<v-avatar :size="avatarSize">
-										<v-img src="/Avatar.png"/>
-									</v-avatar>
-								</v-layout>
-							</v-flex>
-						</v-layout>
-					</v-card-title>
-					<v-divider/>
-					<v-card-text>
-						<v-layout class="title">
-							{{organization.description}}
-						</v-layout>
-					</v-card-text>
-				</v-layout>
-			</v-card>
+			<organization-info
+				:organization="organization"
+				:followersAmount="followersAmount"
+				:rating="rating"
+			/>
+		</v-flex>
+		<v-flex xs9
+			class="mt-5"
+		>	
+			<div>
+				<span class="display-1 font-weight-medium ml-4"> Founder & Activists </span>
+			</div>
+			<v-divider/>
+			<v-layout
+				class="px-4"
+				justify-start
+				wrap
+			>
+				<v-flex xs12 sm12 md8 lg8
+					v-for="(person, i) in persons"
+					:key="i"
+					class="my-4"
+				>
+					<v-card class="custom-elevation">
+						<v-card-title>
+							{{ person.surname }} {{ person.name }}
+						</v-card-title>
+					</v-card>
+				</v-flex>
+			</v-layout>
+		</v-flex>
+		<v-flex xs9
+			class="mt-5"
+		>	
+			<div>
+				<span class="display-1 font-weight-medium ml-4"> Events </span>
+			</div>
+			<v-divider/>
+			<v-layout 
+			class="my-2" 
+				justify-center
+				wrap
+			>
+				<v-flex
+					xs12 sm10 md12
+					v-for="i in events"
+					:key="i.uuid"
+				>
+					<event-item 
+						:event="i"
+						:tickets="i.tickets"
+						:tags="i.tags"
+						:logo="organization.logo"
+						:canSubscribe="true"
+						:canView="true"
+						:canEdit="false"
+					/>
+				</v-flex>
+			</v-layout>
 		</v-flex>
 	</v-layout>
 </template>
 
 <script>
+import EventItem from '@/components/helper/EventItem';
+import OrganizationInfo from '@/components/helper/OrganizationInfo';
+
 export default {
 	name: 'OrganizationPage',
+	
+	components: {
+		OrganizationInfo,
+		EventItem,
+	},
 
 	created() {
-		this.$store.dispatch('nonauth/requestOrganizationInfo', this.$route.params.uuid);
+		console.log(this.$route.params.uuid);
+		this.requestOrganizationInfo();
 	},
 	
 	data: () => ({
-		length: 10,
+		events: null,
+		persons: null,
+
+		organization: null,
+		followersAmount: null,
+		rating: null,
 	}),
 
-	computed: {
-		organization() {
-			return this.$store.getters['nonauth/getCurrentOrganization'];
-		},
+	methods: {
 
-		rating: {
-			get() {
-				return this.$store.getters['nonauth/getCurrentOrganization'].reputation;
-			},
-			set(val) {  },
+		async requestOrganizationInfo() {
+			await this.$store.dispatch('nonauth/requestOrganizationInfo', this.$route.params.uuid);
+			await this.setPageInfo();
 		},
-
-		ratingSize() {
-			switch (this.$vuetify.breakpoint.name) {
-				case 'xs': return 16;
-				case 'sm': return 32;
-				case 'md': return 32;
-				case 'lg': return 32;
-				case 'xl': return 32;
-			}
+		
+		setPageInfo() {
+			this.events = this.$store.getters['nonauth/getCurrentOrganization'].events;
+			this.persons = this.$store.getters['nonauth/getCurrentOrganization'].organizers;
+			this.organization = this.$store.getters['nonauth/getCurrentOrganization'].organization;
+			this.followersAmount = this.$store.getters['nonauth/getCurrentOrganization'].subscribers;
+			this.rating = this.$store.getters['nonauth/getCurrentOrganization'].organization.reputation;
 		},
-
-		justify() {
-			switch(this.$vuetify.breakpoint.name) {
-				case 'xs': 
-				case 'sm': return 'justify-center'
-			}
-		},
-
-		avatarSize() {
-			switch(this.$vuetify.breakpoint.name) {
-				case 'xs': 
-				case 'sm': return 256;
-				case 'md':
-				case 'lg': return 128;
-				case 'xl': return 256;
-				default: return 128;
-			}
-		}
 	},
 
 	beforeDestroy() {

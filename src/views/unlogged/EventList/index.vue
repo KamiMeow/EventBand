@@ -28,6 +28,9 @@
 					:event="i"
 					:tickets="i.tickets"
 					:tags="i.tags"
+					:canSubscribe="true"
+					:canView="true"
+					:canEdit="false"
 				/>
 			</v-flex>
 		</v-layout>

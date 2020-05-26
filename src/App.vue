@@ -22,7 +22,7 @@ export default {
 
   computed: {
     isOrganizationLayout() {
-      return false;
+      return this.$store.getters['auth/getIsLoggedAsOrganization'];
     },
 	},
 };
@@ -38,6 +38,10 @@ export default {
 .v-data-table {
   border-radius: 6px !important;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.v-card__text, .v-card__title {
+  word-break: normal !important;
 }
 
 .title--font {

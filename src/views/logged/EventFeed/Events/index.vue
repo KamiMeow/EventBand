@@ -10,6 +10,9 @@
 			:event="event"
 			:tickets="event.tickets"
 			:tags="event.tags"
+			:canSubscribe="true"
+			:canView="true"
+			:canEdit="false"
 		/>
 	</v-layout>
 </template>

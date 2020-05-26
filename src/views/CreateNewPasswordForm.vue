@@ -6,7 +6,7 @@
 		max-width="450px"
 	>
 		<form-base
-			ref="createPasswordForm"
+			ref="form"
 			@submit.prevent="submitNewPassword"
 		>
 			<template #title >
@@ -45,6 +45,7 @@
 					<v-btn 
 						color="primary"
 						type="submit"
+						:loading="isProcessing"
 					> 
 						Submit password 
 					</v-btn>
@@ -71,6 +72,7 @@ export default {
 
 	data: () => ({
 		token: '',
+		isProcessing: false,
 		show1: false,
 		show2: false,
 		newPassword: '',
@@ -78,16 +80,26 @@ export default {
 	}),
 
 	methods: {
-		submitNewPassword() {
+		async submitNewPassword() {
 			if ( !this.comparePassword(this.newPassword, this.submitedPassword) ) {
 				
-				this.$refs.createPasswordForm.setAlert('Fields must have the same values', 'error');
+				this.$refs.form.setAlert('Fields must have the same values', 'error');
 				return;
 			}
+			this.isProcessing = true;
+			let message = await this.$store.dispatch('changePassword', { 
+				password: this.newPassword,
+				token: this.token,
+			});
+			console.log(message);
+			
+			this.isProcessing = false;
 
-			// this.$store.dispatch('changePassword', { 
-			// 	password: this.newPassword,
-			// });
+			if ( message ) {
+				return this.$refs.form.setAlert(message.message, 'error');
+			}
+			
+			this.$router.push('/sign-in');
 		},
 
 		comparePassword( newPass, subPass ) {
