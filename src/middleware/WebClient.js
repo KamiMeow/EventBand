@@ -21,7 +21,7 @@ class WebClient {
 				'Content-Type': 'application/json',
 				'Origin': 'https://event-band-api.ru'
       },
-      withCredentials: false,
+      withCredentials: true,
     });
 
     this.setInterceptors();
