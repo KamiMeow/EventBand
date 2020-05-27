@@ -20,7 +20,6 @@ export default function (store) {
 		
     if (organizationToken || token) {
 			webClient.login(organizationToken || token);
-			webClient.login(token);
 		}
 
     const isPing = !!(to.path === '/ping' && lastRoute);
