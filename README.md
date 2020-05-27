@@ -14,16 +14,8 @@ yarn serve
 ```
 yarn build
 ```
-
-### Run your unit tests
-```
-yarn test:unit
-```
-
-### Run your end-to-end tests
-```
-yarn test:e2e
-```
+### The latest release is available at the following link
+<a href="https://event-band-api.ru/"> EventBand </a>
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
