@@ -19,8 +19,6 @@ class WebClient {
       baseURL,
       headers: {
 				'Content-Type': 'application/json',
-				'Origin': 'https://event-band-api.ru',
-				'Access-Control-Request-Headers': 'origin',
       },
       withCredentials: true,
     });

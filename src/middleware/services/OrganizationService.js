@@ -24,7 +24,7 @@ export default {
 			return errorMessage.message = response.data.message;
 		}
 		
-		this.apiClient.login(response.data.organizationToken);
+		// this.apiClient.login(response.data.organizationToken);
 		return response;
 	},
 
