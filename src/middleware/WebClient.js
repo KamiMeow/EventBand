@@ -19,8 +19,6 @@ class WebClient {
       baseURL,
       headers: {
 				'Content-Type': 'application/json',
-				'Origin': 'event-band-api.ru',
-				'Access-Control-Request-Headers': 'origin',
       },
       withCredentials: true,
     });
@@ -98,5 +96,5 @@ class WebClient {
  * URL API
  */
 // const url = 'https://cors-anywhere.herokuapp.com/http://event-band-api.ru:5001/';
-const url = 'https://cors-anywhere.herokuapp.com/https://event-band-api.ru:5000/';
+const url = 'https://event-band-api.ru:5001/';
 export default new WebClient(url);
