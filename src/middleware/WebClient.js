@@ -20,7 +20,7 @@ class WebClient {
       headers: {
 				'Content-Type': 'application/json',
       },
-      withCredentials: false,
+      withCredentials: true,
     });
 
     this.setInterceptors();
