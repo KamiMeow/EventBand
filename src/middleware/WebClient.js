@@ -20,7 +20,7 @@ class WebClient {
       headers: {
 				'Content-Type': 'application/json',
 				'Origin': 'https://event-band-api.ru',
-				'Access-Control-Request-Headers': 'Origin',
+				'Access-Control-Request-Headers': 'origin',
       },
       withCredentials: true,
     });
