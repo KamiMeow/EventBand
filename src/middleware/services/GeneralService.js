@@ -7,7 +7,12 @@ export default {
 		return this.apiClient.get('tag/all');
 	},
 
-	requestEvents(params) {
+	requestEvents(params, isLogged) {
+		console.log(isLogged);
+		
+		if (isLogged) {
+			return this.apiClient.get(`event/event-list?`, { ...params });
+		}
 		return this.apiClient.get(`event-list?`, { ...params });
 	},
 

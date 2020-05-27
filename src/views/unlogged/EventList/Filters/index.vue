@@ -281,13 +281,16 @@ export default {
 				console.log(this.maxPrice);
 				
 				this.$store.dispatch('nonauth/requestEvents', {
-					dateFrom: this.dateFrom,
-					dateTo: this.dateTo,
-					priceFrom: this.range[0],
-					priceTo: this.range[1],
-					people: this.maxPeopleLimit,
-					tags: [...this.selected].map( v => v.id) || [],
-					reputation: this.minRate,
+					params: {
+						dateFrom: this.dateFrom,
+						dateTo: this.dateTo,
+						priceFrom: this.range[0],
+						priceTo: this.range[1],
+						people: this.maxPeopleLimit,
+						tags: [...this.selected].map( v => v.id) || [],
+						reputation: this.minRate,
+					}, 
+					isLogged: this.$store.getters['auth/getIsLogged'],
 				});
 			}, 1000);
 		},

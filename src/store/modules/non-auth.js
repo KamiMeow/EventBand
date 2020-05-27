@@ -150,9 +150,9 @@ export const actions = {
 		commit('SET_TAGS', tags);
 	},
 	
-	async requestEvents({ commit, state }, params) {
+	async requestEvents({ commit, state, getters }, {params, isLogged}) {
 		try {
-			let { events = [] } = (await GeneralService.requestEvents(params)).data;
+			let { events = [] } = (await GeneralService.requestEvents(params, isLogged)).data;
 			commit('SET_EVENTS', events);
 			console.log(events);
 		} catch (e) {
