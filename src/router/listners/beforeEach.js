@@ -19,7 +19,7 @@ export default function (store) {
 		// console.log(organizationToken);
 		
     if (organizationToken || token) {
-			// webClient.login(organizationToken || token);
+			webClient.login(organizationToken || token);
 			webClient.login(token);
 		}
 
