@@ -48,6 +48,7 @@ export const actions = {
 	logout: ({ dispatch }) => dispatch('unsetUserData', null, { root: true }),
 
 	logoutAsOrganization: ({ commit, dispatch, state }) => {
+
 		commit('LOGOUT_AS_ORG');
 		const infoUser = {
 			token: state.token,

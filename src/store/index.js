@@ -79,7 +79,7 @@ const vuex = new Vuex.Store({
       });
       commit('UNSET_DATA');
       dispatch('saveToLocaleStorage');
-      WebClient.logout();
+			WebClient.logout();
 		},
 		
 		async changePassword(_, { password, token }) {
