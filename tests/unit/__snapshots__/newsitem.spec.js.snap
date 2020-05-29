@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`News item - компонент для вывода новостей Делаем снапшот 1`] = `
+<div class="my-4 v-card v-sheet theme--light">
+  <header class="v-sheet v-sheet--tile theme--light v-toolbar secondary" style="height: 64px;">
+    <div class="v-toolbar__content" style="height: 64px;">
+      <div class="v-toolbar__title white--text"> Org name </div>
+    </div>
+  </header>
+  <div class="v-card__title">
+    <div class="flex xs12">
+      <div>
+        Topic: <span class="grey--text text--darken-2"> News Title </span></div>
+    </div>
+  </div>
+  <div class="v-card__text">
+    <div class="layout"><span class="grey--text text--darken-3"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea non cupiditate praesentium inventore voluptatem quas? </span></div>
+  </div>
+  <hr role="separator" aria-orientation="horizontal" class="v-divider theme--light">
+  <div class="v-card__subtitle pa-0 px-4">
+    <div class="flex xs12"><span class="subtitle-2">
+				Created at: 2020-05-21 (13:51:35)
+			</span></div>
+  </div>
+</div>
+`;

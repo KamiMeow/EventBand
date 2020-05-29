@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Event item - компонент для вывода мероприятий Делаем снапшот 1`] = `
+<div class="pa-2 my-2 v-card v-card--outlined v-sheet theme--light elevation-0">
+  <div class="layout">
+    <div class="flex xs1">
+      <div class="v-avatar" style="height: 128px; min-width: 128px; width: 128px;">
+        <div class="v-responsive v-image">
+          <div class="v-image__image v-image__image--preload v-image__image--cover" style="background-position: center center;"></div>
+          <div class="v-responsive__content"></div>
+        </div>
+      </div>
+    </div>
+    <div class="flex pl-4 xs3">
+      <div class="layout column">
+        <div class="v-card__title headline"> MoscowJS 47 </div>
+        <div class="v-card__subtitle subtitle-1 pa-0 pl-4 text-truncate">
+          MoscowJS return! MoscowJS 47
+        </div>
+      </div>
+    </div>
+    <div class="flex xs2">
+      <div class="text-center "> Tags </div>
+      <div class="layout wrap"><span class="ma-1 v-chip v-chip--no-color theme--light v-size--small"><span class="v-chip__content"> 
+					Technologies 
+				</span></span><span class="ma-1 v-chip v-chip--no-color theme--light v-size--small"><span class="v-chip__content"> 
+					IT 
+				</span></span><span class="ma-1 v-chip v-chip--no-color theme--light v-size--small"><span class="v-chip__content"> 
+					Alcoparty 
+				</span></span></div>
+    </div>
+    <div class="flex left-border pl-4 xs3">
+      <div class="layout column"><span class="align-self-center"> Info </span>
+        <div> Max tickets amount
+          <span class="orange--text text--darken-4"> (250) </span></div>
+        <div> Min ticket price
+          <span class="green--text text--darken-2"> (0) </span></div>
+        <div> Starting
+          <span class="pink--text text--darken-4"> 2020-05-10 </span></div>
+        <div> Ending
+          <span class="pink--text text--darken-4"> 2020-05-10 </span></div>
+      </div>
+    </div>
+    <div class="flex xs3">
+      <div class="layout fill-height column justify-space-around">
+        <!---->
+        <!---->
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>
+`;

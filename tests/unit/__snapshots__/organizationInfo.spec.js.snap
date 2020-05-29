@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Organization info - компонент для вывода информации об организации Делаем snapshot 1`] = `
+<div class="custom-elevation v-card v-sheet theme--light">
+  <div class="layout column">
+    <div class="v-card__title">
+      <div class="layout mx-2 wrap">
+        <div class="flex d-xs-flex d-md-none xs12 sm12 md2 lg2">
+          <div class="layout">
+            <div class="v-avatar" style="height: 128px; min-width: 128px; width: 128px;">
+              <div class="v-responsive v-image">
+                <div class="v-image__image v-image__image--preload v-image__image--cover" style="background-position: center center;"></div>
+                <div class="v-responsive__content"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex grow">
+          <div class="layout column"><span class="display-1 font-weight-medium"> Fregalo </span> <span> Followers ( 3 ) </span> <span> Reputation ( 9 ) </span>
+            <div class="v-rating v-rating--readonly v-rating--dense"><button type="button" tabindex="-1" class="v-icon notranslate v-icon--link mdi mdi-star theme--light accent--text text--lighten-1" style="font-size: 32px;"></button><button type="button" tabindex="-1" class="v-icon notranslate v-icon--link mdi mdi-star theme--light accent--text text--lighten-1" style="font-size: 32px;"></button><button type="button" tabindex="-1" class="v-icon notranslate v-icon--link mdi mdi-star theme--light accent--text text--lighten-1" style="font-size: 32px;"></button><button type="button" tabindex="-1" class="v-icon notranslate v-icon--link mdi mdi-star theme--light accent--text text--lighten-1" style="font-size: 32px;"></button><button type="button" tabindex="-1" class="v-icon notranslate v-icon--link mdi mdi-star theme--light accent--text text--lighten-1" style="font-size: 32px;"></button><button type="button" tabindex="-1" class="v-icon notranslate v-icon--link mdi mdi-star theme--light accent--text text--lighten-1" style="font-size: 32px;"></button><button type="button" tabindex="-1" class="v-icon notranslate v-icon--link mdi mdi-star theme--light accent--text text--lighten-1" style="font-size: 32px;"></button><button type="button" tabindex="-1" class="v-icon notranslate v-icon--link mdi mdi-star theme--light accent--text text--lighten-1" style="font-size: 32px;"></button><button type="button" tabindex="-1" class="v-icon notranslate v-icon--link mdi mdi-star-outline theme--light accent--text text--lighten-3" style="font-size: 32px;"></button><button type="button" tabindex="-1" class="v-icon notranslate v-icon--link mdi mdi-star-outline theme--light accent--text text--lighten-3" style="font-size: 32px;"></button></div>
+          </div>
+        </div>
+        <div class="flex d-none d-md-flex d-lg-flex xs12 sm12 md2 lg2">
+          <div class="layout">
+            <div class="v-avatar" style="height: 128px; min-width: 128px; width: 128px;">
+              <div class="v-responsive v-image">
+                <div class="v-image__image v-image__image--preload v-image__image--cover" style="background-position: center center;"></div>
+                <div class="v-responsive__content"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr role="separator" aria-orientation="horizontal" class="v-divider theme--light">
+    <div class="v-card__text">
+      <div class="layout title">
+
+        Normal fregal Sergeevich. Sounds honorable, looks stylish. Here, only fucked up in the head anime. Who are willing to sell their mother for ramen and a point for the opportunity to see waifa.
+        If you're not like that, just walk through and leave us alone. We don't touch you, don't touch us. Trust me, you'll be better off. We're fucked up tight, we can fuck you in all the holes if you just mention anime in our presence.
+
+      </div>
+    </div>
+  </div>
+</div>
+`;
