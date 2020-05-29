@@ -45,13 +45,12 @@ class WebClient {
 			
       return error.response;
     });
-  }
-
+	}
   /**
-   * Метод установки заголовка авторизации после входа пользователем в приложение
-   * @param {String} token Токен авторизации
+	 * Метод установки заголовка авторизации после входа пользователем в приложение
+	 * @param {String} token Токен авторизации
    */
-  login(token) {
+	login(token) {
 		this.axios.defaults.baseURL = this.baseURL + 'api/';
 		this.axios.defaults.headers.common['authorization'] = 'Bearer ' + token;
   }
@@ -95,6 +94,6 @@ class WebClient {
 /**
  * URL API https://cors-anywhere.herokuapp.com/
  */
-// const url = 'https://localhost:5000/';
-const url = 'https://event-band-api.ru:5000/';
+const url = 'http://localhost:5001/';
+// const url = 'https://event-band-api.ru:5000/';
 export default new WebClient(url);

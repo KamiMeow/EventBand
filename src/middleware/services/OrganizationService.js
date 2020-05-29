@@ -18,12 +18,11 @@ export default {
 				},
 			},
 		};
-		console.log(response);
 		
 		if (response.status === 403 || response.status === 404) {
 			return errorMessage.message = response.data.message;
 		}
-		
+
 		this.apiClient.login(response.data.organizationToken);
 		return response;
 	},
