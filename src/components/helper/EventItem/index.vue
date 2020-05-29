@@ -1,7 +1,6 @@
 <template>
 	<v-card
-		class="pa-2 my-2"
-		elevation="0"
+		class="pa-2 my-2 custom-elevation"
 		outlined
 	>
 

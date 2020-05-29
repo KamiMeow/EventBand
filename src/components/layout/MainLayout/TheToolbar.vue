@@ -5,6 +5,7 @@
 			class="d-none d-md-inline-block d-lg-inline-block"
 			dark
 			app
+			clipped-right
 		>
 			<div>
 				<v-img src="/logo.png" contain />
