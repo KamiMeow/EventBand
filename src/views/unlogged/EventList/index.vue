@@ -3,15 +3,13 @@
 		class="d-flex flex-column"
 		fluid
 	>
-		<v-layout wrap>
+		<filters/>
+		<v-layout justify-center wrap>
 			<v-flex 
 				color="secondary"
 				lg9 md8 sm12 xs12
 			>
 				<ya-map/>
-			</v-flex>
-			<v-flex lg3 md4 sm12 xs12 >
-				<filters/>
 			</v-flex>
 		</v-layout>
 		<v-layout 

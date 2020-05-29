@@ -102,7 +102,6 @@ export default {
 		async signIn() {
 			console.log(this.email);
 			console.log(this.password);
-
 			let resp = await this.$store.dispatch('auth/signIn', { 
 				password: this.password,
 				email: this.email, 
