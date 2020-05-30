@@ -11,4 +11,8 @@ export default {
 		removeTicket( uuid ) {
 			return this.apiClient.delete(`my-organization/ticket/${uuid}`);
 		},
+
+		subscribeOnEvent(uuid) {
+			return this.apiClient.get(`event/subscribe/${uuid}`);
+		},
 }
