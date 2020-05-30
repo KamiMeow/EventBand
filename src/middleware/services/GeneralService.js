@@ -1,3 +1,5 @@
+import emailExistance from 'email-existence';
+
 export default {
 	requestPassword( email ) {
 		return this.apiClient.get('request-password', { email, });
@@ -40,6 +42,12 @@ export default {
 		}
 		return { nomessage: ''} ;
 	},	
+
+	async checkForEmailExistance() {
+		await emailExistance.check('test@test.com', (err, res) => {
+			console.log('response:', res, 'error:', err);
+		});
+	},
 
 	
 }

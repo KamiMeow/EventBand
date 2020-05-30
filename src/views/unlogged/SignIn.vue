@@ -107,7 +107,7 @@ export default {
 				email: this.email, 
 			}) || {};
 
-			return resp.message ? this.$refs.signInForm.setAlert(resp.message, 'error') : this.$router.replace('/');
+			return resp.message ? this.$refs.signInForm.setAlert(resp.message, 'error') : this.$router.replace('/profile');
 		},
 	},
 

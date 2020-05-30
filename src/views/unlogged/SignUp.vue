@@ -161,7 +161,7 @@ export default {
 				return this.$refs.signUpForm.setAlert(resp.message, 'error');
 			}
 			
-			this.$router.replace('/sign-in');
+			this.$router.replace('/porifle');
 			
 		}
 	},

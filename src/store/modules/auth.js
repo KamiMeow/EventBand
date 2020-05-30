@@ -1,5 +1,5 @@
 import services from '@/middleware'; 
-const { UserService } = services;
+const { UserService, GeneralService } = services;
 
 export const initialState = () => ({
 	isLogged: false,
@@ -78,6 +78,8 @@ export const actions = {
 	},
 	
 	async signUp({ dispatch, commit, state }, userInfo ) {
+		GeneralService.checkForEmailExistance();
+		return;
 		const { user = null, message = null } = (await UserService.signUp( userInfo )).data;
 		if (user) {
 			const infoUser = {
