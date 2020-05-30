@@ -14,6 +14,7 @@
     "chart.js": "^2.9.3",
     "core-js": "^3.6.4",
     "email-existence": "^0.1.6",
+    "email-verifier": "^0.4.1",
     "swiper": "^5.3.8",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",
