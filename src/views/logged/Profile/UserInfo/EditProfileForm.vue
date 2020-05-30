@@ -78,6 +78,8 @@ export default {
 			this.dialog = false;
 			
 			let resp = await this.$store.dispatch('profile/setActualUser', this.userInfo) || {};
+			console.log('sos',resp);
+			
 			if (resp.message) {
 				this.postDialog = true;
 				this.postMessage = resp.message;

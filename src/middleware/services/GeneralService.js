@@ -1,3 +1,5 @@
+import Verifier from 'email-verifier';
+
 export default {
 	requestPassword( email ) {
 		return this.apiClient.get('request-password', { email, });
@@ -43,8 +45,10 @@ export default {
 
 	
 	async checkForEmailExistance() {
-		await emailExistance.check('test@test.com', (err, res) => {
-			console.log('response:', res, 'error:', err);
+		let verifier = new Verifier('at_5nOXpnX089bInJ3LdliDUykgCjXfd');
+		verifier.verify("daihaotea@gmail.com", (err, data) => {
+			if (err) throw err;
+			console.log(data);
 		});
 	},
 

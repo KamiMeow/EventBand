@@ -18,7 +18,7 @@
 			wrap
 		>
 			<v-flex
-				xs12 sm10 md9
+				xs12 sm10 md10
 				v-for="i in events"
 				:key="i.uuid"
 			>
