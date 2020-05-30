@@ -41,6 +41,17 @@ export const actions = {
 		
 		commit('UNSET_EVENT_INFO');
 	},
+
+	async subscribeOnEvent(_, uuid) {
+		let response = await EventService.subscribeOnEvent(uuid);
+		return response.status < 400 ? {
+			message: response.data.message,
+			type: 'success',
+		} : {
+			message: response.data.message,
+			type: 'error',
+		};
+	}
 };
 
 export const getters = {

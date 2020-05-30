@@ -103,6 +103,7 @@ export const actions = {
 		dispatch('saveToLocaleStorage', getters.getDataForLocalStorage, { root: true });
 	},
 	
+	
 };
 
 export const getters = {
