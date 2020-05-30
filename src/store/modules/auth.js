@@ -78,8 +78,8 @@ export const actions = {
 	},
 	
 	async signUp({ dispatch, commit, state }, userInfo ) {
-		GeneralService.checkForEmailExistance();
-		return;
+		// GeneralService.checkForEmailExistance();
+		// return;
 		const { user = null, message = null } = (await UserService.signUp( userInfo )).data;
 		if (user) {
 			const infoUser = {
