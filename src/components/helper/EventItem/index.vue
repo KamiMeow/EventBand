@@ -50,7 +50,7 @@
 				</v-layout>
 			</v-flex>
 			<v-flex xs3>
-				<v-layout fill-height column justify-space-around>
+				<v-layout fill-height column justify-center>
 					<quick-subscribe-form 
 						v-if="canSubscribe"
 						:tickets="tickets"/>

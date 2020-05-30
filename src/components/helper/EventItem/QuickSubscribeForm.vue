@@ -1,11 +1,13 @@
 <template>	
-	<v-row justify="center" >
+	<v-layout justify-center align-center>
     <v-dialog v-model="dialog" persistent max-width="50vw">
       <template #activator="{ on }">
-        <v-btn class="align-self-center"  color="primary" dark v-on="on">Quick subscribe</v-btn>
+        <v-btn class="align-self-center"  color="primary" dark v-on="on">
+					{{ isLogged ? 'Book a ticket' : 'Quck subscribe form'}}
+				</v-btn>
       </template>
       <v-card>
-				<v-layout justify-center>
+				<v-layout v-if="!isLogged" justify-center>
 					<v-card-title class="title">For quick subscribe fill the following fields</v-card-title>
 				</v-layout>
 				<v-layout
@@ -18,9 +20,10 @@
 							Quick subscribe form
 						</template>
 						<v-layout
-							column
+							v-if="!isLogged"
 							align-content-center
 							justify-center
+							column
 						> 
 							<v-text-field
 								v-model="email"
@@ -101,7 +104,7 @@
 				{{ cbMessage }} 
 			</v-alert>
 		</v-dialog>
-  </v-row>
+	</v-layout>
 </template>
 
 <script>
@@ -124,8 +127,7 @@ export default {
 		email: '',
 		surname: '',
 		name: '',
-		radio: '',
-		// radio: vm.tickets[0].uuid,
+		radio: vm.tickets[0].uuid,
 
 		cbMessage: 'nothing happend',
 	}),
@@ -134,33 +136,41 @@ export default {
 		rules() {
 			return this.$store.getters['getRules'];
 		},
+		isLogged() {
+			return this.$store.getters['auth/getIsLogged'];
+		},
 	},
 
 	methods: {
 		async subscribeOnEvent() {
+			if (!this.radio) {
+				this.$refs.quickForm.setAlert('Choose ticket', 'warning');
+				return;
+			};
+
+			if (this.isLogged) {
+				let message = await this.$store.dispatch('event/subscribeOnEvent', this.radio);
+				this.$store.dispatch('notification/set', message);
+				return;
+			}
+
 			let message = await this.$store.dispatch('nonauth/subscribeOnEvent', {
 				ticketUuid: this.radio,
 				email: this.email,
 				surname: this.surname, 
 				name: this.name,
 			});
-
-			// console.log(this.$refs.quickForm);
 			
-			// this.$refs.quickForm.reset();
-			this.cbDialog = true;
-			this.cbMessage = message;
+			this.$refs.quickForm.resetForm();
+			this.radio = this.tickets[0].uuid;
+			this.$store.dispatch('notification/set', {
+				message: message,
+				type: 'info',
+			});
 			this.dialog = false;
 		},
 
 	},
-
-	watch: {
-		radio(val) {
-			console.log(val);
-		}
-	}
-
 }
 </script>
 
