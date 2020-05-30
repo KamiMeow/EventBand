@@ -4,12 +4,12 @@ describe('Изменение данных пользователя', () => {
 	});
 
 	it('Ввод почты', () => {
-		cy.get('#input-32')
+		cy.get('#input-42')
 			.type('test@test.com')
 	});
 
 	it('Ввод пароля', () => {
-		cy.get('#input-36')
+		cy.get('#input-46')
 			.type('test');
 	});
 
@@ -24,17 +24,17 @@ describe('Изменение данных пользователя', () => {
 			.focus()
 			.click();
 
-		cy.get('#input-167')
+		cy.get('#input-129')
 		.focus()
 		.clear()
 		.type('some-nick');
 
-		cy.get('#input-170')
+		cy.get('#input-132')
 		.focus()
 		.clear()
 		.type('some-sur');
 
-		cy.get('#input-173')
+		cy.get('#input-135')
 		.focus()
 		.clear()
 		.type('some-name');
@@ -47,17 +47,17 @@ describe('Изменение данных пользователя', () => {
 			.focus()
 			.click();
 
-			cy.get('#input-167')
+			cy.get('#input-129')
 		.focus()
 		.clear()
 		.type('jelly');
 
-		cy.get('#input-170')
+		cy.get('#input-132')
 		.focus()
 		.clear()
 		.type('belly');
 
-		cy.get('#input-173')
+		cy.get('#input-135')
 		.focus()
 		.clear()
 		.type('john');

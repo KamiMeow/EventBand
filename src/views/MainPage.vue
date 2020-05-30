@@ -1,6 +1,7 @@
 <template>
   <v-img
     src="/blur-bg-main.png"
+		lazy-src="/blur-bg-main.png"
 		class="pb-8"
   >
 		<v-layout 
@@ -25,6 +26,7 @@
 						<div class="d-flex flex-column align-center white--text">
 							<v-img
 								:src="'/'+ offer.icon +'-icon.'+ offer.format"
+								:lazy-src="'/'+ offer.icon +'-icon.'+ offer.format"
 								class="my-2"
 							/>
 

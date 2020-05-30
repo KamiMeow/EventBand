@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Event item - компонент для вывода мероприятий Делаем снапшот 1`] = `
-<div class="pa-2 my-2 v-card v-card--outlined v-sheet theme--light elevation-0">
+<div class="pa-2 my-2 custom-elevation v-card v-card--outlined v-sheet theme--light">
   <div class="layout">
     <div class="flex xs1">
       <div class="v-avatar" style="height: 128px; min-width: 128px; width: 128px;">

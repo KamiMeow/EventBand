@@ -9,19 +9,17 @@ import listners from './listners';
 
 import unloggedRoutes from "./routes/unloggedRoutes";
 import loggedRoutes from "./routes/loggedRoutes";
-import MainPage from '@/views/MainPage';
-import CreateNewPasswordForm from '@/views/CreateNewPasswordForm';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-		component: MainPage,
+		component: () => import('@/views/MainPage'),
 	},
 	{
 		path: "/create-new-password/:token",
-		component: CreateNewPasswordForm,
+		component: () => import('@/views/CreateNewPasswordForm'),
   },
 
   ...unloggedRoutes,

@@ -16,7 +16,7 @@ WebClient.$store = store;
 
 RStore.subscribe('afterUpdate', state => {
   store.dispatch(state ? 'auth/loginFromState' : 'unsetUserData', state);
-  router.replace('/ping');
+  router.replace('/ping').catch(e => console.log(e));
 });
 
 new Vue({

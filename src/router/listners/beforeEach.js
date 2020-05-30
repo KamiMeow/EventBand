@@ -32,7 +32,7 @@ export default function (store) {
     else if (isLogged && access === NOT_LOGIN_META) {
       return next('/');
     }
-
+		
     return next((isPing && path) || true);
   };
 };

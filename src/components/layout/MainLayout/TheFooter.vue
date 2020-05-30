@@ -13,14 +13,18 @@
 		<v-col
 			class="d-flex flex-row justify-center align-center py-0"
 			cols="6"
-		>
-			<v-icon
+		>	
+			<v-btn
 				v-for="icon in icons"
-				:key="icon"
-				class="grey--text mx-2"
+				:key="icon.icon"
+				:href="icon.link"
+				color="white"
+				icon
 			>
-				{{ icon }}
-			</v-icon>
+				<v-icon>
+					{{icon.icon}}
+				</v-icon>
+			</v-btn>
 		</v-col>
 
 		<v-col shrink align="right">
@@ -31,10 +35,23 @@
 
 <script>
 const icons = [
-	'mdi-instagram',
-	'mdi-facebook',
-	'mdi-twitter',
-	'mdi-email',
+	{
+		icon: 'mdi-instagram',
+		link: 'https://twitter.com/cantsleepanymo',
+	},
+	{
+		icon: 'mdi-facebook',
+		link: 'https://twitter.com/cantsleepanymo',
+	},
+	{
+		icon: 'mdi-twitter',
+		link: 'https://twitter.com/cantsleepanymo',
+	},
+	{
+		icon: 'mdi-email',
+		link: 'mailto:info.event.band.api',
+	},
+
 ];
 
 export default {

@@ -4,12 +4,12 @@ describe('Авторизация за пользователя', () => {
 	});
 
 	it('Ввод почты', () => {
-		cy.get('#input-32')
+		cy.get('#input-42')
 			.type('test@test.com')
 	});
 
 	it('Ввод пароля', () => {
-		cy.get('#input-36')
+		cy.get('#input-46')
 			.type('test');
 	});
 
@@ -26,12 +26,12 @@ describe('Случай с проваленной аутентификацией'
 	});
 
 	it('Ввод почты', () => {
-		cy.get('#input-32')
+		cy.get('#input-42')
 			.type('test@test.com')
 	});
 
 	it('Ввод пароля', () => {
-		cy.get('#input-36')
+		cy.get('#input-46')
 			.type('test-no-access');
 	});
 

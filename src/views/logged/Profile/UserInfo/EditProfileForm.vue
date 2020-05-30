@@ -5,8 +5,11 @@
 		</template>
 		<v-card>
 			<v-layout 
-				justify-center>
+				justify-center
+				align-content-center	
+			>
 				<v-dialog
+					width="400"
 					v-model="postDialog">
 					<v-alert type="error"> 
 						{{ postMessage }}
@@ -81,11 +84,10 @@ export default {
 			console.log('sos',resp);
 			
 			if (resp.message) {
-				this.postDialog = true;
-				this.postMessage = resp.message;
-				setTimeout( () => {
-					this.postDialog = false;
-				}, 2800);
+				this.$store.dispatch('notification/set', {
+					message: resp.message,
+					type: 'error',
+				});
 			}
 		},
 

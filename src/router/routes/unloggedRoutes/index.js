@@ -1,43 +1,36 @@
-import SignIn from '@/views/unlogged/SignIn';
-import SignUp from '@/views/unlogged/SignUp';
-import ResetPassword from '@/views/unlogged/ResetPassword';
-import EventPage from '@/views/unlogged/EventPage';
-import OrganizationPage from '@/views/unlogged/OrganizationPage';
-
-
 export default [
     {
         path: "/sign-in",
         name: "sign-in",
-        component: SignIn,
+        component: () => import('@/views/unlogged/SignIn'),
         meta: {
             access: 'notLogin',
         },
     },
     {
         path: "/sign-up",
-        component: SignUp, 
+        component: () => import('@/views/unlogged/SignUp'), 
         meta: {
             access: 'notLogin',
         },
     },
     {
         path: "/reset-password",
-        component: ResetPassword, 
+        component: () => import('@/views/unlogged/ResetPassword'), 
         meta: {
             access: 'notLogin',
         },
 		},
     {
 			path: "/event/:uuid",
-			component: EventPage,
+			component: () => import('@/views/unlogged/EventPage'),
 			meta: {
 				access: 'all',
 			},
 		},
 		{
 			path: "/organization/:uuid",
-			component: OrganizationPage,
+			component: () => import('@/views/unlogged/OrganizationPage'),
 			meta: {
 				access: 'all',
 			},
