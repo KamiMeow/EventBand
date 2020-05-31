@@ -15,6 +15,7 @@
     "core-js": "^3.6.4",
     "email-existence": "^0.1.6",
     "email-verifier": "^0.4.1",
+    "socket.io-client": "^2.3.0",
     "swiper": "^5.3.8",
     "vue": "^2.6.11",
     "vue-awesome-swiper": "^4.1.1",
