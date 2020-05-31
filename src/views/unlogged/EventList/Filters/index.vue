@@ -159,7 +159,9 @@
 										cols="6"
 									>
 										<calendar-input 
-											v-model="dateFrom"/>
+											v-model="dateFrom"
+											:showCurrent="dateFrom"
+										/>
 									</v-col>
 									<v-col
 										cols="6"
