@@ -3,12 +3,14 @@
  */
 
 import * as notification from './notification';
-import * as examples from './example';
-import * as auth from './auth';
-import * as profile from './profile';
 import * as organization from './organization';
-import * as nonauth from './non-auth.js'
+import * as nonauth from './non-auth';
+import * as examples from './example';
+import * as profile from './profile';
 import * as event from './event';
+import * as chat from './chat';
+import * as auth from './auth';
+
 
 export default {
 	notification,
@@ -18,4 +20,5 @@ export default {
 	nonauth,
 	event,
 	auth,
+	chat,
 };

@@ -51,7 +51,8 @@ export const actions = {
 			message: response.data.message,
 			type: 'error',
 		};
-	}
+	},
+
 };
 
 export const getters = {

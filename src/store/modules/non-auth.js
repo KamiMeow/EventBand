@@ -5,6 +5,7 @@ export const initialState = () => ({
 	tags: [],
 	events: [],
 	currentEvent: {
+			"chatUuid": 'no-uuid',
 			"event": {
 					"id": 2,
 					"uuid": "13c2db04-6375-47bc-a878-7a397ba4f3bd",
@@ -122,7 +123,9 @@ export const mutations = {
 		state.events = events || [];
 	},
 
-	SET_CURRENT_EVENT: (state, event) => {
+	SET_CURRENT_EVENT: (state, event) => {		
+		console.log(event);
+		
 		state.currentEvent = event;
 	},
 
@@ -166,9 +169,7 @@ export const actions = {
 	},
 
 	async requestEventInfo({ commit }, uuid) {
-		let resp = (await GeneralService.requestEventInfo(uuid)).data;
-		console.log(resp);
-		
+		let resp = (await GeneralService.requestEventInfo(uuid)).data;		
 		return resp.event ? commit('SET_CURRENT_EVENT', resp) : resp.message;
 	},
 
