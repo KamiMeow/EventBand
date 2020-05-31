@@ -160,7 +160,7 @@
 									>
 										<calendar-input 
 											v-model="dateFrom"
-											:showCurrent="dateFrom"
+											:showCurrent="new Date().toISOString().substr(0, 10)"
 										/>
 									</v-col>
 									<v-col
@@ -362,6 +362,11 @@ export default {
 		},
 
 		dateFrom(val) {
+			let start = Date.parse(this.dateFrom);
+			let end = Date.parse(this.dateTo);
+			let diff = start - end;
+			
+			this.dateTo = diff > 0 ? this.dateFrom : this.dateTo;
 			this.requestEvents();
 		},
 		

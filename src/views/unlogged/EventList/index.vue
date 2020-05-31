@@ -4,7 +4,7 @@
 		fluid
 	>
 		<filters/>
-		<v-layout justify-center wrap>
+		<v-layout justify-center align-center wrap>
 			<v-flex 
 				color="secondary"
 				lg9 md8 sm12 xs12

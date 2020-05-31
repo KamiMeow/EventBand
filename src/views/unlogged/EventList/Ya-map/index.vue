@@ -1,23 +1,21 @@
 <template>
-	<v-layout>
-		<v-responsive :aspect-ratio="16/9">
-			<yandex-map
-				style="width: 100%; height: 100%;" 
-				:coords="[55.75370903771494, 37.61981338262558]"
-				:controls="['zoomControl']"
-				zoom="10"
-				@map-was-initialized="getYaMap"
-			>
-				<ymap-marker
-					v-for="(c, i) in eventsCoords"
-					:key="i"
-					marker-id="i"
-					:coords="c.coord"
-					:hint-content="c.balloonTemplate"
-				/>
-			</yandex-map>
-		</v-responsive>
-	</v-layout>
+	<!-- <v-responsive :aspect-ratio="16/9"> -->
+		<yandex-map
+			:style="styleWidthAndHeight" 
+			:coords="[55.75370903771494, 37.61981338262558]"
+			:controls="['zoomControl']"
+			zoom="10"
+			@map-was-initialized="getYaMap"
+		>
+			<ymap-marker
+				v-for="(c, i) in eventsCoords"
+				:key="i"
+				marker-id="i"
+				:coords="c.coord"
+				:hint-content="c.balloonTemplate"
+			/>
+		</yandex-map>
+	<!-- </v-responsive> -->
 </template>
 
 <script>
@@ -51,12 +49,17 @@ export default {
 			});
 		},
 
-		baloonTemplate() {
-      return `
-        <h1 class="red">Hi, everyone!</h1>
-        <img src="http://via.placeholder.com/350x150">
-      `
-    }
+		aspectRatio() {
+			let width = this.$vuetify.breakpoint.width;
+			let height = this.$vuetify.breakpoint.height;
+			return width / height;
+		},
+
+		styleWidthAndHeight() {
+			let width = this.$vuetify.breakpoint.width;
+			let height = this.$vuetify.breakpoint.height;
+			return `width: ${width / (16/9)}px; height: ${height / (16/9)}px;`;
+		},
 	},
 	
 	methods: {
