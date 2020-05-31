@@ -173,7 +173,9 @@
 											cols="6"
 										>
 											<calendar-input 
-												v-model="dateTo"/>
+												v-model="dateTo"
+												:showCurrent="dateFrom"
+											/>
 										</v-col>
 										<v-col
 											cols="6"
@@ -262,10 +264,10 @@ export default {
 			maxPrice: 0,
 			range: [0, 0],
 
-			dateFrom: '2020-05-10',
+			dateFrom: new Date().toISOString().substr(0, 10),
 			dateTo: new Date().toISOString().substr(0, 10),
-			timeTo: '',
-			timeFrom: '',
+			timeTo: '00:00',
+			timeFrom: '00:00',
 
 
 			isFree: true,
@@ -364,16 +366,6 @@ export default {
 		dateTo(val) {
 			this.requestEvents();
 		},
-
-
-		// minPrice(val) {
-		// 	console.log('MIN ', val);
-		// 	this.range[0]
-		// },
-
-		// maxPrice(val) {
-		// 	console.log('MAX ', val);
-		// },
 	},
 }
 </script>
