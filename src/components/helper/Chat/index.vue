@@ -112,7 +112,7 @@ export default {
 
 	methods: {
 		openChat() {
-			this.socket = io('https://localhost:5000/', {
+			this.socket = io('https://event-band-api.ru:5000/', {
 				autoConnect: false,
 				query: {
 					chatUuid: this.$store.getters['nonauth/getCurrentEvent'].chatUuid,
