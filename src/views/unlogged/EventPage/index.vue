@@ -31,11 +31,17 @@ export default {
 	},
 
 	data: () => ({
-		uuid: 'no-uuid'
 	}),
 
 	created() {
-		this.$store.dispatch('nonauth/requestEventInfo', this.$route.params.uuid);
+		this.preloadInfo();
+	},
+
+	methods: {
+		async preloadInfo() {
+			await this.$store.dispatch('nonauth/requestEventInfo', this.$route.params.uuid);
+			this.$store.dispatch('profile/getProfile');
+		},
 	},
 
 }

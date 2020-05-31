@@ -1,7 +1,14 @@
 <template>
 	<v-card>
 		<v-layout column>
-			<v-card-title> <span class="headline"> Event </span> </v-card-title>
+			<v-card-title>
+				<v-layout>
+					<span class="headline"> Event </span>
+					<v-spacer/>
+					<chat/>
+				</v-layout>
+			</v-card-title>
+
 			<v-divider/>
 			<span class="title pl-4 "> Tags </span>
 			<v-layout 
@@ -61,12 +68,15 @@
 
 <script>
 import OrganizationItem from '@/components/helper/OrganizationItem';
+import Chat from '@/components/helper/Chat';
+
 
 export default {
 	name: 'EventInfoDetailed',
 
 	components: {
 		OrganizationItem,
+		Chat,
 	},
 
 	computed: {
@@ -88,6 +98,7 @@ export default {
 		organization() {
 			return this.$store.getters['nonauth/getCurrentEvent'].organization;
 		},
+		
 	},
 
 	methods: {
