@@ -200,6 +200,8 @@ export default {
 				createdAt: new Date().toISOString(),
 				message: this.newMessage,
 			});
+			console.log('noth');
+			
 			this.$nextTick(() => {
 				document.querySelector('.chat-container').lastChild.scrollIntoView({behavior: "smooth"});
 			});
