@@ -37,7 +37,8 @@
 
 <script>
 
-import yaMap from '@/components/helper/Ya-map';
+// import yaMap from '@/components/helper/Ya-map';
+import yaMap from './Ya-map';
 import Filters from './Filters';
 import EventItem from '@/components/helper/EventItem';
 
