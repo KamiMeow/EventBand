@@ -8,6 +8,7 @@ import GeneralService from './GeneralService';
 import ProfileService from './ProfileService';
 import OrganizationService from './OrganizationService';
 import EventService from './EventService';
+import ChatService from './ChatService';
 
 export default {
 	GeneralService,
@@ -16,4 +17,5 @@ export default {
 	ExampleService,
 	EventService,
 	UserService,
+	ChatService,
 };
