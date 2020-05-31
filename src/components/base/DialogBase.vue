@@ -2,30 +2,32 @@
   <v-dialog
     v-model="dialog"
     :max-width="maxWidth"
+		:persistent="persistent"
   >
     <v-card :height="height" class="d-flex flex-column">
-      <v-card-title>
-        <v-layout justify-space-between align-center>
-          <slot name="title">{{ title }}</slot>
-
-          <slot name="closeIcon">
-            <v-tooltip top>
-              <template #activator="{ on }">
-                <v-btn
-                  color="error"
-                  v-on="on"
-                  icon
-                  text
-                  @click="closeDialog"
-                >
-                  <v-icon>mdi-close</v-icon>
-                </v-btn>
-              </template>
-              Закрыть диалоговое окно
-            </v-tooltip>
-          </slot>
-        </v-layout>
-      </v-card-title>
+			<v-toolbar
+				max-height="60px"
+			 	dark color="primary"
+			>
+				<slot name="title">{{ title }}</slot>
+				<v-spacer/>
+				<slot name="closeIcon">
+					<v-tooltip top>
+						<template #activator="{ on }">
+							<v-btn
+								color="error"
+								v-on="on"
+								icon
+								text
+								@click="closeDialog"
+							>
+								<v-icon>mdi-close</v-icon>
+							</v-btn>
+						</template>
+						Close window
+					</v-tooltip>
+				</slot>
+			</v-toolbar>
       <v-divider />
 
       <slot name="beforeContent"></slot>
@@ -34,9 +36,11 @@
         <slot />
       </v-card-text>
 
-      <slot name="afterContent"></slot>
+			<div class="mt-auto">
+				<slot name="afterContent"></slot>
+			</div>
 
-      <v-card-actions class="mt-auto">
+      <v-card-actions>
         <slot name="actions" />
       </v-card-actions>
     </v-card>
@@ -59,7 +63,8 @@ export default {
     maxWidth: [String, Number],
     height: [String, Number],
     withClose: Boolean,
-    title: String,
+		title: String,
+		persistent: Boolean,
   },
 
   computed: {
