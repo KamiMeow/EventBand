@@ -94,6 +94,6 @@ class WebClient {
 /**
  * URL API
  */
-// const url = 'http://localhost:5001/';
+// const url = 'http://localhost:5001/';z
 const url = 'https://event-band-api.ru:5000/';
 export default new WebClient(url);
