@@ -5,7 +5,9 @@
 				<v-layout>
 					<span class="headline"> Event </span>
 					<v-spacer/>
-					<chat/>
+					<chat
+						v-if="isLogged"
+					/>
 				</v-layout>
 			</v-card-title>
 
@@ -97,6 +99,9 @@ export default {
 		},
 		organization() {
 			return this.$store.getters['nonauth/getCurrentEvent'].organization;
+		},
+		isLogged() {
+			return this.$store.getters['auth/getIsLogged'];
 		},
 		
 	},

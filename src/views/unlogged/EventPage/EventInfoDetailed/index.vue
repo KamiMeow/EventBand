@@ -32,7 +32,7 @@
 			</v-card-subtitle>
 			<v-layout
 				class="px-4"
-				justify-center
+				justify-start
 				wrap
 			>
 				<ticket-item

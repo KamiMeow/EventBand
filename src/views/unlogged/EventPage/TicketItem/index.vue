@@ -1,6 +1,6 @@
 <template>
 	<v-flex xs11 sm10 md10 lg8 
-		class="my-2"
+		class="my-6"
 	>
 		<v-card 
 			class="custom-elevation"
@@ -22,6 +22,7 @@
 					<span class="subtitle-2 mx-2 text-left"> {{ticket.description}} </span>
 				</v-flex>
 				<v-btn 
+					v-if="isLogged"
 					:loading="loading"
 					class="align-self-center ma-2"
 					color="secondary"
@@ -30,8 +31,12 @@
 					small
 					@click="buyTicket"
 				> 
-					Buy ticket
+					Book ticket
 				</v-btn>
+				<book-dialog
+					v-else
+					:ticketUuid="ticket.uuid"
+				/>
 			</v-layout>
 		</v-card>
 		<v-snackbar 
@@ -52,8 +57,14 @@
 </template>
 
 <script>
+import bookDialog from './bookDialog';
+
 export default {
 	name: 'TicketItem',
+
+	components: {
+		bookDialog,
+	},
 
 	props: {
 		ticket: Object,
@@ -65,6 +76,12 @@ export default {
 		snackbarMessage: '',
 		snackbarType: 'success',
 	}),
+
+	computed: {
+		isLogged() {
+			return this.$store.getters['auth/getIsLogged'];
+		},
+	},
 
 	methods: {
 		async buyTicket() {
