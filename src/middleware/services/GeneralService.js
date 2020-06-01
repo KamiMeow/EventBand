@@ -44,12 +44,16 @@ export default {
 	},	
 
 	
-	async checkForEmailExistance() {
+	checkForEmailExistance(email) {
 		let verifier = new Verifier('at_5nOXpnX089bInJ3LdliDUykgCjXfd');
-		verifier.verify("daihaotea@gmail.com", (err, data) => {
-			if (err) throw err;
-			console.log(data);
-		});
+		return new Promise((resolve, reject) => {
+			verifier.verify(email, (err, data) => {
+				if (err) throw err;
+				console.log(data);
+				resolve((data.dnsCheck && data.smtpCheck) || false);
+			});
+		}) 
+		
 	},
 
 	

@@ -78,8 +78,6 @@ export const actions = {
 	},
 	
 	async signUp({ dispatch, commit, state }, userInfo ) {
-		// GeneralService.checkForEmailExistance();
-		// return;
 		const { user = null, message = null } = (await UserService.signUp( userInfo )).data;
 		if (user) {
 			const infoUser = {
@@ -101,6 +99,13 @@ export const actions = {
 		
 		commit('SET_AUTH_ORG_INFO', {token, uuid});
 		dispatch('saveToLocaleStorage', getters.getDataForLocalStorage, { root: true });
+	},
+
+	async verifyEmail(_, email) {
+		let res = await GeneralService.checkForEmailExistance(email);
+		// console.log('AUTH', res);
+		return res;
+		
 	},
 	
 	

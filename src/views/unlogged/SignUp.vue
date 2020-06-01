@@ -143,11 +143,18 @@ export default {
 	methods: {
 		async signUpNewUserAccount() {
 
-			console.log(this.email);
-			console.log(this.surname);
-			console.log(this.name);
-			console.log(this.nickname);
-			console.log(this.password);
+			let exists = await this.$store.dispatch('auth/verifyEmail', this.email);
+			
+			
+			// console.log('SIGN UP', exists);
+			if (!exists) {
+				this.$store.dispatch('notification/set', {
+					message: 'Email doesn`t exist',
+					type: 'error',
+				});
+				this.email = '';
+				return;
+			}
 
 			let resp = await this.$store.dispatch('auth/signUp', {
 				email: this.email,
