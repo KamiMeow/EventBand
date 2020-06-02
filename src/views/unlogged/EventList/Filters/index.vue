@@ -1,229 +1,224 @@
 	<template>
-	<!-- <v-layout
-		class="d-flex flex-column justify-start align-center"
-		:class="maxFilterHeight"
-		style="overflow-y: auto;"
-	> -->
-			<v-navigation-drawer
-				width="450px"
-				permanent
-				floating
-				clipped
-				right
-				app
-			>
-				<v-form>
+		<v-navigation-drawer
+			width="450px"
+			permanent
+			floating
+			clipped
+			right
+			app
+		>
+			<v-form>
 
-				<v-expansion-panels
-					multiple
-					accordion
-				>
-							Filters
-						<v-expansion-panel
-							elevation="0">
-							<v-expansion-panel-header> Themes </v-expansion-panel-header>
-							<v-expansion-panel-content>
-								<v-row
-									align="center"
-									justify="start"
-								>	
+			<v-expansion-panels
+				multiple
+				accordion
+			>
+						Filters
+					<v-expansion-panel
+						elevation="0">
+						<v-expansion-panel-header> Themes </v-expansion-panel-header>
+						<v-expansion-panel-content>
+							<v-row
+								align="center"
+								justify="start"
+							>	
+								<v-col
+									v-for="(tag, i) in selectedTags"
+									:key="i"
+									class="shrink"
+								>
+									<v-chip
+										color="primary"
+										close
+										@click:close="selectedTags.splice(i, 1)"
+									>
+										{{ tag.name }}
+									</v-chip>
+								</v-col>
+							</v-row>
+							<v-row
+								align="center"
+								justify="start"
+							>
+								<template
+									v-for="tag in tags"
+								>
 									<v-col
-										v-for="(tag, i) in selectedTags"
-										:key="i"
+										v-if="!selected.includes(tag)"
+										:key="tag.uuid"
 										class="shrink"
 									>
 										<v-chip
-											color="primary"
-											close
-											@click:close="selectedTags.splice(i, 1)"
+											@click="selected.push(tag)"
 										>
 											{{ tag.name }}
 										</v-chip>
 									</v-col>
-								</v-row>
-								<v-row
-									align="center"
-									justify="start"
+								</template>
+							</v-row>
+						</v-expansion-panel-content>
+					</v-expansion-panel>
+					<v-expansion-panel
+						elevation="0">
+						<v-expansion-panel-header> Event people limit </v-expansion-panel-header>
+						<v-expansion-panel-content>
+							<v-row>
+								<v-slider
+									v-model="maxPeopleLimit"
+									:max="maxPeople"
+									:min="minPeople"
+									thumb-label="always"
+									class="align-center"
+									hide-details
 								>
-									<template
-										v-for="tag in tags"
-									>
-										<v-col
-											v-if="!selected.includes(tag)"
-											:key="tag.uuid"
-											class="shrink"
-										>
-											<v-chip
-												@click="selected.push(tag)"
-											>
-												{{ tag.name }}
-											</v-chip>
-										</v-col>
+									<template v-slot:append>
+										<v-text-field
+											v-model="maxPeopleLimit"
+											:max="maxPeople"
+											style="width: 60px"
+											class="mt-0 pt-0"
+											type="number"
+											hide-details
+											single-line
+										></v-text-field>
 									</template>
-								</v-row>
-							</v-expansion-panel-content>
-						</v-expansion-panel>
-						<v-expansion-panel
-							elevation="0">
-							<v-expansion-panel-header> Event people limit </v-expansion-panel-header>
-							<v-expansion-panel-content>
-								<v-row>
-									<v-slider
-										v-model="maxPeopleLimit"
-										:max="maxPeople"
-										:min="minPeople"
+								</v-slider>
+							</v-row>
+						</v-expansion-panel-content>
+					</v-expansion-panel>
+					<v-expansion-panel
+						elevation="0">
+						<v-expansion-panel-header> Price </v-expansion-panel-header>
+						<v-expansion-panel-content>
+							<v-row>
+								<v-col cols="12">
+									<v-switch 
+										v-model="isFree"
+										:label="isFree ? 'Free' : 'Paid'"
+									/>
+								</v-col>
+								<v-col
+									v-if="!isFree"
+								>
+									<v-range-slider
+										v-model="range"
+										:max="2500"
+										:min="0"
 										thumb-label="always"
 										class="align-center"
 										hide-details
 									>
-										<template v-slot:append>
+										<template v-slot:prepend>
 											<v-text-field
-												v-model="maxPeopleLimit"
-												:max="maxPeople"
+												:value="range[0]"
+												:min="minPrice"
 												style="width: 60px"
 												class="mt-0 pt-0"
 												type="number"
 												hide-details
 												single-line
+												@change="$set(range, 0, $event)"
 											></v-text-field>
 										</template>
-									</v-slider>
-								</v-row>
-							</v-expansion-panel-content>
-						</v-expansion-panel>
-						<v-expansion-panel
-							elevation="0">
-							<v-expansion-panel-header> Price </v-expansion-panel-header>
-							<v-expansion-panel-content>
-								<v-row>
-									<v-col cols="12">
-										<v-switch 
-											v-model="isFree"
-											:label="isFree ? 'Free' : 'Paid'"
-										/>
-									</v-col>
-									<v-col
-										v-if="!isFree"
-									>
-										<v-range-slider
-											v-model="range"
-											:max="2500"
-											:min="0"
-											thumb-label="always"
-											class="align-center"
-											hide-details
-										>
-											<template v-slot:prepend>
-												<v-text-field
-													:value="range[0]"
-													:min="minPrice"
-													style="width: 60px"
-													class="mt-0 pt-0"
-													type="number"
-													hide-details
-													single-line
-													@change="$set(range, 0, $event)"
-												></v-text-field>
-											</template>
-											<template v-slot:append>
-												<v-text-field
-													:value="range[1]"
-													:max="maxPrice"
-													style="width: 60px"
-													class="mt-0 pt-0"
-													type="number"
-													hide-details
-													single-line
-													@change="$set(range, 1, $event)"
-												></v-text-field>
-											</template>
-										</v-range-slider>
-									</v-col>
-								</v-row>
-							</v-expansion-panel-content>
-						</v-expansion-panel>
-						<v-expansion-panel
-							elevation="0">
-							<v-expansion-panel-header> Date </v-expansion-panel-header>
-							<v-expansion-panel-content>
-								<v-row>
-									<v-col
-										cols="12"
-									>
-										<v-switch 
-											v-model="isPeriod"
-											:label="isPeriod ? 'Period' : 'One-day'"
-										/>
-									</v-col>
+										<template v-slot:append>
+											<v-text-field
+												:value="range[1]"
+												:max="maxPrice"
+												style="width: 60px"
+												class="mt-0 pt-0"
+												type="number"
+												hide-details
+												single-line
+												@change="$set(range, 1, $event)"
+											></v-text-field>
+										</template>
+									</v-range-slider>
+								</v-col>
+							</v-row>
+						</v-expansion-panel-content>
+					</v-expansion-panel>
+					<v-expansion-panel
+						elevation="0">
+						<v-expansion-panel-header> Date </v-expansion-panel-header>
+						<v-expansion-panel-content>
+							<v-row>
+								<v-col
+									cols="12"
+								>
+									<v-switch 
+										v-model="isPeriod"
+										:label="isPeriod ? 'Period' : 'One-day'"
+									/>
+								</v-col>
+								<v-col
+									cols="6"
+								>
+									<calendar-input 
+										v-model="dateFrom"
+										:showCurrent="new Date().toISOString().substr(0, 10)"
+									/>
+								</v-col>
+								<v-col
+									cols="6"
+								>
+									<time-input v-model="timeFrom"/>
+								</v-col>
+								<template
+									v-if="isPeriod"
+								>
 									<v-col
 										cols="6"
 									>
 										<calendar-input 
-											v-model="dateFrom"
-											:showCurrent="new Date().toISOString().substr(0, 10)"
+											v-model="dateTo"
+											:showCurrent="dateFrom"
 										/>
 									</v-col>
 									<v-col
 										cols="6"
 									>
-										<time-input v-model="timeFrom"/>
+										<time-input v-model="timeTo" />
 									</v-col>
-									<template
-										v-if="isPeriod"
+								</template>
+							</v-row>
+						</v-expansion-panel-content>
+					</v-expansion-panel>
+					<v-expansion-panel
+						elevation="0">
+						<v-expansion-panel-header> Rating </v-expansion-panel-header>
+						<v-expansion-panel-content>
+							<v-row>
+								<v-col
+									cols="12"
+								>
+									<v-slider
+										v-model="minRate"
+										label="Min rate"
+										class="align-center"
+										thumb-label="always"
+										max="10"
+										min="1"
+										hide-details
 									>
-										<v-col
-											cols="6"
-										>
-											<calendar-input 
-												v-model="dateTo"
-												:showCurrent="dateFrom"
-											/>
-										</v-col>
-										<v-col
-											cols="6"
-										>
-											<time-input v-model="timeTo" />
-										</v-col>
-									</template>
-								</v-row>
-							</v-expansion-panel-content>
-						</v-expansion-panel>
-						<v-expansion-panel
-							elevation="0">
-							<v-expansion-panel-header> Rating </v-expansion-panel-header>
-							<v-expansion-panel-content>
-								<v-row>
-									<v-col
-										cols="12"
-									>
-										<v-slider
-											v-model="minRate"
-											label="Min rate"
-											class="align-center"
-											thumb-label="always"
-											max="10"
-											min="1"
-											hide-details
-										>
-											<template v-slot:append>
-												<v-text-field
-													v-model="minRate"
-													style="width: 60px"
-													class="mt-0 pt-0"
-													type="number"
-													max="10"
-													hide-details
-													single-line
-												></v-text-field>
-											</template>
-										</v-slider>
-									</v-col>
-								</v-row>
-							</v-expansion-panel-content>
-						</v-expansion-panel>
-					</v-expansion-panels>
-				</v-form>
-			</v-navigation-drawer>
+										<template v-slot:append>
+											<v-text-field
+												v-model="minRate"
+												style="width: 60px"
+												class="mt-0 pt-0"
+												type="number"
+												max="10"
+												hide-details
+												single-line
+											></v-text-field>
+										</template>
+									</v-slider>
+								</v-col>
+							</v-row>
+						</v-expansion-panel-content>
+					</v-expansion-panel>
+				</v-expansion-panels>
+			</v-form>
+		</v-navigation-drawer>
 	<!-- </v-layout> -->
 </template>
 
@@ -238,11 +233,6 @@ export default {
 	components: {
 		CalendarInput,
 		TimeInput,
-	},
-
-	async created() {
-		await this.$store.dispatch('nonauth/requestAllTags');
-		this.items = this.$store.getters['nonauth/getAllTags'];
 	},
 
 	beforeDestroy() {
@@ -281,13 +271,8 @@ export default {
 	}),
 
 	methods: {
-		changeWholeForm(e) {
-			console.log(1);
-		},
-
 		requestEvents() {
 			clearTimeout(this.timer);
-			// console.log([...this.selected].map( v => v.id));
 			
 			this.timer = setTimeout( () => {
 				
@@ -309,7 +294,7 @@ export default {
 
 	computed: {
 		tags() {
-			return this.items;
+			return this.$store.getters['nonauth/getAllTags'];
 		},
 		selectedTags() {
 			return this.selected;
