@@ -62,7 +62,7 @@
 						:tickets="i.tickets"
 						:tags="i.tags"
 						:logo="organization.logo"
-						:canSubscribe="true"
+						:canSubscribe="!isOrg && isLogged"
 						:canView="true"
 						:canEdit="false"
 					/>
@@ -97,6 +97,15 @@ export default {
 		followersAmount: null,
 		rating: null,
 	}),
+
+	computed: {
+		isOrg() {
+			return this.$store.getters['auth/getIsLoggedAsOrganization'];
+		},
+		isLogged() {
+			return this.$store.getters['auth/getIsLogged'];
+		},
+	},
 
 	methods: {
 
