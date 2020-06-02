@@ -6,7 +6,7 @@
 					<span class="headline"> Event </span>
 					<v-spacer/>
 					<chat
-						v-if="isLogged"
+						v-if="isLogged && !isOrg"
 					/>
 				</v-layout>
 			</v-card-title>
@@ -103,6 +103,10 @@ export default {
 		isLogged() {
 			return this.$store.getters['auth/getIsLogged'];
 		},
+
+		isOrg() {
+			return this.$store.getters['auth/getIsLoggedAsOrganization'];
+		}
 		
 	},
 

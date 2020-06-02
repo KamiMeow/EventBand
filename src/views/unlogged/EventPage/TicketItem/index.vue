@@ -21,22 +21,24 @@
 				<v-flex xs12 sm12 md-grow lg-grow>
 					<span class="subtitle-2 mx-2 text-left"> {{ticket.description}} </span>
 				</v-flex>
-				<v-btn 
-					v-if="isLogged"
-					:loading="loading"
-					class="align-self-center ma-2"
-					color="secondary"
-					depressed
-					right
-					small
-					@click="buyTicket"
-				> 
-					Book ticket
-				</v-btn>
-				<book-dialog
-					v-else
-					:ticketUuid="ticket.uuid"
-				/>
+				<template v-if="!isOrg">			
+					<v-btn 
+						v-if="isLogged"
+						:loading="loading"
+						class="align-self-center ma-2"
+						color="secondary"
+						depressed
+						right
+						small
+						@click="buyTicket"
+					> 
+						Book ticket
+					</v-btn>
+					<book-dialog
+						v-else
+						:ticketUuid="ticket.uuid"
+					/>
+				</template>
 			</v-layout>
 		</v-card>
 		<v-snackbar 
@@ -80,6 +82,10 @@ export default {
 	computed: {
 		isLogged() {
 			return this.$store.getters['auth/getIsLogged'];
+		},
+
+		isOrg() {
+			return this.$store.getters['auth/getIsLoggedAsOrganization'];
 		},
 	},
 
