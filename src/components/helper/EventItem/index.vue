@@ -126,6 +126,10 @@ export default {
 			return this.$store.getters['auth/getIsLogged'];
 		},
 
+		isOrg() {
+			return this.$store.getters['auth/getIsLoggedAsOrganization'];
+		},
+
 		minimumPrice() {
 			if (this.event.price === undefined) {
 				return this.event.minPrice;
