@@ -1,7 +1,7 @@
 <template>
 	<v-card 
 		:max-width="maxWidth"
-		:min-width="'auto'"
+		:min-width="minWidth"
 		:tile="tile"
 		:outlined="outlined"
 		:flat="flat"
