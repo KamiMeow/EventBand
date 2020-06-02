@@ -4,13 +4,22 @@
 		justify-start
 		column
 	>
-		<news-item
-			v-for="(v, i) in news"
-			:key="i"
-			:news="v"
-			:organization="v.Organization"
-			:showOrganizationName="true"
-		/>
+		<v-alert 
+			v-if="!news.length"
+			type="info"
+			class="text-center"
+		>
+			<span class="headline"> No recommended news </span>
+		</v-alert>
+		<template v-else>
+			<news-item
+				v-for="(v, i) in news"
+				:key="i"
+				:news="v"
+				:organization="v.Organization"
+				:showOrganizationName="true"
+			/>
+		</template>
 	</v-layout>
 </template>
 

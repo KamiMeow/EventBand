@@ -5,13 +5,23 @@
 		justify-start
 		column
 	>
-		<organization-item
-			v-for="o in organizations"
-			:key="o.uuid"
-			:organization="o"
-			:maxWidth="750"
+		<v-alert 
+			v-if="!organizations.length"
+			type="info"
+			class="text-center"
 		>
-		</organization-item>
+			<span class="headline"> No recommended organizations </span>
+		</v-alert>
+		<template v-else>
+			<organization-item
+				v-for="o in organizations"
+				:key="o.uuid"
+				:organization="o"
+				:maxWidth="750"
+				minWidth="750"
+				class="my-4"
+			/>
+		</template>
 	</v-layout>
 </template>
 
