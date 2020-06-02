@@ -77,16 +77,7 @@ export default {
 	components: {
 		DialogBase,
 		Message,
-	},
-
-
-
-	created() {	
-		
-		},
-
-	mounted() {
-	},
+	}, 
 
 	data: () => ({
 		dialog: false,
@@ -188,7 +179,10 @@ export default {
 		},
 
 		sendMessage() {
-			console.log('message sent');
+			if (!this.message.trim()) return;
+
+			let message = this.newMessage.split(' ').map( w => w.trim()).filter( m => m).join(' ');
+
 			this.socket.emit('send', this.newMessage);
 			this.messages.push({
 				user: {
@@ -198,7 +192,7 @@ export default {
 					isOwn: true,
 				},
 				createdAt: new Date().toISOString(),
-				message: this.newMessage,
+				message: message,
 			});
 			console.log('noth');
 			
