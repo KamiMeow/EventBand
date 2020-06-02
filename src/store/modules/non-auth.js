@@ -1,3 +1,4 @@
+// TODO set comments
 import services from "@/middleware";
 const { GeneralService } = services;
 
@@ -140,6 +141,10 @@ export const mutations = {
 	RESET_CURRENT_ORGANIZATION: (state) => {
 		state.currentEvent = {};
 	},
+
+	RESET_EVENTS: (state) => {
+		state.events.splice(0, state.events.length);
+	},
 };
 
 export const actions = {
@@ -188,6 +193,10 @@ export const actions = {
 
 	changePassword({ getters } , { password }) {
 		
+	},
+
+	resetEvents({commit}) {
+		commit('RESET_EVENTS');
 	},
 };
 
