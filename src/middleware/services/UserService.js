@@ -8,9 +8,16 @@ export default {
 	 * @param {String} password - Пароль
 	 * @returns {Promise}
 	 */
-	async signIn( email, password ) {
-		let response = (await this.apiClient.post('login', { email, password })).data;
-				
+	async signIn( email, password ) {		
+		let response;
+		try {
+			response = (await this.apiClient.post('login', { email, password })).data;
+			
+		} catch(e) {
+			console.log(e);
+			
+		}
+		
 		if (response.user) {
 			this.apiClient.login(response.user.token);
 		}
