@@ -65,21 +65,3 @@ describe('News item - компонент для вывода новостей', 
 	});
 	
 });
-
-// {
-// 	store: false,
-// 	propsData: {
-// 		showOrganizationName: true,
-// 		news: {
-// 			uuid: '01f77df9-d732-4d2a-907d-7ad4edadf7e0',
-// 			title: 'Test news',
-// 			text: 'News text',
-// 			createdAt: '2020-05-21T13:51:35.073Z',
-// 		},
-// 		organization: {
-// 			uuid: 'bfc0de35-5789-4746-aef3-aa5bc393836a',
-// 			logo: 'no-homo.jpg',
-// 			name: 'Organization',
-// 		},
-// 	},
-// }
