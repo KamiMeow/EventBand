@@ -42,12 +42,18 @@ describe('Модуль NON-AUTH', () => {
 	});
 
 
-	it('Текущее мероприятие - отсутствует', () => {
-		expect(store.getters[`${path}getCurrentEvent`]).toEqual({});
+	it('Текущее мероприятие - отсутствует', async () => {
+		const eventUuid = "300921b1-4ae3-442d-8396-642cde5e565b";
+		await store.dispatch(`${path}requestEventInfo`, eventUuid);
+		
+		expect(Object.keys(store.getters[`${path}getCurrentEvent`]).length).toBeGreaterThan(0);
 	});
 	
-	it('Текущая организация - отсутствует', () => {
-		expect(store.getters[`${path}getCurrentOrganization`]).toEqual({});
+	it('Текущая организация - отсутствует', async () => {
+		const organizationUuid = "989713f3-2f0b-4a14-b863-d98b5c00f94e";
+		await store.dispatch(`${path}requestOrganizationInfo`, organizationUuid);
+	
+		expect(Object.keys(store.getters[`${path}getCurrentOrganization`]).length).toBeGreaterThan(0);
 	});
 
 
