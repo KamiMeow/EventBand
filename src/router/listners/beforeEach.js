@@ -15,9 +15,7 @@ export default function (store) {
     const isLogged = store.getters['auth/getIsLogged'];
     const token = store.getters['auth/getToken'];
 		const organizationToken = store.getters['auth/getOrganizationToken'];
-		
-		// console.log(organizationToken);
-		
+			
     if (organizationToken || token) {
 			webClient.login(organizationToken || token);
 		}

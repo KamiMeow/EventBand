@@ -23,6 +23,9 @@ export default [
 		{
 			path: "/my-organization",
 			component: () => import('@/views/logged/Organization'),
+			meta: {
+				access: 'organization',
+			},
 		},
 		{
 			path: `/my-organization/event/edit/:uuid`,

@@ -21,10 +21,6 @@ const routes = [
 		path: "/create-new-password/:token",
 		component: () => import('@/views/CreateNewPasswordForm'),
 	},
-	{
-		path: '/chat',
-		component: () => import('@/views/Chat'),
-	},
 
   ...unloggedRoutes,
   ...loggedRoutes,
