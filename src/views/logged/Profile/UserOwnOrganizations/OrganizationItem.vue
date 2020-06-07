@@ -85,7 +85,7 @@ export default {
 				this.snackbarType = res.message.type;
 			}
 			if (res.isNext) {
-				this.$router.push(`/my-organization`);
+				this.$router.push(`/my-organization/info`);
 			}
 		},
 	},
