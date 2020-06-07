@@ -4,7 +4,7 @@
 	>
 		<v-flex xs10>
 			<v-layout justify-space-around>
-				<v-flex xs8
+				<v-flex xs9
 					class="mx-4"
 				>
 					<organization-info
@@ -12,10 +12,6 @@
 						:organization="organization"
 						:rating="rating"
 					/>
-				</v-flex>
-				<v-flex xs2
-				>
-					<menu-control/>
 				</v-flex>
 			</v-layout>
 		</v-flex>

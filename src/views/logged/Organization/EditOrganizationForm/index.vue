@@ -44,7 +44,7 @@
 								color="warning darken-2"
 								@click="setOrgInfo"
 							>
-								Back to default
+								Reset
 							</v-btn>
 
 							<v-btn
