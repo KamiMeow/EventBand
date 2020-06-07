@@ -21,26 +21,38 @@ export default [
 			},
 		},
 		{
-			path: "/my-organization",
+			path: "/my-organization/info",
 			component: () => import('@/views/logged/Organization'),
 			meta: {
-				access: 'organization',
+				access: 'needOrgLogin',
 			},
 		},
 		{
 			path: `/my-organization/event/edit/:uuid`,
 			component: () => import('@/views/logged/EditEventForm'),
+			meta: {
+				access: 'needOrgLogin',
+			},
 		},
 		{
 			path: `/my-organization/event/create`,
 			component: () => import('@/views/logged/Organization/CreateEventForm'),
+			meta: {
+				access: 'needOrgLogin',
+			},
 		},
 		{
 			path: '/my-organization/news/create',
 			component: () => import('@/views/logged/Organization/CreateNewsForm'),
+			meta: {
+				access: 'needOrgLogin',
+			},
 		},
 		{
 			path: '/my-organization/edit',
 			component: () => import('@/views/logged/Organization/EditOrganizationForm'),
+			meta: {
+				access: 'needOrgLogin',
+			},
 		},
 ];
