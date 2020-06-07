@@ -33,7 +33,7 @@
 					:logo="organization.logo"
 					:canSubscribe="false"
 					:canView="true"
-					:canEdit="true"
+					:canEdit="false"
 				/>
 			</v-flex>
 		</v-layout>

@@ -70,6 +70,10 @@ export default {
 		this.setUpPageContent();
 	},
 
+	beforeDestroy() {
+		this.$store.dispatch('nonauth/resetEvents');
+	},	
+
 	data: () => ({
 		isPreloading: true,
 	}),
