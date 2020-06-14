@@ -5,6 +5,7 @@
 	>
 
 		<v-layout>
+			{{logo || event.organization.logo}}
 			<v-flex xs1>
 				<v-avatar size="128px">
 					<v-img :src="`https://event-band-api.ru:5000/static/organizations/${logo || event.organization.logo}`" />
