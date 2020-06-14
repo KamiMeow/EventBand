@@ -218,8 +218,13 @@ export default {
 		checkCount(e) {
 			console.log((e + '').length);
 			
-			this.count = (e + '').length ? (e > this.maxCount) ? this.maxCount : e : this.minCount;
-			
+			this.count = (e + '').length
+				? (
+					e > this.maxCount
+						? this.maxCount
+						: e
+				)
+				: this.minCount;
 		}
 	},
 }
