@@ -72,6 +72,18 @@ export const mutations = {
 	SET_EVENT_EDIT: (state, value) => {
 		state.isOnEditEvent = value;
 	},
+
+	SET_EVENT_INFO: (state, info) => {
+		state.currentEditableEvent.name = info.name;
+		state.currentEditableEvent.description = info.description;
+		state.currentEditableEvent.datetimeFrom = info.datetimeFrom;
+		state.currentEditableEvent.datetimeTo = info.datetimeTo;
+		state.currentEditableEvent.tags = info.tags;
+	},
+
+	SET_EVENT_PLACE: (state, coords) => {
+		state.currentEditableEvent.coords = coords;
+	},
 };	
 
 export const actions = {
@@ -136,6 +148,20 @@ export const actions = {
 		commit('SET_EVENT_EDIT', true);
 	},
 
+	setIsOnEditFalse({commit}) {
+		commit('SET_EVENT_EDIT', false);
+	},
+
+	setEventInfoBlock({ commit, getters }, info) {
+		commit('SET_EVENT_INFO', info);
+		OrganizationService.updateEventInfo(getters['getEditableEvent']);
+	},
+
+	setEventPlaceBlock({ commit, getters }, coords) {
+		commit('SET_EVENT_PLACE', coords);
+		OrganizationService.updateEventInfo(getters['getEditableEvent']);
+	},
+
 };
 
 export const getters = {
@@ -149,5 +175,5 @@ export const getters = {
 	getNews: state => state.news,
 
 	getIsOnEdit: state => state.isOnEditEvent,
-	
+	getEditableEvent: state => state.currentEditableEvent,
 };
