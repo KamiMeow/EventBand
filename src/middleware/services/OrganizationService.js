@@ -88,4 +88,10 @@ export default {
 		return this.apiClient.put('my-organization/', { ...info });
 	},
 
+	updateEventInfo(event) {
+		return this.apiClient.put(`my-organization/event/${event.uuid}`, {
+			...event,
+		});
+	},
+
 }

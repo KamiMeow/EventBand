@@ -4,4 +4,8 @@ export default {
 		console.log('CS', obj);
 		return obj;
 	},
+
+	removeMessage(chatUuid, messageUuid) {
+		return this.apiClient.delete(`chat/${chatUuid}/message/${messageUuid}`);
+	} ,
 };
