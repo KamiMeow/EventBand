@@ -70,6 +70,14 @@
 					>
 						Edit event
 					</v-btn>
+					<v-btn
+						v-if="canEdit"
+						color="secondary darken-3"
+						block
+						@click="openChatEditPage"
+					>
+						Edit chat
+					</v-btn>
 				</v-layout>
 			</v-flex>
 		</v-layout>
@@ -155,16 +163,19 @@ export default {
 			this.$store.dispatch('organization/setIsOnEditTrue');
 			this.$router.push('/my-organization/event/create');
 		},
+
+		openChatEditPage() {
+			this.$store.dispatch('eventchat/setChatUuid', this.event.chatUuid);
+			this.$router.push('/my-organization/chat/edit');
+		},
 	},
 }
 </script>
 
 <style lang="scss" scoped>
+
 	.left-border {
 		border-left: 2px solid gray;
 	}
-	// ::-webkit-scrollbar { 
-  //   width: 0px;  
-  //   background: transparent;
-	// }
+	
 </style>

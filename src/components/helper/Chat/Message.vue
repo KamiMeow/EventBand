@@ -2,6 +2,7 @@
 	<v-card 
 		class="custom-elevation my-4"
 		max-width="600px"
+		min-width="400px"
 	>
 		<v-card-title>
 			<v-layout align-center>
@@ -40,6 +41,20 @@
 				{{message.createdAt | currentDateTime}}
 			</span>
 		</v-card-actions>
+		<v-layout 
+			v-if="isOrgLogged"
+			class="pa-2"
+			justify-center
+		>
+			<v-btn
+				class="error darken-1"
+				depressed
+				small
+				@click="removeMessage"
+			>
+				remove message
+			</v-btn>
+		</v-layout>
 	</v-card>
 </template>
 
@@ -52,18 +67,27 @@ export default {
 	},
 
 	computed: {
+
 		isMyMessage() {
 			return this.message.user.isOwn ? 'justify-end' : 'justify-start';
 		},
+		
+		isOrgLogged() {
+			return this.$store.getters['auth/getIsLoggedAsOrganization'];
+		}	
 	},
 
 	filters: {
 		currentDateTime(dateTime) {
-			if (!dateTime) return;
-			// console.log(dateTime.splice(dateTime.indexOf('.')).replace('T', ' '));
-			
+			if (!dateTime) return;			
 			let date = dateTime.split('.')[0].replace('T', ' ');
 			return date;
+		},
+	},
+
+	methods: {
+		removeMessage() {
+			this.$store.dispatch('eventchat/removeMessage', this.message.uuid);
 		},
 	},
 
