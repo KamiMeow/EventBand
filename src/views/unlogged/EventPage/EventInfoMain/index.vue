@@ -1,20 +1,20 @@
 <template>
-	<v-card>
+	<v-card class="custom-elevation">
 		<v-layout column>
 			<v-card-title>
 				<v-layout>
 					<span class="headline"> Event </span>
 					<v-spacer/>
-					<chat
-						v-if="isLogged && !isOrg"
-					/>
+
+					<chat v-if="isLogged && !isOrg" />
 				</v-layout>
 			</v-card-title>
 
 			<v-divider/>
-			<span class="title pl-4 "> Tags </span>
+			<span class="title pl-4 pt-3"> Tags </span>
+
 			<v-layout 
-				class="pa-4"
+				class="px-4 pb-3"
 				wrap
 			>
 				<v-chip
@@ -25,6 +25,7 @@
 					{{tag.name}}
 				</v-chip>
 			</v-layout>
+
 			<span class="title pl-4 "> Date </span>
 			<v-layout wrap justify-center>
 				<v-flex xs5>
@@ -56,13 +57,15 @@
 					/>
 				</v-flex>
 			</v-layout>
+
 			<organization-item
 				:organization="organization"
-				:minWidth="'auto'"
 				:forSubscribe="false"
-				:forView="true"
-				:tile="true"
-				:flat="true"
+				minWidth="auto"
+				class="mt-2"
+				forView
+				tile
+				flat
 			/>
 		</v-layout>
 	</v-card>

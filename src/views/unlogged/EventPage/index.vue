@@ -4,15 +4,18 @@
 		fill-height
 		wrap
 	>
-		<v-flex xs12 sm12 md8 lg8
+		<v-flex
 			class="pt-12 mb-5"
+			xs12 sm12 md8
 		>
-			<event-info-detailed/>
+			<event-info-detailed />
 		</v-flex>
-		<v-flex xs12 sm12 md2 lg2
+
+		<v-flex
 			class="pt-12 mb-5"
+			xs12 sm12 md3
 		>
-			<event-info-main/>
+			<event-info-main />
 		</v-flex>
 	</v-layout>
 </template>

@@ -3,16 +3,19 @@
 		<v-layout column>
 			<v-card-title>
 				<span class="display-1 pb-6"> {{ event.name }} </span>
-			</v-card-title> 
+			</v-card-title>
+
 			<v-card-subtitle>
 				<span class="headline" > Description </span>
 				<v-divider/>
 			</v-card-subtitle>
+
 			<v-card-text>
 				<p class="subtitle-1">
 					{{ event.name }}
 				</p>
 			</v-card-text>
+
 			<yandex-map
 				style="width: 100%; height: 300px" 
 				:coords="coords"
@@ -26,10 +29,12 @@
 				>
 				</ymap-marker>
 			</yandex-map>
+
 			<v-card-subtitle>
 				<span class="headline" > Tickets </span>
 				<v-divider/>
 			</v-card-subtitle>
+
 			<v-layout
 				class="px-4"
 				justify-start
@@ -37,8 +42,8 @@
 			>
 				<ticket-item
 					v-for="(ticket, i) in tickets"
-					:key="i"
 					:ticket="ticket"
+					:key="i"
 				/>
 			</v-layout>
 		</v-layout>			
