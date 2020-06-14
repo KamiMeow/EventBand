@@ -56,7 +56,7 @@
 						:tickets="tickets"/>
 					<v-btn
 						v-if="canView"
-						:to="`/my-organization/event/${event.uuid}`"
+						:to=" isOrg ? `/my-organization/event/${event.uuid}` : `/event/${event.uuid}`"
 						color="accent"
 						block
 					>
