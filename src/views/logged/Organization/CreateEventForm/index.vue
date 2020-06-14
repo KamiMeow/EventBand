@@ -31,24 +31,25 @@
 						{{isEditEvent ? 'Edit place' : 'Choose place'}}
 					</v-stepper-step>
 
-					<v-divider></v-divider>
+					<template v-if="!isEditEvent">
+						<v-divider></v-divider>
 
-					<v-stepper-step 
-						:complete="stepper > 3" 
-						:editable="isEditEvent"
-						step="3"
-					>
-						{{isEditEvent ? 'Edit tickets' : 'Create tickets'}}
-					</v-stepper-step>
+						<v-stepper-step 
+							:complete="stepper > 3" 
+							:editable="isEditEvent"
+							step="3"
+						>
+							{{isEditEvent ? 'Edit tickets' : 'Create tickets'}}
+						</v-stepper-step>
 
-					<v-divider></v-divider>
-
-					<v-stepper-step 
-						:editable="isEditEvent"
-						step="4"
-					>
-						Submit event information
-					</v-stepper-step>
+						<v-divider/>
+						<v-stepper-step 
+							:editable="isEditEvent"
+							step="4"
+						>
+							Submit event information
+						</v-stepper-step>
+					</template>
 				</v-stepper-header>
 				<v-stepper-content step="1">
 					<event-info-block @handle-event-info-block="handleInfo"/>
@@ -126,6 +127,10 @@ export default {
 
 	created() {
 		this.prepareForm();
+	},
+
+	beforeDestroy() {
+		this.$store.dispatch('organization/setIsOnEditFalse');
 	},
 
 	data: () => ({

@@ -49,6 +49,10 @@ export default {
 		ymapMarker,
 	},
 
+	created() {
+		this.setDataForEditEvent();
+	},
+
 	data: () => ({
 		coords: [
 			55.75,
@@ -58,12 +62,34 @@ export default {
 		settings,
 	}),
 
+	computed: {
+		isEditEvent() {
+			return this.$store.getters['organization/getIsOnEdit'];
+		},
+
+		editableEvent() {
+			return this.$store.getters['organization/getEditableEvent'];
+		},
+	},
+
 	methods: {
+		setDataForEditEvent() {
+			if (!this.isEditEvent) return;
+
+			this.coords = this.editableEvent.coords.split(',').map( c => +c);
+		},
+
 		changeMarkerPosition(e) {
 			this.coords = e.get('coords');
 		},
 
 		submitEventPlace() {
+			if (this.isEditEvent) {
+				console.log(this.coords.join(','), typeof(this.coords.join(',')));
+				
+				return this.$store.dispatch('organization/setEventPlaceBlock', this.coords.join(','));
+			}
+
 			this.$emit('handle-event-place-block', {
 				coords: this.coords.join(','),
 			});

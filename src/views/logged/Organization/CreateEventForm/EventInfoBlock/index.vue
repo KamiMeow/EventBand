@@ -167,6 +167,7 @@ export default {
 	}),
 
 	created() {
+		this.setDataForEditEvent();
 		this.tags = this.$store.getters['nonauth/getAllTags'];
 	},
 
@@ -174,11 +175,41 @@ export default {
 		rules() {
 			return this.$store.getters['getRules'];
 		},
+
+		isEditEvent() {
+			return this.$store.getters['organization/getIsOnEdit'];
+		},
+
+		editableEvent() {
+			return this.$store.getters['organization/getEditableEvent'];
+		},
 	},
 	
 	methods: {
+
+		async setDataForEditEvent() {
+			if (!this.isEditEvent) return;
+
+			await this.$store.dispatch('nonauth/requestAllTags');
+			this.name = this.editableEvent.name;
+			this.description = this.editableEvent.name;
+			this.selectedTags = this.editableEvent.tags;
+			this.dateFrom = this.editableEvent.datetimeFrom.split('T')[0];
+			this.dateTo = this.editableEvent.datetimeTo.split('T')[0];
+		},
+
 		submitEventInfo() {
 			if (this.selectedTags.length == 0) return this.$refs.form.setAlert('Set at least ONE tag to your Event', 'warning');
+
+			if (this.isEditEvent) {
+				return this.$store.dispatch('organization/setEventInfoBlock', {
+					name: this.name,
+					description: this.description,
+					datetimeFrom: `${this.dateFrom}T${this.timeFrom}Z`,
+					datetimeTo: `${this.dateTo}T${this.timeTo}Z`,
+					tags: this.selectedTags.map( t => t.id),
+				});
+			}
 
 			this.$emit('handle-event-info-block', {
 				name: this.name,
