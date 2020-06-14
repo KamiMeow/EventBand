@@ -6,9 +6,10 @@
   >
 		<v-layout 
 			wrap
-			justify-center 
-			align-center 
+			justify-center
+			align-center
 			fill-height
+			class="mx-12 px-12"
 		>
 			<v-flex xs12 sm12 md3 lg4
 				class="my-2"
@@ -17,7 +18,6 @@
 			>
 				<v-layout justify-center>
 					<v-card
-						
 						class="py-5 px-1 semi-opacity"
 						max-width="350"
 						outlined
