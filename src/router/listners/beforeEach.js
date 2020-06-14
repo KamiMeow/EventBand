@@ -28,7 +28,6 @@ export default function (store) {
     const isPing = !!(to.path === '/ping' && lastRouteTo);
 		const { meta:   { access }, path } = isPing ? lastRouteTo : to;
 
-		console.log(access);
 
 		if ((isEmpty(lastRouteTo) && to.name === 'sign-in') || to.name !== 'sign-in') {
 			Object.assign(lastRouteTo, to); 

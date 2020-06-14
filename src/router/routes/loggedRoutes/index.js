@@ -55,4 +55,11 @@ export default [
 				access: 'needOrgLogin',
 			},
 		},
+		{
+			path: "/my-organization/chat/edit",
+			component: () => import('@/views/logged/Organization/ChatHistory'),
+			meta: {
+				access: 'needOrgLogin',
+			},
+		},
 ];
