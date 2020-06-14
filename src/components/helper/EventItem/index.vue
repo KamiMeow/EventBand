@@ -50,23 +50,23 @@
 				</v-layout>
 			</v-flex>
 			<v-flex xs3>
-				<v-layout fill-height column justify-center>
+				<v-layout fill-height wrap align-center>
 					<quick-subscribe-form 
 						v-if="canSubscribe"
 						:tickets="tickets"/>
 					<v-btn
 						v-if="canView"
-						:to="`/event/${event.uuid}`"
-						class="align-self-center"
+						:to="`/my-organization/event/${event.uuid}`"
 						color="accent"
+						block
 					>
 						View
 					</v-btn>
 					<v-btn
 						v-if="canEdit"
-						:to="`/my-organization/event/edit/${event.uuid}`"
-						class="align-self-center"
 						color="secondary"
+						block
+						@click="openEditForm"
 					>
 						Edit event
 					</v-btn>
@@ -136,6 +136,24 @@ export default {
 			} else {
 				return this.event.price;
 			}
+		},
+	},
+
+	methods: {
+		openEditForm() {
+			this.$store.dispatch('organization/setEditableEvent', {
+				uuid: this.event.uuid,
+				name: this.event.name,
+				description: this.event.description,
+				datetimeFrom: this.event.datetimeFrom,
+				datetimeTo: this.event.datetimeTo,
+				coords: this.event.coords,
+				count: this.event.count || 1,
+				tags: this.tags,
+				tickets: this.tickets,
+			});
+			this.$store.dispatch('organization/setIsOnEditTrue');
+			this.$router.push('/my-organization/event/create');
 		},
 	},
 }

@@ -2,7 +2,7 @@
 	<v-layout justify-center align-center>
     <v-dialog v-model="dialog" persistent max-width="50vw">
       <template #activator="{ on }">
-        <v-btn class="align-self-center"  color="primary" dark v-on="on">
+        <v-btn block  color="primary" dark v-on="on">
 					{{ isLogged ? 'Book a ticket' : 'Quck subscribe form'}}
 				</v-btn>
       </template>
