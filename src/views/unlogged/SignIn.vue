@@ -69,6 +69,7 @@
 				<v-row class="null-indents">
 					<v-col cols="12" align="center" class="null-indents" >
 						<v-btn
+							:loading="loading"
 							tabindex="3"
 							color="primary"
 							type="submit"
@@ -92,6 +93,8 @@ export default {
 	
 	data() {
 		return {
+			loading: false,
+
 			email: '',
 			password: '',
 			formTitle: 'Sign In',
@@ -100,14 +103,16 @@ export default {
 
 	methods: {
 		async signIn() {
-			console.log(this.email);
-			console.log(this.password);
+			this.loading = true;
 			let resp = await this.$store.dispatch('auth/signIn', { 
 				password: this.password,
 				email: this.email, 
 			}) || {};
+			this.loading = false;
 
-			return resp.message ? this.$refs.signInForm.setAlert(resp.message, 'error') : this.$router.replace('/profile');
+			return resp.message
+				? this.$refs.signInForm.setAlert(resp.message, 'error')
+				: this.$router.replace('/profile');
 		},
 	},
 

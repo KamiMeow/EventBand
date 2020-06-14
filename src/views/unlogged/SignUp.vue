@@ -107,6 +107,7 @@
 					<v-row>
 						<v-col align="center">
 							<v-btn
+								:loading="loading"
 								class="white--text align-self-center"
 								color="primary"
 								type="submit"
@@ -132,6 +133,8 @@ export default {
 	},
 
 	data: () => ({
+		loading: false,
+
 		email: '',
 		surname: '',
 		name: '',
@@ -142,11 +145,10 @@ export default {
 	}),
 	methods: {
 		async signUpNewUserAccount() {
-
+			this.loading = true;
 			let exists = await this.$store.dispatch('auth/verifyEmail', this.email);
-			
-			
-			// console.log('SIGN UP', exists);
+			this.loading = false;
+
 			if (!exists) {
 				this.$store.dispatch('notification/set', {
 					message: 'Email doesn`t exist',
