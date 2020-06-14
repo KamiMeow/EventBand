@@ -11,6 +11,18 @@ const initialOrganization = () => ({
 	description: '',
 });
 
+const initialCurrentEvent = () => ({
+	uuid: '',
+	name: '',
+	description: '',
+	datetimeFrom: '',
+	datetimeTo: '',
+	coords: [],
+	count: 0,
+	tags: [],
+	tickets: [],
+});
+
 export const initialState = () => ({ 
 	uuid: '',
 	subscribersAmount: 0,
@@ -19,6 +31,9 @@ export const initialState = () => ({
 	organizers: [],
 	events: [],
 	news: [],
+
+	isOnEditEvent: false,
+	currentEditableEvent: initialCurrentEvent(),
 });
 
 
@@ -48,6 +63,14 @@ export const mutations = {
 
 	UNSET_EDITABLE_INFO: (state) => {
 		state.editableOrganization = { ...state.actualOrganization };
+	},
+
+	SET_EDITABLE_EVENT: (state, event) => {
+		state.currentEditableEvent = event;
+	},
+
+	SET_EVENT_EDIT: (state, value) => {
+		state.isOnEditEvent = value;
 	},
 };	
 
@@ -105,6 +128,14 @@ export const actions = {
 		commit('UNSET_EDITABLE_INFO');
 	},
 
+	setEditableEvent({ commit }, event) {
+		commit('SET_EDITABLE_EVENT', event);
+	},
+
+	setIsOnEditTrue({ commit }) {
+		commit('SET_EVENT_EDIT', true);
+	},
+
 };
 
 export const getters = {
@@ -116,4 +147,7 @@ export const getters = {
 	getOrganizers: state => state.organizers,
 	getUuid: state => state.uuid,
 	getNews: state => state.news,
+
+	getIsOnEdit: state => state.isOnEditEvent,
+	
 };
