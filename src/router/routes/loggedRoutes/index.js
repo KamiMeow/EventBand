@@ -28,13 +28,6 @@ export default [
 			},
 		},
 		{
-			path: `/my-organization/event/edit/:uuid`,
-			component: () => import('@/views/logged/EditEventForm'),
-			meta: {
-				access: 'needOrgLogin',
-			},
-		},
-		{
 			path: `/my-organization/event/create`,
 			component: () => import('@/views/logged/Organization/CreateEventForm'),
 			meta: {
@@ -51,6 +44,13 @@ export default [
 		{
 			path: '/my-organization/edit',
 			component: () => import('@/views/logged/Organization/EditOrganizationForm'),
+			meta: {
+				access: 'needOrgLogin',
+			},
+		},
+		{
+			path: "/my-organization/event/:uuid",
+			component: () => import('@/views/unlogged/EventPage'),
 			meta: {
 				access: 'needOrgLogin',
 			},
