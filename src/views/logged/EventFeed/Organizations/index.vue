@@ -1,7 +1,6 @@
 <template>
 	<v-layout
 		class="pa-4"
-		align-center
 		justify-start
 		column
 	>

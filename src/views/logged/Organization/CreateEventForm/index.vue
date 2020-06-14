@@ -1,9 +1,4 @@
 <template>
-	<v-layout
-		fill-height
-		justify-center
-		align-content-center
-	>
 		<v-layout v-if="isPreparing"
 			fill-height
 			justify-center
@@ -16,27 +11,44 @@
 			/>
 		</v-layout>
 		<v-flex v-else xs10>
-			<v-btn
-				color="error"
-			@click="$router.go(-1)"
-			>
-				Go back
-			</v-btn>
 			<v-stepper v-model="stepper">
 				<v-stepper-header>
-					<v-stepper-step :complete="stepper > 1" step="1">Describe Event</v-stepper-step>
+					<v-stepper-step 
+						:complete="stepper > 1" 
+						:editable="isEditEvent"
+						step="1"
+					>
+						{{isEditEvent ? 'Edit event info' : 'Describe event'}}
+					</v-stepper-step>
 
 					<v-divider></v-divider>
 
-					<v-stepper-step :complete="stepper > 2" step="2">Choose place</v-stepper-step>
+					<v-stepper-step 
+						:complete="stepper > 2" 
+						:editable="isEditEvent"
+						step="2"
+					>
+						{{isEditEvent ? 'Edit place' : 'Choose place'}}
+					</v-stepper-step>
 
 					<v-divider></v-divider>
 
-					<v-stepper-step :complete="stepper > 3" step="3">Create tickets</v-stepper-step>
+					<v-stepper-step 
+						:complete="stepper > 3" 
+						:editable="isEditEvent"
+						step="3"
+					>
+						{{isEditEvent ? 'Edit tickets' : 'Create tickets'}}
+					</v-stepper-step>
 
 					<v-divider></v-divider>
 
-					<v-stepper-step step="4">Finishing</v-stepper-step>
+					<v-stepper-step 
+						:editable="isEditEvent"
+						step="4"
+					>
+						Submit event information
+					</v-stepper-step>
 				</v-stepper-header>
 				<v-stepper-content step="1">
 					<event-info-block @handle-event-info-block="handleInfo"/>
@@ -58,13 +70,24 @@
 					>
 						<v-layout  column align-center justify-center>
 							<v-card-title>
-								<span class="display-1"> We`ve collected all information </span>
+								<span class="display-1">
+									{{isEditEvent ? 'If you has edited all you need' : 'We`ve collected all information'}}
+								</span>
 							</v-card-title>
 							<v-card-subtitle>
-								<span class="title"> If you want to create your Event, press submit button </span>
+								<span class="title"> {{ isEditEvent ? 'Just press the submit button to confirm your new information about that event' : 'If you want to create your Event, press submit button'}} </span>
 							</v-card-subtitle>
 							<v-flex xs2>
 								<v-btn
+									v-if="isEditEvent"
+									:loading="isRequesting"
+									color="success darken-2"
+									large
+								>
+									Submit
+								</v-btn>
+								<v-btn
+									v-else
 									:loading="isRequesting"
 									color="success darken-2"
 									large
@@ -78,7 +101,6 @@
 				</v-stepper-content>
 			</v-stepper>
 		</v-flex>
-	</v-layout>
 </template>
 
 <script>
@@ -93,6 +115,13 @@ export default {
 		EventInfoBlock,
 		EventPlaceBlock,
 		EventTicketBlock,
+	},
+
+	props: {
+		isEdit: false,
+		event: Object,
+		selectedTags: Array,
+		tags: Array,
 	},
 
 	created() {
@@ -110,13 +139,17 @@ export default {
 		
 	}),
 
-	computed: { },
+	computed: { 
+		isEditEvent() {
+			return this.$store.getters['organization/getIsOnEdit'];
+		},
+	},
 
 	methods: {
 		async prepareForm() {
 			this.isPreparing = true;
 			await this.$store.dispatch('nonauth/requestAllTags');
-			let timer = setTimeout( () => { this.isPreparing = false; clearTimeout(timer) }, 750 );
+			let timer = setTimeout( () => { this.isPreparing = false; clearTimeout(timer) }, 100 );
 		},
 
 		handleInfo(info) {
