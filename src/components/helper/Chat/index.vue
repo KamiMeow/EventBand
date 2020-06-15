@@ -179,7 +179,7 @@ export default {
 		},
 
 		sendMessage() {
-			if (!this.message.trim()) return;
+			if (!this.newMessage.trim()) return;
 
 			let message = this.newMessage.split(' ').map( w => w.trim()).filter( m => m).join(' ');
 
