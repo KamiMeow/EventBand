@@ -9,6 +9,7 @@ export const initialState = () => ({
 
 export const mutations = {
 	SET_MESSAGES: (state, messages) => {
+		state.messages.splice(0, state.messages.length);
 		state.messages = messages;
 	},
 };
