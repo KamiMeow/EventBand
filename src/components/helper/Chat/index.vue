@@ -174,6 +174,7 @@ export default {
 		},
 
 		leaveFromChat() {
+			this.messages.splice(0, this.messages.length);
 			this.socket.emit('leave-chat');
 			this.socket.close();
 		},
