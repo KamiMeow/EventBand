@@ -50,7 +50,7 @@ describe('Модуль NON-AUTH', () => {
 	});
 	
 	it('Текущая организация - отсутствует', async () => {
-		const organizationUuid = "989713f3-2f0b-4a14-b863-d98b5c00f94e";
+		const organizationUuid = "868d1201-2a4c-4686-9ed2-bd9335753693";
 		await store.dispatch(`${path}requestOrganizationInfo`, organizationUuid);
 	
 		expect(Object.keys(store.getters[`${path}getCurrentOrganization`]).length).toBeGreaterThan(0);

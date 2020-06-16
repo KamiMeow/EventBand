@@ -11,6 +11,7 @@
 					class="mx-2"
 					color="success darken-2"
 					@click="submitEventTickets"
+					:disabled="!tickets.length"
 				>
 					Submit tickets
 				</v-btn>

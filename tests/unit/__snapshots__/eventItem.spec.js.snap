@@ -42,7 +42,8 @@ exports[`Event item - компонент для вывода мероприят�
       </div>
     </div>
     <div class="flex xs3">
-      <div class="layout fill-height column justify-center">
+      <div class="layout fill-height wrap align-center">
+        <!---->
         <!---->
         <!---->
         <!---->
